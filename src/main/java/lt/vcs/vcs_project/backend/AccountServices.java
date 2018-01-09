@@ -143,4 +143,24 @@ public class AccountServices {
         return returnString.toString();
     }
 
+    public String toStringCSV(String loginId){
+        return accountCollection.get(loginId).toStringCSV();
+    }
+
+    public String getStudentId(String loginId){
+        if (accountCollection.get(loginId).getRole().equals(Role.STUDENT)) {
+            return accountCollection.get(loginId).getPersonalId();
+        } else {
+            return null;
+        }
+    }
+
+    public String getLecturerId(String loginId){
+        if (accountCollection.get(loginId).getRole().equals(Role.LECTURER)) {
+            return accountCollection.get(loginId).getPersonalId();
+        } else {
+            return null;
+        }
+    }
+
 }

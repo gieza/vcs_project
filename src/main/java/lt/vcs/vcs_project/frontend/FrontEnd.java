@@ -1,19 +1,17 @@
 package lt.vcs.vcs_project.frontend;
 
-import java.util.Scanner;
-
 public class FrontEnd {
-    static String state = "LOGIN";
-    static String substate = "NAME";
+    static String menu = "";
+    static String substate = "";
      void initialize(){
 
     }
 
     void run(){
          while (true) {
-             printMessage(state,substate);
+             printMessage(menu,substate);
    //          String inputString = ScannerUtils.scanString();
-    //         updateState(state,substate,inputString);
+    //         updateState(menu,substate,inputString);
          }
     }
 

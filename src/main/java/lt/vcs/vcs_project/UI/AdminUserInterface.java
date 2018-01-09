@@ -2,6 +2,7 @@ package lt.vcs.vcs_project.UI;
 //todo: add extra menu item to load demo data
 import lt.vcs.vcs_project.backend.Account;
 import lt.vcs.vcs_project.backend.Backend;
+import lt.vcs.vcs_project.backend.Lecturer;
 import lt.vcs.vcs_project.backend.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
@@ -75,13 +76,33 @@ public class AdminUserInterface implements UserInterface {
                 addStudent();
                 menuPosition = "STUDENT";
                 break;
-            case "UPDATE_STUDENTS":
+            case "UPDATE_STUDENT":
                 updateStudent();
                 menuPosition = "STUDENT";
                 break;
-            case "REMOVE_STUDENTS":
+            case "REMOVE_STUDENT":
                 removeStudent();
                 menuPosition = "STUDENT";
+                break;
+            case "LIST_LECTURERS":
+                listLecturer();
+                menuPosition = "LECTURER";
+                break;
+            case "PRINT_LECTURER":
+                printLecturer();
+                menuPosition = "LECTURER";
+                break;
+            case "ADD_LECTURER":
+                addLecturer();
+                menuPosition = "LECTURER";
+                break;
+            case "UPDATE_LECTURER":
+                updateLecturer();
+                menuPosition = "LECTURER";
+                break;
+            case "REMOVE_LECTURERS":
+                removeLecturer();
+                menuPosition = "LECTURER";
                 break;
             default:
                 menuPosition = "TOP";
@@ -181,6 +202,52 @@ public class AdminUserInterface implements UserInterface {
         String userInput = ScannerUtils.scanString();
         if (Backend.studentExists(userInput)) {
             System.out.printf("Selected student: %s\n", userInput);
+            return userInput;
+        } else {
+            System.out.printf("\nSorry, StudentId %s does not exists.\n\treturning to menu\n\n", userInput);
+            return null;
+        }
+    }
+
+
+    private void listLecturer() {
+        Backend.listLecturers(); //todo:not implemented
+    }
+
+    private void printLecturer() { //todo:not implemented
+        String selectedLecturer = selectLecturer();
+        if (selectedLecturer != null) {
+            Backend.printAccount(selectedLecturer);
+        }
+    }
+
+    private void addLecturer() {
+        System.out.printf("\nEnter new Lecturer data in CommaSeparatedValue format\nfollowing template: %s\n:",
+                Lecturer.printHeaderCSV());
+        String userInput = ScannerUtils.scanString();
+        System.out.printf("Entered values %s\n", userInput);
+        Backend.addLecturer(userInput);
+    }
+
+    private void updateLecturer() {//todo:not implemented
+        String selectedLecturer = selectLecturer();
+        if (selectedLecturer != null) {
+            System.out.printf("\nSorry, Lecturer update functionally not implemented.\n\treturning to menu\n\n");
+        }
+    }
+
+    private void removeLecturer() {//todo:not implemented - gal atskirai prideti password??
+        String selectedLecturer = selectLecturer();
+        if (selectedLecturer != null) {
+            System.out.printf("\nSorry, Lecturer update functionally not implemented.\n\treturning to menu\n\n");
+        }
+    }
+
+    private String selectLecturer() {
+        System.out.printf("\n\nEnter to Lecturer Id to select Lecturer:");
+        String userInput = ScannerUtils.scanString();
+        if (Backend.lecturerExists(userInput)) {
+            System.out.printf("Selected Lecturer: %s\n", userInput);
             return userInput;
         } else {
             System.out.printf("\nSorry, StudentId %s does not exists.\n\treturning to menu\n\n", userInput);

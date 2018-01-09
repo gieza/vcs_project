@@ -5,6 +5,7 @@ import lt.vcs.vcs_project.utils.ScannerUtils;
 public class Backend {
     public static AccountServices accounts = new AccountServices();
     public static StudentServices students = new StudentServices();
+    public static LecturerServices lecturers = new LecturerServices();
 
 
     public static String login() {
@@ -88,5 +89,37 @@ public class Backend {
             }
         }
     }
+
+
+    public static void listLecturers() {
+        System.out.println(lecturers.listLecturers());
+    }
+
+    public static void printLecturer(String lecturerId) {
+        System.out.println(lecturers.getLecturer(lecturerId).toString());
+    }
+
+
+    public static boolean lecturerExists(String loginId) {
+        return lecturers.containsKey(loginId);
+    }
+
+    public static void addLecturer(String csv) {
+        Lecturer newLecturer = new Lecturer(csv);
+
+        if (!(accounts.containsKey(newLecturer.getLoginId()) &&
+                students.containsKey(newLecturer.getLecturerId()))) {
+            accounts.addAccount(newLecturer.getAccount());
+            lecturers.addLecturer(newLecturer);
+        } else {
+            if (accounts.containsKey(newLecturer.getLoginId())) {
+                System.out.printf("Sorry, account %s already exists", newLecturer.getLoginId());
+            } else {
+                System.out.printf("Sorry, LecturerId %s already exists", newLecturer.getLecturerId());
+            }
+        }
+    }
+
+
 
 }

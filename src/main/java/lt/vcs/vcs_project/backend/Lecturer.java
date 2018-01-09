@@ -2,19 +2,19 @@ package lt.vcs.vcs_project.backend;
 
 import java.util.Arrays;
 
-public class Student extends Account {
+public class Lecturer extends Account {
 
-    private String  studentId;
-    private String  personalNumber;
-    private String  dateOfBirth;
+    private String lecturerId;
+    private String personalNumber;
+    private String dateOfBirth;
     private String email;
     private String mobileNumber;
     private String gender;
     private String address;
 
-    public Student(String loginId, String firstName, String secondName, String password, String studentId, String personalNumber, String dateOfBirth, String email, String mobileNumber, String gender, String address) {
-        super(loginId, firstName, secondName, password, Role.STUDENT);
-        this.studentId = studentId;
+    public Lecturer(String loginId, String firstName, String secondName, String password, String lecturerId, String personalNumber, String dateOfBirth, String email, String mobileNumber, String gender, String address) {
+        super(loginId, firstName, secondName, password, Role.LECTURER);
+        this.lecturerId = lecturerId;
         this.personalNumber = personalNumber;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
@@ -23,8 +23,7 @@ public class Student extends Account {
         this.address = address;
     }
 
-
-    public Student(String csv) {
+    public Lecturer(String csv) {
         super();
         String[] inputArray = csv.split(",");
         if (inputArray.length >= 11) {
@@ -34,7 +33,7 @@ public class Student extends Account {
             this.setSecondName(inputArray[3]);
             this.setRole(Role.STUDENT);
             this.setPersonalId(inputArray[4]);
-            this.studentId = inputArray[4];
+            this.lecturerId = inputArray[4];
             this.personalNumber = inputArray[5];
             this.dateOfBirth = inputArray[6];
             this.email = inputArray[7];
@@ -44,29 +43,31 @@ public class Student extends Account {
             for (int i = 11; i < inputArray.length; i++) {
                 this.address = this.address + "," + inputArray[11];
             }
-
         } else {
-            System.out.printf("Failure: cannot create Student -- number of fields do not match required number\n");
+            System.out.printf("Failure: cannot create Lecturer -- number of fields do not match required number\n");
         }
     }
 
     public Account getAccount() {
-        return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.studentId);
+        return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.lecturerId);
     }
 
-    static public String printHeaderCSV(){
-        return  "Login,Password,First name,Second name,StudentId,personalNumber,dateOfBirth,email,mobileNumber,gender,address";
+    static public String printHeaderCSV() {
+        return "Login,Password,First name,Second name,lecturerId,personalNumber,dateOfBirth,email,mobileNumber,gender,address";
     }
 
-    public String toStringCSV(){
-        return  String.join(",", Arrays.asList(this.getLoginId(),this.getPassword(),this.getFirstName(),this.getSecondName(),
-                this.getRole().toString(),this.studentId,this.personalNumber,this.dateOfBirth,this.email,this.mobileNumber,this.gender,this.address));
+    public String toStringCSV() {
+        return String.join(",", Arrays.asList(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(),
+                this.getRole().toString(), this.lecturerId, this.personalNumber, this.dateOfBirth, this.email, this.mobileNumber, this.gender, this.address));
 
     }
 
+    public String getLecturerId() {
+        return lecturerId;
+    }
 
-    public String getStudentId() {
-        return studentId;
+    public void setLecturerId(String lecturerId) {
+        this.lecturerId = lecturerId;
     }
 
     public String getPersonalNumber() {
@@ -116,6 +117,5 @@ public class Student extends Account {
     public void setAddress(String address) {
         this.address = address;
     }
-
 
 }

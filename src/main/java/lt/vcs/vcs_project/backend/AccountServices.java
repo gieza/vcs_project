@@ -134,11 +134,13 @@ public class AccountServices {
         StringBuilder returnString = new StringBuilder("AccountId\tFirst name\tLast Name\tRole\tstudent\\lecturerId\n=====================================================\n");
         Set<String> keys = accountCollection.keySet();
         for (String key:keys) {
-            Account listingAccount = accountCollection.get(key);
-            returnString.append(key +"\t" + listingAccount.getFirstName() +
-                    "\t" + listingAccount.getSecondName() +
-                    "\t" + listingAccount.getRole().toString() +
-                    "\t" + listingAccount.getPersonalId() +"\n");
+            if (accountCollection.get(key).getRole()==Role.ADMIN) {
+                Account listingAccount = accountCollection.get(key);
+                returnString.append(key + "\t" + listingAccount.getFirstName() +
+                        "\t" + listingAccount.getSecondName() +
+                        "\t" + listingAccount.getRole().toString() +
+                        "\t" + listingAccount.getPersonalId() + "\n");
+            }
         }
         return returnString.toString();
     }

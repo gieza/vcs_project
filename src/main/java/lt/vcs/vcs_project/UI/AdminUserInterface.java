@@ -1,7 +1,8 @@
 package lt.vcs.vcs_project.UI;
-
+//todo: add extra menu item to load demo data
 import lt.vcs.vcs_project.backend.Account;
 import lt.vcs.vcs_project.backend.Backend;
+import lt.vcs.vcs_project.backend.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class AdminUserInterface implements UserInterface {
@@ -62,13 +63,34 @@ public class AdminUserInterface implements UserInterface {
                 removeAccount();
                 menuPosition="ACCOUNT";
                 break;
+            case "LIST_STUDENTS":
+                listStudent();
+                menuPosition = "STUDENT";
+                break;
+            case "PRINT_STUDENT":
+                printStudent();
+                menuPosition = "STUDENT";
+                break;
+            case "ADD_STUDENT":
+                addStudent();
+                menuPosition = "STUDENT";
+                break;
+            case "UPDATE_STUDENTS":
+                updateStudent();
+                menuPosition = "STUDENT";
+                break;
+            case "REMOVE_STUDENTS":
+                removeStudent();
+                menuPosition = "STUDENT";
+                break;
             default:
                 menuPosition = "TOP";
         }
     }
 
     private void printMenuOptions() {
-        System.out.printf("%s Menu\n======================\nEnter number to select one of the following:\n", menuPosition);
+        System.out.printf("%s Menu\n============================================\n" +
+                "Enter number to select one of the following:\n", menuPosition);
         System.out.printf(AdminUIMenuHash.menuOptions.get(menuPosition));
         //System.out.printf(menuOptions.get(menuPosition));
     }
@@ -77,7 +99,7 @@ public class AdminUserInterface implements UserInterface {
         Backend.listAccounts();
     }
 
-    private void printAccount(){
+    private void printAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount !=null) {
             Backend.printAccount(selectedAccount);
@@ -92,14 +114,14 @@ public class AdminUserInterface implements UserInterface {
         Backend.addAccount(userInput);
     }
 
-    private void updateAccount(){
+    private void updateAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount !=null) {
             System.out.printf("\nSorry, account update functionally not implemented.\n\treturning to menu\n\n");
         }
     }
 
-    private void removeAccount(){
+    private void removeAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount !=null) {
             System.out.printf("\nSorry, account update functionally not implemented.\n\treturning to menu\n\n");
@@ -120,4 +142,50 @@ public class AdminUserInterface implements UserInterface {
             return null;
         }
     }
+
+    private void listStudent() {
+        Backend.listStudents(); //todo:not implemented
+    }
+
+    private void printStudent() { //todo:not implemented
+        String selectedStudent = selectStudent();
+        if (selectedStudent != null) {
+            Backend.printAccount(selectedStudent);
+        }
+    }
+
+    private void addStudent() {
+        System.out.printf("\nEnter new Student data in CommaSeparatedValue format\nfollowing template: %s\n:",
+                Student.printHeaderCSV());
+        String userInput = ScannerUtils.scanString();
+        System.out.printf("Entered values %s\n", userInput);
+        Backend.addStudent(userInput);
+    }
+
+    private void updateStudent() {//todo:not implemented
+        String selectedStudent = selectStudent();
+        if (selectedStudent != null) {
+            System.out.printf("\nSorry, Student update functionally not implemented.\n\treturning to menu\n\n");
+        }
+    }
+
+    private void removeStudent() {//todo:not implemented - gal atskirai prideti password??
+        String selectedStudent = selectStudent();
+        if (selectedStudent != null) {
+            System.out.printf("\nSorry, Student update functionally not implemented.\n\treturning to menu\n\n");
+        }
+    }
+
+    private String selectStudent() {
+        System.out.printf("\n\nEnter to Student Id to select student:");
+        String userInput = ScannerUtils.scanString();
+        if (Backend.studentExists(userInput)) {
+            System.out.printf("Selected student: %s\n", userInput);
+            return userInput;
+        } else {
+            System.out.printf("\nSorry, StudentId %s does not exists.\n\treturning to menu\n\n", userInput);
+            return null;
+        }
+    }
+
 }

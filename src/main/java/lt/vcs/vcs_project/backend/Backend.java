@@ -61,14 +61,32 @@ public class Backend {
 
 
     public static void listStudents() {
-        System.out.println(students.listAccounts());
+        System.out.println(students.listStudents());
     }
 
-    public static void printStudent(String loginId) {
-        System.out.println(students.getAccount(loginId).toString());
+    public static void printStudent(String studentId) {
+        System.out.println(students.getStudent(studentId).toString());
     }
+
 
     public static boolean studentExists(String loginId) {
         return students.containsKey(loginId);
     }
+
+    public static void addStudent(String csv) {
+        Student newStudent = new Student(csv);
+
+        if (!(accounts.containsKey(newStudent.getLoginId()) &&
+                students.containsKey(newStudent.getStudentId()))) {
+            accounts.addAccount(newStudent.getAccount());
+            students.addStudent(newStudent);
+        } else {
+            if (accounts.containsKey(newStudent.getLoginId())) {
+                System.out.printf("Sorry, account %s already exists", newStudent.getLoginId());
+            } else {
+                System.out.printf("Sorry, StudentId %s already exists", newStudent.getStudentId());
+            }
+        }
+    }
+
 }

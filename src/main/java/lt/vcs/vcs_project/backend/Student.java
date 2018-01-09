@@ -46,7 +46,9 @@ public class Student extends Account {
         }
     }
 
-
+    public Account getAccount() {
+        return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.studentId);
+    }
     static public String printHeaderCSV(){
         return  "Login,Password,First name,Second name,StudentId,personalNumber,dateOfBirth,email,mobileNumber,gender,address";
     }
@@ -56,6 +58,7 @@ public class Student extends Account {
                 this.getRole().toString(),this.studentId,this.personalNumber,this.dateOfBirth,this.email,this.mobileNumber,this.gender,this.address));
 
     }
+
 
     public String getStudentId() {
         return studentId;

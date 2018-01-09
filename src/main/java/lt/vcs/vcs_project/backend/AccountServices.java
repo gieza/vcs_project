@@ -27,7 +27,6 @@ public class AccountServices {
     }
 
     public void addAccount(Account account){
-        //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         if (!accountCollection.containsKey(account.getLoginId())) {
             accountCollection.put(account.getLoginId(), account);
             writeToFile();
@@ -38,7 +37,6 @@ public class AccountServices {
     }
 
     public void addAccount(String csv){
-        //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         Account accountCSV = new Account(csv);
         if (!accountCollection.containsKey(accountCSV.getLoginId())) {
             accountCollection.put(accountCSV.getLoginId(), accountCSV);

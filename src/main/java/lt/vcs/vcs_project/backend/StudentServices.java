@@ -20,7 +20,6 @@ public class StudentServices {
     }
 
     public void addStudent(Student student){
-        //todo: reikia prideti account; jeigu jo nera
         if (!studentCollection.containsKey(student.getStudentId())) {
             studentCollection.put(student.getStudentId(), student);
             writeToFile();
@@ -35,7 +34,6 @@ public class StudentServices {
     }
 
     public void addStudent(String csv){
-        //todo: reikia prideti account; jeigu jo nera
         Student studentCSV = new Student(csv);
         if (!studentCollection.containsKey(studentCSV.getStudentId())) {
             studentCollection.put(studentCSV.getStudentId(), studentCSV);
@@ -100,19 +98,23 @@ public class StudentServices {
     }
 
 
-    public String listAccounts() {
+    public String listStudents() {
         //todo:update listing
-        StringBuilder returnString = new StringBuilder("AccountId\tFirst name\tLast Name\tRole\tstudentId\n=====================================================\n");
+        StringBuilder returnString = new StringBuilder("AccountId\tFirst name\tLast Name\tRole\tstudentId\tPersonalNumber\tDoB\tEmail\tMobile#\tF/M\tAddress" +
+                "\n=====================================================\n");
         Set<String> keys = studentCollection.keySet();
         for (String key:keys) {
-            Account listingAccount = studentCollection.get(key);
-            returnString.append(key +"\t" + listingAccount.getFirstName() +
-                    "\t" + listingAccount.getSecondName() +
-                    "\t" + listingAccount.getRole().toString() +
-                    "\t" + listingAccount.getPersonalId() +"\n");
+            Student listingStudent = studentCollection.get(key);
+            returnString.append(key + "\t" + listingStudent.getFirstName() +
+                    "\t" + listingStudent.getSecondName() + "\t" + listingStudent.getRole().toString() +
+                    "\t" + listingStudent.getStudentId() + "\t" + listingStudent.getPersonalNumber() +
+                    "\t" + listingStudent.getDateOfBirth() + "\t" + listingStudent.getEmail() +
+                    "\t" + listingStudent.getMobileNumber() + "\t" + listingStudent.getGender() +
+                    "\t" + listingStudent.getAddress() + "\n");
         }
         return returnString.toString();
     }
+
 
     public String toStringCSV(String studentId){
         return studentCollection.get(studentId).toStringCSV();
@@ -126,6 +128,8 @@ public class StudentServices {
         }
     }
 
-
+    public Student getStudent(String studentId) {
+        return studentCollection.get(studentId);
+    }
 
 }

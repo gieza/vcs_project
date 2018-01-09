@@ -1,10 +1,10 @@
 package lt.vcs.vcs_project.frontend;
 
 import lt.vcs.vcs_project.UI.AdminUserInterface;
+import lt.vcs.vcs_project.UI.LecturerUserInterface;
+import lt.vcs.vcs_project.UI.StudentUserInterface;
 import lt.vcs.vcs_project.UI.UserInterface;
 import lt.vcs.vcs_project.backend.Backend;
-
-import static lt.vcs.vcs_project.backend.Role.ADMIN;
 
 public class Project {
 
@@ -19,6 +19,13 @@ public class Project {
                 switch (Backend.getRole(currentUser)) {
                     case ADMIN:
                         userInterface = new AdminUserInterface();
+                        break;
+                    case STUDENT:
+                        userInterface = new StudentUserInterface();
+                        break;
+                    case LECTURER:
+                        userInterface = new LecturerUserInterface();
+                        break;
                 }
                 userInterface.open(currentUser);
             }

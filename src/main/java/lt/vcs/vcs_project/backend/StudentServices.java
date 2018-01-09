@@ -1,7 +1,7 @@
 package lt.vcs.vcs_project.backend;
 
 import lt.vcs.vcs_project.utils.IOObjectStreamUtils;
-
+//import lt.vcs.vcs_project.backend;
 import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Set;
@@ -24,6 +24,7 @@ public class StudentServices {
         if (!studentCollection.containsKey(student.getStudentId())) {
             studentCollection.put(student.getStudentId(), student);
             writeToFile();
+            //if (accounts.containsKey(student.getLoginId()));
             //todo: if (AccountServices.containsKey(student.getLoginId())) {
 
            // };

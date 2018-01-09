@@ -11,7 +11,7 @@ import static lt.vcs.vcs_project.backend.Role.ADMIN;
 
 public class AccountServices {
     final private String fileName = "AccountList.txt";
-    final private Account defaultAdminAccount = new Account("admin", "", "", "admin", ADMIN);
+    final private Account defaultAdminAccount = new Account("admin", "admin", "Adminu", "adminas", ADMIN);
 
     private Hashtable<String,Account> accountCollection = new Hashtable<>();
 

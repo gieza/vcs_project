@@ -6,6 +6,7 @@ public class Backend {
     public static AccountServices accounts = new AccountServices();
     public static StudentServices students = new StudentServices();
     public static LecturerServices lecturers = new LecturerServices();
+    public static CourseServices courses = new CourseServices();
 
 
     public static String login() {
@@ -120,6 +121,16 @@ public class Backend {
         }
     }
 
+    public static void listCourses() {
+        System.out.println(courses.listCourses());
+    }
 
+    public static void printCourse(String courseCode) {
+        System.out.println(courses.listCourses());
+        //todo: not implemented
+    }
 
+    public static boolean courseExists(String courseCode) {
+        return courses.containsKey(courseCode);
+    }
 }

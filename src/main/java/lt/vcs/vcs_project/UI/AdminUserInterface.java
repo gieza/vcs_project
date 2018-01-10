@@ -45,7 +45,8 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition=decision;
                 break;
             case "LIST_ACCOUNTS":
-                listAccounts();
+                Backend.listAccounts();
+                ;
                 menuPosition="ACCOUNT";
                 break;
             case "PRINT_ACCOUNT":
@@ -104,6 +105,31 @@ public class AdminUserInterface implements UserInterface {
                 removeLecturer();
                 menuPosition = "LECTURER";
                 break;
+            case "LIST_COURSES":
+                Backend.listCourses();
+                menuPosition = "COURSE";
+                break;
+            case "PRINT_COURSE":
+                printCourse();
+                menuPosition = "COURSE";
+                break;
+            case "ADD_COURSE":
+                addCourse();
+                menuPosition = "COURSE";
+                break;
+            case "UPDATE_COURSE":
+                updateCourse();
+                menuPosition = "COURSE";
+                break;
+            case "REMOVE_COURSE":
+                removeCourse();
+                menuPosition = "COURSE";
+                break;
+            case "ASSIGN_COURSE":
+                assignCourse();
+                menuPosition = "COURSE";
+                break;
+
             default:
                 menuPosition = "TOP";
         }
@@ -116,9 +142,6 @@ public class AdminUserInterface implements UserInterface {
         //System.out.printf(menuOptions.get(menuPosition));
     }
 
-    private void listAccounts(){
-        Backend.listAccounts();
-    }
 
     private void printAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
@@ -250,9 +273,57 @@ public class AdminUserInterface implements UserInterface {
             System.out.printf("Selected Lecturer: %s\n", userInput);
             return userInput;
         } else {
-            System.out.printf("\nSorry, StudentId %s does not exists.\n\treturning to menu\n\n", userInput);
+            System.out.printf("\nSorry, Lecturer Id %s does not exists.\n\treturning to menu\n\n", userInput);
             return null;
         }
     }
 
+    private void printCourse() { //todo:not implemented
+        String selectedCourse = selectCourse();
+        if (selectedCourse != null) {
+            Backend.printCourse(selectedCourse);
+        }
+    }
+
+
+    private void addCourse() {
+        System.out.printf("\nEnter new Lecturer data in CommaSeparatedValue format\nfollowing template: %s\n:",
+                Lecturer.printHeaderCSV());
+        String userInput = ScannerUtils.scanString();
+        System.out.printf("Entered values %s\n", userInput);
+        Backend.addLecturer(userInput);
+    }
+
+    private void updateCourse() {//todo:not implemented
+        String selectedCourse = selectCourse();
+        if (selectedCourse != null) {
+            System.out.printf("\nSorry, course update functionally not implemented.\n\treturning to menu\n\n");
+        }
+    }
+
+    private void removeCourse() {//todo:not implemented - gal atskirai prideti password??
+        String selectedCourse = selectCourse();
+        if (selectedCourse != null) {
+            System.out.printf("\nSorry, course remove functionally not implemented.\n\treturning to menu\n\n");
+        }
+    }
+
+    private void assignCourse() {
+        String selectedCourse = selectCourse();
+        if (selectedCourse != null) {
+            System.out.printf("\nSorry, course remove functionally not implemented.\n\treturning to menu\n\n");
+        }
+    }
+
+    private String selectCourse() {
+        System.out.printf("\n\nEnter to Course Code to select Course:");
+        String userInput = ScannerUtils.scanString();
+        if (Backend.courseExists(userInput)) {
+            System.out.printf("Selected Course: %s\n", userInput);
+            return userInput;
+        } else {
+            System.out.printf("\nSorry, Course %s does not exists.\n\treturning to menu\n\n", userInput);
+            return null;
+        }
+    }
 }

@@ -12,6 +12,10 @@ public class LecturerServices {
 
     private Hashtable<String, Lecturer> lecturerCollection = new Hashtable<>();
 
+    public LecturerServices() {
+        readFromFile();
+    }
+
     public long getCount() {
         return lecturerCollection.size();
     }
@@ -78,6 +82,11 @@ public class LecturerServices {
 
     public boolean containsKey(String lecturerId) {
         return lecturerCollection.containsKey(lecturerId);
+    }
+
+    public String getLecturerName(String lecturerId) {
+        return lecturerCollection.get(lecturerId).getFirstName() + " "
+                + lecturerCollection.get(lecturerId).getSecondName();
     }
 
     private void readFromFile() {

@@ -17,6 +17,7 @@ public class Course implements Serializable {
     private Integer enrolledStudentCount;
     private HashSet<String> enrolledStudents;
 
+    private final Integer MAX_STUDENTS_IN_COURSE = 12;
 
     public Course(String courseCode, String title, String description, Date startDate, String credit, String lecturerCode) {
         this.courseCode = courseCode;
@@ -74,6 +75,22 @@ public class Course implements Serializable {
     static public String printHeaderCSV() {
         return "courseCode,title,Description,startDate[yyyy-MM-dd],credit,lecturerCode";
     }
+
+    public boolean available() {
+
+        return (this.enrolledStudentCount < MAX_STUDENTS_IN_COURSE && (this.startDate.after(new Date())));
+    }
+
+    public void enrollStudent(String studentId) {
+        if (!this.enrolledStudents.contains(studentId)) {
+            this.enrolledStudents.add(studentId);
+            this.enrolledStudentCount++;
+        } else {
+            System.out.printf("Student %s is already enrolled into course %s", studentId, this.courseCode);
+        }
+
+    }
+
 
     public String getCourseCode() {
         return courseCode;

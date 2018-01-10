@@ -9,31 +9,31 @@ import java.util.Set;
 public class StudentServices {
     final private String fileName = "StudentList.txt";
 
-    private Hashtable<String,Student> studentCollection = new Hashtable<>();
+    private Hashtable<String, Student> studentCollection = new Hashtable<>();
 
     StudentServices() {
         readFromFile();
     }
 
-    public long getCount(){
+    public long getCount() {
         return studentCollection.size();
     }
 
-    public void addStudent(Student student){
+    public void addStudent(Student student) {
         if (!studentCollection.containsKey(student.getStudentId())) {
             studentCollection.put(student.getStudentId(), student);
             writeToFile();
             //if (accounts.containsKey(student.getLoginId()));
             //todo: if (AccountServices.containsKey(student.getLoginId())) {
 
-           // };
+            // };
         } else {
             //trow exception - duplicate
             System.out.printf("Student addition failure: Student %s already exists\n", student.getStudentId());
         }
     }
 
-    public void addStudent(String csv){
+    public void addStudent(String csv) {
         Student studentCSV = new Student(csv);
         if (!studentCollection.containsKey(studentCSV.getStudentId())) {
             studentCollection.put(studentCSV.getStudentId(), studentCSV);
@@ -44,7 +44,7 @@ public class StudentServices {
         }
     }
 
-    public void updateStudent(Student student){
+    public void updateStudent(Student student) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         if (studentCollection.containsKey(student.getStudentId())) {
             studentCollection.put(student.getStudentId(), student);
@@ -54,7 +54,7 @@ public class StudentServices {
         }
     }
 
-    public void updateStudent(String csv){
+    public void updateStudent(String csv) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas ???
         Student studentCSV = new Student(csv);
         //todo: reikalingas account update -> kad nebutu galima pakeisti account'o ir roles
@@ -66,23 +66,23 @@ public class StudentServices {
         }
     }
 
-    public void removeStudent(String studentId){
+    public void removeStudent(String studentId) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         studentCollection.remove(studentId);
         writeToFile();
     }
 
-    public Account getAccount(String studentId){
-        if (studentCollection.containsKey(studentId))  return studentCollection.get(studentId);
+    public Account getAccount(String studentId) {
+        if (studentCollection.containsKey(studentId)) return studentCollection.get(studentId);
         System.out.printf("Get student failure: student %s does not exist\n", studentId);
         return null;
     }
 
-    public boolean containsKey(String accountId){
+    public boolean containsKey(String accountId) {
         return studentCollection.containsKey(accountId);
     }
 
-    private void readFromFile(){
+    private void readFromFile() {
         try {
             studentCollection = (Hashtable<String, Student>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
         } catch (FileNotFoundException e) {
@@ -92,7 +92,7 @@ public class StudentServices {
     }
 
 
-    private void writeToFile(){
+    private void writeToFile() {
         IOObjectStreamUtils.writeObjectToFile(fileName, studentCollection);
 
     }
@@ -100,10 +100,11 @@ public class StudentServices {
 
     public String listStudents() {
         //todo:update listing
-        StringBuilder returnString = new StringBuilder("AccountId\tFirst name\tLast Name\tRole\tstudentId\tPersonalNumber\tDoB\tEmail\tMobile#\tF/M\tAddress" +
+        StringBuilder returnString = new StringBuilder("AccountId\tFirst name\t" +
+                "Last Name\tRole\tstudentId\tPersonalNumber\tDoB\tEmail\tMobile#\tF/M\tAddress" +
                 "\n=====================================================\n");
         Set<String> keys = studentCollection.keySet();
-        for (String key:keys) {
+        for (String key : keys) {
             Student listingStudent = studentCollection.get(key);
             returnString.append(key + "\t" + listingStudent.getFirstName() +
                     "\t" + listingStudent.getSecondName() + "\t" + listingStudent.getRole().toString() +
@@ -116,11 +117,11 @@ public class StudentServices {
     }
 
 
-    public String toStringCSV(String studentId){
+    public String toStringCSV(String studentId) {
         return studentCollection.get(studentId).toStringCSV();
     }
 
-    public String getLoginId(String studentId){
+    public String getLoginId(String studentId) {
         if (studentCollection.containsKey(studentId)) {
             return studentCollection.get(studentId).getLoginId();
         } else {
@@ -132,4 +133,8 @@ public class StudentServices {
         return studentCollection.get(studentId);
     }
 
+
+    public void addCourse(String studentId, String courseCode) {
+        studentCollection.get(studentId).addCourse(courseCode);
+    }
 }

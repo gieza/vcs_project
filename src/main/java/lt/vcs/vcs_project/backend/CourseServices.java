@@ -116,7 +116,13 @@ public class CourseServices {
         return "";
     }
 
-    public void enrollStudent() {
+    public Course getCourse(String CourseCode) {
+        return courseCollection.get(CourseCode);
+    }
+
+    public void enrollStudent(String courseCode, String studentId) {
+        courseCollection.get(courseCode).enrollStudent(studentId);
+
 
     }
 

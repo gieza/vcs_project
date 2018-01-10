@@ -125,11 +125,14 @@ public class AdminUserInterface implements UserInterface {
                 removeCourse();
                 menuPosition = "COURSE";
                 break;
-            case "ASSIGN_COURSE":
-                assignCourse();
+            case "ASSIGN_COURSE_STUDENT":
+                assignCourse2Student(false);
                 menuPosition = "COURSE";
                 break;
-
+            case "ASSIGN_COURSE_LECTURER":
+                assignCourse2Lecturer();
+                menuPosition = "COURSE";
+                break;
             default:
                 menuPosition = "TOP";
         }
@@ -308,10 +311,19 @@ public class AdminUserInterface implements UserInterface {
         }
     }
 
-    private void assignCourse() {
+    private void assignCourse2Student(boolean courseIsAvailable) {
         String selectedCourse = selectCourse();
-        if (selectedCourse != null) {
-            System.out.printf("\nSorry, course remove functionally not implemented.\n\treturning to menu\n\n");
+        String selectedStudent = selectStudent();
+        if (selectedCourse != null && selectedStudent != null) {
+            Backend.assignCourse2Student(selectedCourse, selectedStudent, courseIsAvailable);
+        }
+    }
+
+    private void assignCourse2Lecturer() {
+        String selectedCourse = selectCourse();
+        String selectedLecturer = selectLecturer();
+        if (selectedCourse != null && selectedLecturer != null) {
+            Backend.assignCourse2Lecturer(selectedCourse, selectedLecturer);
         }
     }
 

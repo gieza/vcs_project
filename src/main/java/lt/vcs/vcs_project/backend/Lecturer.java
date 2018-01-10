@@ -1,6 +1,7 @@
 package lt.vcs.vcs_project.backend;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class Lecturer extends Account {
 
@@ -11,6 +12,7 @@ public class Lecturer extends Account {
     private String mobileNumber;
     private String gender;
     private String address;
+    private HashSet<String> readCourses;
 
     public Lecturer(String loginId, String firstName, String secondName, String password, String lecturerId, String personalNumber, String dateOfBirth, String email, String mobileNumber, String gender, String address) {
         super(loginId, firstName, secondName, password, Role.LECTURER);
@@ -21,6 +23,7 @@ public class Lecturer extends Account {
         this.mobileNumber = mobileNumber;
         this.gender = gender;
         this.address = address;
+        this.readCourses = new HashSet<>();
     }
 
     public Lecturer(String csv) {
@@ -43,6 +46,7 @@ public class Lecturer extends Account {
             for (int i = 11; i < inputArray.length; i++) {
                 this.address = this.address + "," + inputArray[11];
             }
+            this.readCourses = new HashSet<>();
         } else {
             System.out.printf("Failure: cannot create Lecturer -- number of fields do not match required number\n");
         }
@@ -59,6 +63,15 @@ public class Lecturer extends Account {
     public String toStringCSV() {
         return String.join(",", Arrays.asList(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(),
                 this.getRole().toString(), this.lecturerId, this.personalNumber, this.dateOfBirth, this.email, this.mobileNumber, this.gender, this.address));
+
+    }
+
+    public void addCourse(String courseId) {
+        if (!this.readCourses.contains(courseId)) {
+            this.readCourses.add(courseId);
+        } else {
+            System.out.printf("Student %s is already giving into course %s", this.lecturerId, courseId);
+        }
 
     }
 

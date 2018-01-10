@@ -139,4 +139,8 @@ public class LecturerServices {
         return lecturerCollection.get(lecturerId);
     }
 
+
+    public void addCourse(String lecturerId, String courseCode) {
+        lecturerCollection.get(lecturerId).addCourse(courseCode);
+    }
 }

@@ -3,10 +3,10 @@ package lt.vcs.vcs_project.backend;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class Backend {
-    public static AccountServices accounts = new AccountServices();
-    public static StudentServices students = new StudentServices();
-    public static LecturerServices lecturers = new LecturerServices();
-    public static CourseServices courses = new CourseServices();
+    static AccountServices accounts = new AccountServices();
+    static StudentServices students = new StudentServices();
+    static LecturerServices lecturers = new LecturerServices();
+    static CourseServices courses = new CourseServices();
 
 
     public static String login() {
@@ -132,5 +132,23 @@ public class Backend {
 
     public static boolean courseExists(String courseCode) {
         return courses.containsKey(courseCode);
+    }
+
+    public static void assignCourse2Student(String courseCode, String studentId, boolean available) {
+        if (available && courses.getCourse(courseCode).available()) {
+            courses.enrollStudent(courseCode, studentId);
+            students.addCourse(studentId, courseCode);
+        } else if (!available) {
+            courses.enrollStudent(courseCode, studentId);
+            students.addCourse(studentId, courseCode);
+        }
+    }
+
+
+    public static void assignCourse2Lecturer(String courseCode, String lecturerId) {
+        if (courses.containsKey(courseCode) && lecturers.containsKey(lecturerId)) {
+            courses.getCourse(courseCode).setLecturerCode(lecturerId);
+            lecturers.getLecturer(lecturerId).addCourse(courseCode);
+        }
     }
 }

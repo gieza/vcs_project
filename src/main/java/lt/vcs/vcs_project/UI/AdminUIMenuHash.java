@@ -24,6 +24,7 @@ public class AdminUIMenuHash {
         put("TOP", "2","STUDENT");
         put("TOP", "3","LECTURER");
         put("TOP", "4","COURSE");
+        put("TOP", "loadsomedata", "loadsomedata");
         put("ACCOUNT", "0","TOP");
         put("ACCOUNT", "1","LIST_ACCOUNTS");
         put("ACCOUNT", "2","PRINT_ACCOUNT");

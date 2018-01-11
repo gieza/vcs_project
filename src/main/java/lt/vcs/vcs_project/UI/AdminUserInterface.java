@@ -27,9 +27,10 @@ public class AdminUserInterface implements UserInterface {
             menuChoice = ScannerUtils.scanString();
             if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
                 break;
-            } else {
-                runDecision(menuPosition,menuChoice);
             }
+            ;
+                runDecision(menuPosition,menuChoice);
+
         }
     }
 
@@ -131,6 +132,11 @@ public class AdminUserInterface implements UserInterface {
                 break;
             case "ASSIGN_COURSE_LECTURER":
                 assignCourse2Lecturer();
+                menuPosition = "COURSE";
+                break;
+
+            case "loadsomedata":
+                Backend.addSomeData();
                 menuPosition = "COURSE";
                 break;
             default:

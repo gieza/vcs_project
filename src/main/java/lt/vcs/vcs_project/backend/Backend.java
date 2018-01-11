@@ -134,11 +134,13 @@ public class Backend {
         return courses.containsKey(courseCode);
     }
 
-    public static void assignCourse2Student(String courseCode, String studentId, boolean available) {
-        if (available && courses.getCourse(courseCode).available()) {
+    public static void assignAnyCourse2Student(String courseCode, String studentId) {
             courses.enrollStudent(courseCode, studentId);
             students.addCourse(studentId, courseCode);
-        } else if (!available) {
+    }
+
+    public static void assignAvailableCourse2Student(String courseCode, String studentId) {
+        if (courses.getCourse(courseCode).available()) {
             courses.enrollStudent(courseCode, studentId);
             students.addCourse(studentId, courseCode);
         }
@@ -150,5 +152,15 @@ public class Backend {
             courses.getCourse(courseCode).setLecturerCode(lecturerId);
             lecturers.getLecturer(lecturerId).addCourse(courseCode);
         }
+    }
+
+    public static void addSomeData() {
+        accounts.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
+        accounts.addAccount("admin3,admin,Pekka,Peltonen");
+        students.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
+        students.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
+        students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+        students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+
     }
 }

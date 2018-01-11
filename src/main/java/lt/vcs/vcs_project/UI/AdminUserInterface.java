@@ -321,7 +321,7 @@ public class AdminUserInterface implements UserInterface {
         String selectedCourse = selectCourse();
         String selectedStudent = selectStudent();
         if (selectedCourse != null && selectedStudent != null) {
-            Backend.assignCourse2Student(selectedCourse, selectedStudent, courseIsAvailable);
+            Backend.assignAnyCourse2Student(selectedCourse, selectedStudent);
         }
     }
 

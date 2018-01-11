@@ -3,6 +3,8 @@ package lt.vcs.vcs_project.backend;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import static lt.vcs.vcs_project.backend.Role.*;
+
 
 public /*abstract*/ class Account  implements Serializable {
    // private static final Integer MAXPASSWORDRETRIES = 5;
@@ -16,7 +18,7 @@ public /*abstract*/ class Account  implements Serializable {
     private String personalId; // only to be used by Student and Lecturer accounts
 
     public Account(String loginId, String password, String firstName, String secondName,  Role role) {
-       if (role.equals(Role.ADMIN)) {
+        if (role.equals(ADMIN)) {
            this.loginId = loginId;
            this.firstName = firstName;
            this.secondName = secondName;
@@ -30,7 +32,7 @@ public /*abstract*/ class Account  implements Serializable {
     }
 
     public Account(String loginId, String password, String firstName, String secondName,  Role role,String personalId) {
-        if (!role.equals(Role.ADMIN)) {
+        if (!role.equals(ADMIN)) {
             this.loginId = loginId;
             this.firstName = firstName;
             this.secondName = secondName;
@@ -46,21 +48,21 @@ public /*abstract*/ class Account  implements Serializable {
     public Account(String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length == 5 &&
-                Role.valueOf(inputArray[4].toUpperCase()) == Role.ADMIN) {
+                valueOf(inputArray[4].toUpperCase()) == ADMIN) {
             this.loginId = inputArray[0];
             this.password = inputArray[1];
             this.firstName = inputArray[2];
             this.secondName = inputArray[3];
-            this.role = Role.ADMIN;
+            this.role = ADMIN;
             this.personalId="";
         } else if (inputArray.length == 6 && (
-                Role.valueOf(inputArray[4].toUpperCase()) == Role.STUDENT ||
-                        Role.valueOf(inputArray[4].toUpperCase()) == Role.LECTURER)) {
+                valueOf(inputArray[4].toUpperCase()) == STUDENT ||
+                        valueOf(inputArray[4].toUpperCase()) == LECTURER)) {
             this.loginId = inputArray[0];
             this.password = inputArray[1];
             this.firstName = inputArray[2];
             this.secondName = inputArray[3];
-            this.role = Role.valueOf(inputArray[4].toUpperCase());
+            this.role = valueOf(inputArray[4].toUpperCase());
             this.personalId = inputArray[5];
         } else {
             System.out.printf("Account creation Failure: input data has incorrect number of fields\n");

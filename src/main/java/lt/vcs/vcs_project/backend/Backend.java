@@ -1,7 +1,5 @@
 package lt.vcs.vcs_project.backend;
 
-import lt.vcs.vcs_project.utils.ScannerUtils;
-
 import static lt.vcs.vcs_project.backend.AccountOperations.updateFromCSV;
 import static lt.vcs.vcs_project.backend.Role.ADMIN;
 
@@ -12,25 +10,9 @@ public class Backend {
     static CourseServices courses = new CourseServices();
 
 
-    public static String login() {
-        System.out.printf("\n\nWelcome! Please login.\n");
-        while (true) {
-            System.out.print("Username: ");
-            String username = ScannerUtils.scanString();
-            System.out.print("Password: ");
-            String password = ScannerUtils.scanString();
 
-            if (accounts.authenticate(username, password)) {
-                return username;
-            }
-            System.out.println("Login failed, please try again");
-        }
-    }
 
-    public static String loginDefault() {
-        System.out.printf("\n\nWelcome! Admin.\n");
-        return "admin";
-    }
+
 
     public static Role getRole(String loginId) {
         return accounts.getAccount(loginId).getRole();
@@ -44,6 +26,12 @@ public class Backend {
         return accounts.getAccount(loginId).getSecondName();
     }
 
+    public static boolean authenticate(String accountId, String password) {
+        return accounts.getAccount(accountId).authenticate(password);
+    }
+
+    ;
+
     public static void listAccounts() {
         System.out.println(accounts.listAccounts());
     }
@@ -51,6 +39,7 @@ public class Backend {
     public static void printAccount(String loginId) {
         System.out.println(accounts.getAccount(loginId).toString());
     }
+
 
     public static boolean accountExists(String loginId) {
         return accounts.containsKey(loginId);

@@ -22,7 +22,7 @@ public /*abstract*/ class Account implements Serializable {
             this.secondName = secondName;
             this.password = password;
             this.role = role;
-            this.personalId = "1";
+            this.personalId = "";
         } else {
             System.out.printf("Failure: cannot create %s type of account with ID\n", role.toString());
         }
@@ -60,9 +60,7 @@ public /*abstract*/ class Account implements Serializable {
         return "Account Data:\n=============\nLogin Name:"
                 + this.loginId + "\nName:" + this.firstName + " " + this.secondName
                 + "\n Password:" + this.password
-                + "\n Role:" + this.role.toString() + "\n"
-                + "\n PersonalId:" + this.personalId
-                ;
+                + "\n Role:" + this.role.toString() + "\n";
     }
 
     public String toStringCSV() {

@@ -9,7 +9,7 @@ public class CommandLineUI {
     public static void run() {
         UserInterface userInterface = null;
         while (true) {
-            //currentUser = DataOperations.login();
+            //currentUser = login();
             currentUser = loginDefault();
             switch (DataOperations.getRole(currentUser)) {
                 case ADMIN:

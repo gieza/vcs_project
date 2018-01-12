@@ -87,6 +87,7 @@ public class AccountCollection {
     public void removeAccount(String loginId) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         accountCollection.remove(loginId);
+        addAdminIfMissing();
         writeToFile();
     }
 

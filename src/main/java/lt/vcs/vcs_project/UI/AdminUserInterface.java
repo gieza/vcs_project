@@ -21,17 +21,18 @@ public class AdminUserInterface implements UserInterface {
         //this.adminUser = (Admin) user;
         //System.out.println("Administration menuPosition");
         while (true) {
-            //todo refactor to be only in backend login
+            if (menuPosition.equals("LOGOUT")) {
+                break;
+            }
             clearScreen();
-            System.out.printf("\nHello %s %s,\n", DataOperations.getFirstName(accountId), DataOperations.getSecondName(accountId));
+            System.out.printf("\nHello %s %s,\n", DataOperations.getFirstName(accountId),
+                    DataOperations.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
             if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
                 break;
             }
-            ;
             runDecision(menuPosition, menuChoice);
-
         }
     }
 
@@ -52,7 +53,6 @@ public class AdminUserInterface implements UserInterface {
                 break;
             case "LIST_ACCOUNTS":
                 DataOperations.listAccounts();
-                ;
                 menuPosition = "ACCOUNT";
                 break;
             case "PRINT_ACCOUNT":
@@ -73,7 +73,7 @@ public class AdminUserInterface implements UserInterface {
                 break;
             case "REMOVE_ACCOUNT":
                 removeAccount();
-                menuPosition = "ACCOUNT";
+                //menuPosition is being set in removeAccount method
                 break;
             case "LIST_STUDENTS":
                 listStudent();
@@ -216,8 +216,15 @@ public class AdminUserInterface implements UserInterface {
     private void removeAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
-            System.out.printf("\nSorry, account update functionally not implemented.\n\treturning to menu\n\n");
+            DataOperations.removeAccount(selectedAccount);
+            if (selectedAccount.equals(currentAccount)) {
+                menuPosition = "LOGOUT";
+                //current account does not exist anymore -> it has to leave immediately
+            } else {
+                menuPosition = "ACCOUNT";
+            }
         }
+        waitForEnter();
     }
 
     private String selectAccount(String currentAccount) {

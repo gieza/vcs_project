@@ -26,7 +26,7 @@ public class DataOperations {
         return accounts.getAccount(accountId).authenticate(password);
     }
 
-    ;
+
 
     public static void listAccounts() {
         System.out.println(accounts.listAccounts());
@@ -69,6 +69,14 @@ public class DataOperations {
             System.out.printf("Account password failed - no such account %s\n", accountId);
         }
     }
+
+    public static void removeAccount(String accountId) {
+        if (accounts.containsKey(accountId)) {
+            accounts.removeAccount(accountId);
+        }
+        //UI interface handles case of missing account
+    }
+
 
     public static void listStudents() {
         System.out.println(students.listStudents());

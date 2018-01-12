@@ -10,10 +10,6 @@ public class DataOperations {
     static CourseCollection courses = new CourseCollection();
 
 
-
-
-
-
     public static Role getRole(String loginId) {
         return accounts.getAccount(loginId).getRole();
     }
@@ -45,6 +41,7 @@ public class DataOperations {
         return accounts.containsKey(loginId);
     }
 
+
     public static boolean accountAdminExists(String loginId) {
         //todo: reikalingas refaktoringas
         return (accounts.containsKey(loginId) && accounts.getAccount(loginId).getRole() == ADMIN);
@@ -63,6 +60,14 @@ public class DataOperations {
     static public String getCurrentDataforUpdate(String accountID) {
         return accounts.getAccount(accountID).getCurrentValuesForUpdate();
 
+    }
+
+    static public void changeAccountPassword(String accountId, String newPassword) {
+        if (accounts.containsKey(accountId)) {
+            accounts.getAccount(accountId).setPassword(newPassword);
+        } else {
+            System.out.printf("Account password failed - no such account %s\n", accountId);
+        }
     }
 
     public static void listStudents() {
@@ -95,6 +100,14 @@ public class DataOperations {
     }
 
 
+    static public void changeStudentPassword(String studentId, String newPassword) {
+        if (students.containsKey(studentId)) {
+            students.getStudent(studentId).setPassword(newPassword);
+        } else {
+            System.out.printf("Student password failed - no such account %s\n", studentId);
+        }
+    }
+
     public static void listLecturers() {
         System.out.println(lecturers.listLecturers());
     }
@@ -121,6 +134,14 @@ public class DataOperations {
             } else {
                 System.out.printf("Sorry, LecturerId %s already exists", newLecturer.getLecturerId());
             }
+        }
+    }
+
+    static public void changeLecturerPassword(String lecturerId, String newPassword) {
+        if (lecturers.containsKey(lecturerId)) {
+            lecturers.getLecturer(lecturerId).setPassword(newPassword);
+        } else {
+            System.out.printf("Lecturer password failed - no such account %s\n", lecturerId);
         }
     }
 

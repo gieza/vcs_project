@@ -67,6 +67,10 @@ public class AdminUserInterface implements UserInterface {
                 updateAccount();
                 menuPosition = "ACCOUNT";
                 break;
+            case "CHANGE_ACCOUNT_PASSWORD":
+                changeAccountPassword();
+                menuPosition = "ACCOUNT";
+                break;
             case "REMOVE_ACCOUNT":
                 removeAccount();
                 menuPosition = "ACCOUNT";
@@ -87,6 +91,10 @@ public class AdminUserInterface implements UserInterface {
                 updateStudent();
                 menuPosition = "STUDENT";
                 break;
+            case "CHANGE_STUDENT_PASSWORD":
+                changeStudentPassword();
+                menuPosition = "STUDENT";
+                break;
             case "REMOVE_STUDENT":
                 removeStudent();
                 menuPosition = "STUDENT";
@@ -101,6 +109,10 @@ public class AdminUserInterface implements UserInterface {
                 break;
             case "ADD_LECTURER":
                 addLecturer();
+                menuPosition = "LECTURER";
+                break;
+            case "CHANGE_LECTURER_PASSWORD":
+                changeLecturerPassword();
                 menuPosition = "LECTURER";
                 break;
             case "UPDATE_LECTURER":
@@ -190,6 +202,17 @@ public class AdminUserInterface implements UserInterface {
         }
     }
 
+    private void changeAccountPassword() {
+        String selectedAccount = selectAccount(currentAccount);
+        String newPassword = askForNewPassword();
+        if (newPassword.length() > 0) {
+            DataOperations.changeAccountPassword(selectedAccount, newPassword);
+        } else {
+            System.out.println("User password cannot be empty");
+        }
+        waitForEnter();
+    }
+
     private void removeAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
@@ -238,6 +261,17 @@ public class AdminUserInterface implements UserInterface {
         }
     }
 
+    private void changeStudentPassword() {
+        String selectedStudent = selectStudent();
+        String newPassword = askForNewPassword();
+        if (newPassword.length() > 0) {
+            DataOperations.changeStudentPassword(selectedStudent, newPassword);
+        } else {
+            System.out.println("User password cannot be empty");
+        }
+        waitForEnter();
+    }
+
     private void removeStudent() {//todo:not implemented - gal atskirai prideti password??
         String selectedStudent = selectStudent();
         if (selectedStudent != null) {
@@ -282,6 +316,17 @@ public class AdminUserInterface implements UserInterface {
         if (selectedLecturer != null) {
             System.out.printf("\nSorry, Lecturer update functionally not implemented.\n\treturning to menu\n\n");
         }
+    }
+
+    private void changeLecturerPassword() {
+        String selectedLecturer = selectLecturer();
+        String newPassword = askForNewPassword();
+        if (newPassword.length() > 0) {
+            DataOperations.changeLecturerPassword(selectedLecturer, newPassword);
+        } else {
+            System.out.println("User password cannot be empty");
+        }
+        waitForEnter();
     }
 
     private void removeLecturer() {//todo:not implemented - gal atskirai prideti password??

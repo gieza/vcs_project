@@ -1,5 +1,7 @@
 package lt.vcs.vcs_project.UI;
 
+import lt.vcs.vcs_project.utils.ScannerUtils;
+
 import static lt.vcs.vcs_project.utils.ScannerUtils.scanString;
 
 public class UI_common {
@@ -19,5 +21,10 @@ public class UI_common {
             System.out.print("=");
         System.out.println();
 
+    }
+
+    public static String askForNewPassword() {
+        System.out.println("Please, enter new password:");
+        return ScannerUtils.scanString();
     }
 }

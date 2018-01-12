@@ -36,7 +36,7 @@ public class AdminUserInterface implements UserInterface {
     }
 
     private void runDecision(String menu, String subMenu) {
-        String decision = AdminUIMenuHash.menuNavigation.get(menu, subMenu);
+        String decision = AdminUIMenuDefinition.menuNavigation.get(menu, subMenu);
         System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = "TOP";
@@ -152,7 +152,7 @@ public class AdminUserInterface implements UserInterface {
     private void printMenuOptions() {
         System.out.printf("%s Menu\n============================================\n" +
                 "Enter number to select one of the following:\n", menuPosition);
-        System.out.printf(AdminUIMenuHash.menuOptions.get(menuPosition));
+        System.out.printf(AdminUIMenuDefinition.menuOptions.get(menuPosition));
         //System.out.printf(menuOptions.get(menuPosition));
     }
 

@@ -4,7 +4,7 @@ import lt.vcs.vcs_project.utils.BiHashMap;
 
 import java.util.Hashtable;
 
-public class StudentUIMenuHash {
+public class StudentUIMenuDefinition {
     public static final Hashtable<String, String> menuOptions = new Hashtable<>() {{
         put("TOP", "\t1 Student Menu\n\t2 Course menu\n\t9 Logout\nPossible options[1-2,9]:");
         put("STUDENT", "\t0 Top menu\n\t1 Print Student data\n\t2 Update Student\n\t3 Assign course\nPossible options[0-3]:");

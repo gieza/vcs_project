@@ -1,9 +1,6 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.backend.Account;
 import lt.vcs.vcs_project.backend.Backend;
-import lt.vcs.vcs_project.backend.Lecturer;
-import lt.vcs.vcs_project.backend.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class LecturerUserInterface implements UserInterface {
@@ -32,7 +29,7 @@ public class LecturerUserInterface implements UserInterface {
     }
 
     private void runDecision(String menu, String subMenu) {
-        String decision = LecturerUIMenuHash.menuNavigation.get(menu, subMenu);
+        String decision = LecturerUIMenuDefinition.menuNavigation.get(menu, subMenu);
         System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = "TOP";
@@ -62,7 +59,7 @@ public class LecturerUserInterface implements UserInterface {
     private void printMenuOptions() {
         System.out.printf("%s Menu\n============================================\n" +
                 "Enter number to select one of the following:\n", menuPosition);
-        System.out.printf(LecturerUIMenuHash.menuOptions.get(menuPosition));
+        System.out.printf(LecturerUIMenuDefinition.menuOptions.get(menuPosition));
         //System.out.printf(menuOptions.get(menuPosition));
     }
 

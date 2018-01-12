@@ -6,13 +6,13 @@ import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Set;
 
-public class CourseServices {
+public class CourseCollection {
 
     final private String fileName = "CourseList.txt";
 
     private Hashtable<String, Course> courseCollection = new Hashtable<>();
 
-    public CourseServices() {
+    public CourseCollection() {
         readFromFile();
     }
 
@@ -103,7 +103,7 @@ public class CourseServices {
             returnString.append(key + "\t" + listingCourse.getCourseCode() +
                     "\t" + listingCourse.getTitle() + "\t" + listingCourse.getTitle() +
                     "\t" + listingCourse.getStartDate().toString() + "\t" + listingCourse.getCredit() +
-                    "\t" + Backend.lecturers.getLecturerName(listingCourse.getLecturerCode()) + "\t" +
+                    "\t" + DataOperations.lecturers.getLecturerName(listingCourse.getLecturerCode()) + "\t" +
                     "\t" + listingCourse.getEnrolledStudentCount() + "\n");
         }
         return returnString.toString();

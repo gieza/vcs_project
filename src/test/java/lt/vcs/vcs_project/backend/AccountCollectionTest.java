@@ -6,8 +6,8 @@ import java.io.File;
 
 import static org.junit.Assert.assertEquals;
 
-public class AccountServicesTest {
-    private AccountServices accountServices = new AccountServices();
+public class AccountCollectionTest {
+    private AccountCollection accountCollection = new AccountCollection();
     private Account defaultAdminAccount1 = new Account("admin1", "admin", "", "admin", Role.ADMIN);
     private Account defaultAdminAccount2 = new Account("admin2", "admin2", "Adminas", "Admintauskas", Role.ADMIN);
 
@@ -16,21 +16,21 @@ public class AccountServicesTest {
         //ismesti account faila
         File accountCollectionFile = new File("AccountList.txt");
         accountCollectionFile.delete();
-        assertEquals("newly created Account list has 1 members",1, accountServices.getCount() );
+        assertEquals("newly created Account list has 1 members", 1, accountCollection.getCount());
     }
 
     @Test
     public void givenEmptyAccountList_for_then_has_admin() {
-        System.out.println(accountServices.listAccounts());
-        assertEquals("newly created Account list has Admin member",true, accountServices.containsKey("admin") );
+        System.out.println(accountCollection.listAccounts());
+        assertEquals("newly created Account list has Admin member", true, accountCollection.containsKey("admin"));
     }
 
    @Test
     public void givenEmptyAccountList_with_2_accounts_when_account_is_removed_then_AccountListSize_is_1() {
-      // accountServices.addAccount(defaultAdminAccount);
-       accountServices.addAccount(defaultAdminAccount2);
-        assertEquals("After adding 2 accounts newly created Account list has 2 member", 2, accountServices.getCount());
-       System.out.println(accountServices.listAccounts());
+       // accountCollection.addAccount(defaultAdminAccount);
+       accountCollection.addAccount(defaultAdminAccount2);
+       assertEquals("After adding 2 accounts newly created Account list has 2 member", 2, accountCollection.getCount());
+       System.out.println(accountCollection.listAccounts());
     }
 /*
             accountCollection.removeAccount("admin2");

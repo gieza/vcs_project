@@ -8,13 +8,13 @@ import java.util.Set;
 
 import static lt.vcs.vcs_project.backend.Role.ADMIN;
 
-public class AccountServices {
+public class AccountCollection {
     final private String fileName = "AccountList.txt";
     final private Account defaultAdminAccount = new Account("admin", "admin", "Adminu", "adminas", ADMIN);
 
     private Hashtable<String, Account> accountCollection = new Hashtable<>();
 
-    AccountServices() {
+    AccountCollection() {
         readFromFile();
         this.addAdminIfMissing();
 

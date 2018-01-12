@@ -6,13 +6,13 @@ import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Set;
 
-public class LecturerServices {
+public class LecturerCollection {
 
     final private String fileName = "LecturerList.txt";
 
     private Hashtable<String, Lecturer> lecturerCollection = new Hashtable<>();
 
-    public LecturerServices() {
+    public LecturerCollection() {
         readFromFile();
     }
 
@@ -25,7 +25,7 @@ public class LecturerServices {
             lecturerCollection.put(lecturer.getLecturerId(), lecturer);
             writeToFile();
             //if (accounts.containsKey(student.getLoginId()));
-            //todo: if (AccountServices.containsKey(student.getLoginId())) {
+            //todo: if (AccountCollection.containsKey(student.getLoginId())) {
 
             // };
         } else {

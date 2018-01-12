@@ -1,6 +1,6 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.backend.Backend;
+import lt.vcs.vcs_project.backend.DataOperations;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class CommandLineUI {
@@ -9,9 +9,9 @@ public class CommandLineUI {
     public static void run() {
         UserInterface userInterface = null;
         while (true) {
-            //currentUser = Backend.login();
+            //currentUser = DataOperations.login();
             currentUser = loginDefault();
-            switch (Backend.getRole(currentUser)) {
+            switch (DataOperations.getRole(currentUser)) {
                 case ADMIN:
                     userInterface = new AdminUserInterface();
                     break;
@@ -34,7 +34,7 @@ public class CommandLineUI {
             System.out.print("Password: ");
             String password = ScannerUtils.scanString();
 
-            if (Backend.authenticate(username, password)) {
+            if (DataOperations.authenticate(username, password)) {
                 return username;
             }
             System.out.println("Login failed, please try again");

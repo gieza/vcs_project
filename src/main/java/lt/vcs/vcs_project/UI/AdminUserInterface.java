@@ -23,7 +23,7 @@ public class AdminUserInterface implements UserInterface {
         while (true) {
             //todo refactor to be only in backend login
             clearScreen();
-            System.out.printf("\nHello %s %s,\n", Backend.getFirstName(accountId), Backend.getSecondName(accountId));
+            System.out.printf("\nHello %s %s,\n", DataOperations.getFirstName(accountId), DataOperations.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
             if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
@@ -51,7 +51,7 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case "LIST_ACCOUNTS":
-                Backend.listAccounts();
+                DataOperations.listAccounts();
                 ;
                 menuPosition = "ACCOUNT";
                 break;
@@ -112,7 +112,7 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = "LECTURER";
                 break;
             case "LIST_COURSES":
-                Backend.listCourses();
+                DataOperations.listCourses();
                 menuPosition = "COURSE";
                 break;
             case "PRINT_COURSE":
@@ -141,7 +141,7 @@ public class AdminUserInterface implements UserInterface {
                 break;
 
             case "loadsomedata":
-                Backend.addSomeData();
+                DataOperations.addSomeData();
                 menuPosition = "COURSE";
                 break;
             default:
@@ -160,7 +160,7 @@ public class AdminUserInterface implements UserInterface {
     private void printAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
-            Backend.printAccount(selectedAccount);
+            DataOperations.printAccount(selectedAccount);
         }
     }
 
@@ -169,7 +169,7 @@ public class AdminUserInterface implements UserInterface {
                 AccountOperations.getNewAccountDataInputTemplate());
         String userInput = ScannerUtils.scanString() + ",ADMIN";
         System.out.printf("Entered values %s\n", userInput);
-        Backend.addAccount(userInput);
+        DataOperations.addAccount(userInput);
     }
 
     private void updateAccount() {
@@ -178,14 +178,14 @@ public class AdminUserInterface implements UserInterface {
             String headline = AccountOperations.getUpdateHeader();
             System.out.printf("\nCurrent Admin Account values are:\n%s\n", headline);
             printUnderLineForString(headline);
-            System.out.println(Backend.getCurrentDataforUpdate(selectedAccount));
+            System.out.println(DataOperations.getCurrentDataforUpdate(selectedAccount));
             System.out.printf("\n\nEnter new Admin Account data in CommaSeparatedValue format" +
                             "\nfollowing template:\n %s\n",
                     AccountOperations.getUpdateAccountDataInputTemplate());
             String userInput = ScannerUtils.scanString();
-            Backend.updateAccount(selectedAccount, userInput);
+            DataOperations.updateAccount(selectedAccount, userInput);
             //print updated values
-            Backend.printAccount(selectedAccount);
+            DataOperations.printAccount(selectedAccount);
             waitForEnter();
         }
     }
@@ -203,7 +203,7 @@ public class AdminUserInterface implements UserInterface {
         if (userInput.equals("")) {
             System.out.printf("Selected account: %s\n", currentAccount);
             return currentAccount;
-        } else if (Backend.accountAdminExists(userInput)) {
+        } else if (DataOperations.accountAdminExists(userInput)) {
             System.out.printf("Selected account: %s\n", userInput);
             return userInput;
         } else {
@@ -213,13 +213,13 @@ public class AdminUserInterface implements UserInterface {
     }
 
     private void listStudent() {
-        Backend.listStudents(); //todo:not implemented
+        DataOperations.listStudents(); //todo:not implemented
     }
 
     private void printStudent() { //todo:not implemented
         String selectedStudent = selectStudent();
         if (selectedStudent != null) {
-            Backend.printAccount(selectedStudent);
+            DataOperations.printAccount(selectedStudent);
         }
     }
 
@@ -228,7 +228,7 @@ public class AdminUserInterface implements UserInterface {
                 Student.printHeaderCSV());
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
-        Backend.addStudent(userInput);
+        DataOperations.addStudent(userInput);
     }
 
     private void updateStudent() {//todo:not implemented
@@ -248,7 +248,7 @@ public class AdminUserInterface implements UserInterface {
     private String selectStudent() {
         System.out.printf("\n\nEnter to Student Id to select student:");
         String userInput = ScannerUtils.scanString();
-        if (Backend.studentExists(userInput)) {
+        if (DataOperations.studentExists(userInput)) {
             System.out.printf("Selected student: %s\n", userInput);
             return userInput;
         } else {
@@ -259,13 +259,13 @@ public class AdminUserInterface implements UserInterface {
 
 
     private void listLecturer() {
-        Backend.listLecturers(); //todo:not implemented
+        DataOperations.listLecturers(); //todo:not implemented
     }
 
     private void printLecturer() { //todo:not implemented
         String selectedLecturer = selectLecturer();
         if (selectedLecturer != null) {
-            Backend.printAccount(selectedLecturer);
+            DataOperations.printAccount(selectedLecturer);
         }
     }
 
@@ -274,7 +274,7 @@ public class AdminUserInterface implements UserInterface {
                 Lecturer.printHeaderCSV());
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
-        Backend.addLecturer(userInput);
+        DataOperations.addLecturer(userInput);
     }
 
     private void updateLecturer() {//todo:not implemented
@@ -294,7 +294,7 @@ public class AdminUserInterface implements UserInterface {
     private String selectLecturer() {
         System.out.printf("\n\nEnter to Lecturer Id to select Lecturer:");
         String userInput = ScannerUtils.scanString();
-        if (Backend.lecturerExists(userInput)) {
+        if (DataOperations.lecturerExists(userInput)) {
             System.out.printf("Selected Lecturer: %s\n", userInput);
             return userInput;
         } else {
@@ -306,7 +306,7 @@ public class AdminUserInterface implements UserInterface {
     private void printCourse() { //todo:not implemented
         String selectedCourse = selectCourse();
         if (selectedCourse != null) {
-            Backend.printCourse(selectedCourse);
+            DataOperations.printCourse(selectedCourse);
         }
     }
 
@@ -316,7 +316,7 @@ public class AdminUserInterface implements UserInterface {
                 Lecturer.printHeaderCSV());
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
-        Backend.addLecturer(userInput);
+        DataOperations.addLecturer(userInput);
     }
 
     private void updateCourse() {//todo:not implemented
@@ -337,7 +337,7 @@ public class AdminUserInterface implements UserInterface {
         String selectedCourse = selectCourse();
         String selectedStudent = selectStudent();
         if (selectedCourse != null && selectedStudent != null) {
-            Backend.assignAnyCourse2Student(selectedCourse, selectedStudent);
+            DataOperations.assignAnyCourse2Student(selectedCourse, selectedStudent);
         }
     }
 
@@ -345,14 +345,14 @@ public class AdminUserInterface implements UserInterface {
         String selectedCourse = selectCourse();
         String selectedLecturer = selectLecturer();
         if (selectedCourse != null && selectedLecturer != null) {
-            Backend.assignCourse2Lecturer(selectedCourse, selectedLecturer);
+            DataOperations.assignCourse2Lecturer(selectedCourse, selectedLecturer);
         }
     }
 
     private String selectCourse() {
         System.out.printf("\n\nEnter to Course Code to select Course:");
         String userInput = ScannerUtils.scanString();
-        if (Backend.courseExists(userInput)) {
+        if (DataOperations.courseExists(userInput)) {
             System.out.printf("Selected Course: %s\n", userInput);
             return userInput;
         } else {

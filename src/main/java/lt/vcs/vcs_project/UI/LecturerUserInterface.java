@@ -1,6 +1,6 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.backend.Backend;
+import lt.vcs.vcs_project.backend.DataOperations;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class LecturerUserInterface implements UserInterface {
@@ -17,7 +17,7 @@ public class LecturerUserInterface implements UserInterface {
         menuPosition = "TOP";
         while (true) {
             //todo refactor to be only in backend login
-            System.out.printf("\nHello %s %s,\n", Backend.getFirstName(accountId), Backend.getSecondName(accountId));
+            System.out.printf("\nHello %s %s,\n", DataOperations.getFirstName(accountId), DataOperations.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
             if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
@@ -65,7 +65,7 @@ public class LecturerUserInterface implements UserInterface {
 
 
     private void printLecturer() { //todo:not implemented
-        Backend.printAccount(currentAccount);
+        DataOperations.printAccount(currentAccount);
 
     }
 

@@ -3,11 +3,11 @@ package lt.vcs.vcs_project.backend;
 import static lt.vcs.vcs_project.backend.AccountOperations.updateFromCSV;
 import static lt.vcs.vcs_project.backend.Role.ADMIN;
 
-public class Backend {
-    static AccountServices accounts = new AccountServices();
-    static StudentServices students = new StudentServices();
-    static LecturerServices lecturers = new LecturerServices();
-    static CourseServices courses = new CourseServices();
+public class DataOperations {
+    static AccountCollection accounts = new AccountCollection();
+    static StudentCollection students = new StudentCollection();
+    static LecturerCollection lecturers = new LecturerCollection();
+    static CourseCollection courses = new CourseCollection();
 
 
 

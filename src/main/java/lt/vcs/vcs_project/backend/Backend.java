@@ -2,6 +2,9 @@ package lt.vcs.vcs_project.backend;
 
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
+import static lt.vcs.vcs_project.backend.AccountOperations.updateFromCSV;
+import static lt.vcs.vcs_project.backend.Role.ADMIN;
+
 public class Backend {
     static AccountServices accounts = new AccountServices();
     static StudentServices students = new StudentServices();
@@ -54,13 +57,24 @@ public class Backend {
     }
 
     public static boolean accountAdminExists(String loginId) {
-        return (accounts.containsKey(loginId) && accounts.getAccount(loginId).getRole() == Role.ADMIN);
+        //todo: reikalingas refaktoringas
+        return (accounts.containsKey(loginId) && accounts.getAccount(loginId).getRole() == ADMIN);
     }
 
     public static void addAccount(String csv) {
         accounts.addAccount(csv);
     }
 
+    public static void updateAccount(String AccountId, String updateCSV) {
+        if (accounts.getAccount(AccountId).getRole() == ADMIN) {
+            updateFromCSV(accounts.getAccount(AccountId), updateCSV);
+        }
+    }
+
+    static public String getCurrentDataforUpdate(String accountID) {
+        return accounts.getAccount(accountID).getCurrentValuesForUpdate();
+
+    }
 
     public static void listStudents() {
         System.out.println(students.listStudents());
@@ -135,8 +149,8 @@ public class Backend {
     }
 
     public static void assignAnyCourse2Student(String courseCode, String studentId) {
-            courses.enrollStudent(courseCode, studentId);
-            students.addCourse(studentId, courseCode);
+        courses.enrollStudent(courseCode, studentId);
+        students.addCourse(studentId, courseCode);
     }
 
     public static void assignAvailableCourse2Student(String courseCode, String studentId) {

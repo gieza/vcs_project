@@ -30,4 +30,5 @@ public class Project {
                 userInterface.open(currentUser);
             }
     }
- }
+
+}

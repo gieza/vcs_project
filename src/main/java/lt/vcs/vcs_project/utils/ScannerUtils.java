@@ -8,4 +8,6 @@ public class ScannerUtils {
     public static String scanString() {
         return scanner.nextLine();
     }
+
+
 }

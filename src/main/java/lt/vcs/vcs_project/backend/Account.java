@@ -77,6 +77,9 @@ public /*abstract*/ class Account implements Serializable {
                 this.role.toString(), this.personalId);
     }
 
+    public String getCurrentValuesForUpdate() {
+        return String.format("%-20s %-25s", this.firstName, this.secondName);
+    }
 
     public String getLoginId() {
         return loginId;

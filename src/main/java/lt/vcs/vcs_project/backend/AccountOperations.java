@@ -20,17 +20,17 @@ public class AccountOperations {
             return new Account(inputArray[0], inputArray[1], inputArray[2], inputArray[3],
                     valueOf(inputArray[4].toUpperCase()), inputArray[5]);
         }
+        return null;
     }
 
     public static Account updateFromCSV(Account account, String csv) {
-        //todo - lauku kiekis yra kitoks, todel kitokia konvertacija reiklainga
-        Account accountCSV = accountFromCSV(csv);
-        if (accountCSV == null) {
+        String[] inputArray = csv.split(",");
+        if (inputArray.length != 2) {
             System.out.printf("Account update Failure: input data has incorrect number of fields\n");
             return account;
         } else {
-            account.setFirstName(accountCSV.getFirstName());
-            account.setSecondName(accountCSV.getSecondName());
+            account.setFirstName(inputArray[0]);
+            account.setSecondName(inputArray[1]);
             return account;
         }
     }
@@ -39,8 +39,16 @@ public class AccountOperations {
         return "Login,Password,First name,Second name";
     }
 
+    static public String getUpdateAccountDataInputTemplate() {
+        return "First name,Second name";
+    }
+
     static public String getListingHeader() {
         return String.format("%-15s %20s %-25s %-8s %-8s", "Login", "First name", "Second name", "Role", "ID");
+    }
+
+    static public String getUpdateHeader() {
+        return String.format("%-20s %-25s", "First name", "Second name");
     }
 }
 

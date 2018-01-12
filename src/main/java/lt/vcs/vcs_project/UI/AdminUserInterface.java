@@ -4,6 +4,8 @@ package lt.vcs.vcs_project.UI;
 import lt.vcs.vcs_project.backend.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
+import static lt.vcs.vcs_project.UI.UI_common.*;
+
 public class AdminUserInterface implements UserInterface {
     static String menuPosition = "TOP";
     static String menuChoice = "";
@@ -13,13 +15,14 @@ public class AdminUserInterface implements UserInterface {
 
     @Override
     public void open(String accountId) {
-        currentAccount =accountId;
-        menuChoice="";
+        currentAccount = accountId;
+        menuChoice = "";
         menuPosition = "TOP";
         //this.adminUser = (Admin) user;
         //System.out.println("Administration menuPosition");
         while (true) {
             //todo refactor to be only in backend login
+            clearScreen();
             System.out.printf("\nHello %s %s,\n", Backend.getFirstName(accountId), Backend.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
@@ -27,42 +30,46 @@ public class AdminUserInterface implements UserInterface {
                 break;
             }
             ;
-                runDecision(menuPosition,menuChoice);
+            runDecision(menuPosition, menuChoice);
 
         }
     }
 
-    private void runDecision(String menu,String subMenu){
-        String decision = AdminUIMenuHash.menuNavigation.get(menu,subMenu);
-        System.out.printf("Next action: %s\n\n",decision);
+    private void runDecision(String menu, String subMenu) {
+        String decision = AdminUIMenuHash.menuNavigation.get(menu, subMenu);
+        System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = "TOP";
             return;
         }
         switch (decision) {
-            case "ACCOUNT": case "STUDENT": case "LECTURER":  case "COURSE": case "TOP":
-                menuPosition=decision;
+            case "ACCOUNT":
+            case "STUDENT":
+            case "LECTURER":
+            case "COURSE":
+            case "TOP":
+                menuPosition = decision;
                 break;
             case "LIST_ACCOUNTS":
                 Backend.listAccounts();
                 ;
-                menuPosition="ACCOUNT";
+                menuPosition = "ACCOUNT";
                 break;
             case "PRINT_ACCOUNT":
                 printAccount();
-                menuPosition="ACCOUNT";
+                menuPosition = "ACCOUNT";
                 break;
             case "ADD_ACCOUNT":
                 addAccount();
-                menuPosition="ACCOUNT";
+                menuPosition = "ACCOUNT";
                 break;
             case "UPDATE_ACCOUNT":
                 updateAccount();
-                menuPosition="ACCOUNT";
+                menuPosition = "ACCOUNT";
                 break;
             case "REMOVE_ACCOUNT":
                 removeAccount();
-                menuPosition="ACCOUNT";
+                menuPosition = "ACCOUNT";
                 break;
             case "LIST_STUDENTS":
                 listStudent();
@@ -125,7 +132,7 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = "COURSE";
                 break;
             case "ASSIGN_COURSE_STUDENT":
-                assignCourse2Student(false);
+                assignCourse2Student();
                 menuPosition = "COURSE";
                 break;
             case "ASSIGN_COURSE_LECTURER":
@@ -152,42 +159,53 @@ public class AdminUserInterface implements UserInterface {
 
     private void printAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
-        if (selectedAccount !=null) {
+        if (selectedAccount != null) {
             Backend.printAccount(selectedAccount);
         }
     }
 
-    private void addAccount(){
+    private void addAccount() {
         System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format\nfollowing template: %s\n:",
                 AccountOperations.getNewAccountDataInputTemplate());
-        String userInput = ScannerUtils.scanString()+ ",ADMIN" ;
-        System.out.printf("Entered values %s\n",userInput);
+        String userInput = ScannerUtils.scanString() + ",ADMIN";
+        System.out.printf("Entered values %s\n", userInput);
         Backend.addAccount(userInput);
     }
 
-    private void updateAccount() { //todo:not implemented
+    private void updateAccount() {
         String selectedAccount = selectAccount(currentAccount);
-        if (selectedAccount !=null) {
-            System.out.printf("\nSorry, account update functionally not implemented.\n\treturning to menu\n\n");
+        if (selectedAccount != null) {
+            String headline = AccountOperations.getUpdateHeader();
+            System.out.printf("\nCurrent Admin Account values are:\n%s\n", headline);
+            printUnderLineForString(headline);
+            System.out.println(Backend.getCurrentDataforUpdate(selectedAccount));
+            System.out.printf("\n\nEnter new Admin Account data in CommaSeparatedValue format" +
+                            "\nfollowing template:\n %s\n",
+                    AccountOperations.getUpdateAccountDataInputTemplate());
+            String userInput = ScannerUtils.scanString();
+            Backend.updateAccount(selectedAccount, userInput);
+            //print updated values
+            Backend.printAccount(selectedAccount);
+            waitForEnter();
         }
     }
 
     private void removeAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
-        if (selectedAccount !=null) {
+        if (selectedAccount != null) {
             System.out.printf("\nSorry, account update functionally not implemented.\n\treturning to menu\n\n");
         }
     }
 
-    private String selectAccount(String currentAccount){
+    private String selectAccount(String currentAccount) {
         System.out.printf("\n\nCurrent Account %s.\n\tpress Enter to select current account, otherwise enter new account:", currentAccount);
         String userInput = ScannerUtils.scanString(); //todo pakeisti scannerutils, kad tiktu ir tuscia eilute
         if (userInput.equals("")) {
-            System.out.printf("Selected account: %s\n",currentAccount);
+            System.out.printf("Selected account: %s\n", currentAccount);
             return currentAccount;
-        } else if (Backend.accountAdminExists(userInput) ) {
-                System.out.printf("Selected account: %s\n",userInput);
-                return userInput;
+        } else if (Backend.accountAdminExists(userInput)) {
+            System.out.printf("Selected account: %s\n", userInput);
+            return userInput;
         } else {
             System.out.printf("\nSorry, Account %s does not exists.\n\treturning to menu\n\n", userInput);
             return null;
@@ -315,7 +333,7 @@ public class AdminUserInterface implements UserInterface {
         }
     }
 
-    private void assignCourse2Student(boolean courseIsAvailable) {
+    private void assignCourse2Student() {
         String selectedCourse = selectCourse();
         String selectedStudent = selectStudent();
         if (selectedCourse != null && selectedStudent != null) {

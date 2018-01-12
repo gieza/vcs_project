@@ -6,32 +6,30 @@ import java.util.Arrays;
 import static lt.vcs.vcs_project.backend.Role.*;
 
 
-public /*abstract*/ class Account  implements Serializable {
-   // private static final Integer MAXPASSWORDRETRIES = 5;
-
+public /*abstract*/ class Account implements Serializable {
 
     private String loginId;
     private String firstName;
     private String secondName;
     private String password;
     private Role role;
-    private String personalId; // only to be used by Student and Lecturer accounts
+    private String personalId; // only to be used by Student and Lecturer login accounts
 
-    public Account(String loginId, String password, String firstName, String secondName,  Role role) {
+    public Account(String loginId, String password, String firstName, String secondName, Role role) {
         if (role.equals(ADMIN)) {
-           this.loginId = loginId;
-           this.firstName = firstName;
-           this.secondName = secondName;
-           this.password = password;
-           this.role = role;
-           this.personalId="";
-       } else {
-           System.out.printf("Failure: cannot create %s type of account with ID\n", role.toString());
-       }
+            this.loginId = loginId;
+            this.firstName = firstName;
+            this.secondName = secondName;
+            this.password = password;
+            this.role = role;
+            this.personalId = "1";
+        } else {
+            System.out.printf("Failure: cannot create %s type of account with ID\n", role.toString());
+        }
 
     }
 
-    public Account(String loginId, String password, String firstName, String secondName,  Role role,String personalId) {
+    public Account(String loginId, String password, String firstName, String secondName, Role role, String personalId) {
         if (!role.equals(ADMIN)) {
             this.loginId = loginId;
             this.firstName = firstName;
@@ -39,35 +37,12 @@ public /*abstract*/ class Account  implements Serializable {
             this.password = password;
             this.role = role;
             this.personalId = personalId;
-        } else  {
+        } else {
             System.out.printf("Failure: Admin role should not have ID\n");
         }
-
     }
 
-    public Account(String csv) {
-        String[] inputArray = csv.split(",");
-        if (inputArray.length == 5 &&
-                valueOf(inputArray[4].toUpperCase()) == ADMIN) {
-            this.loginId = inputArray[0];
-            this.password = inputArray[1];
-            this.firstName = inputArray[2];
-            this.secondName = inputArray[3];
-            this.role = ADMIN;
-            this.personalId="";
-        } else if (inputArray.length == 6 && (
-                valueOf(inputArray[4].toUpperCase()) == STUDENT ||
-                        valueOf(inputArray[4].toUpperCase()) == LECTURER)) {
-            this.loginId = inputArray[0];
-            this.password = inputArray[1];
-            this.firstName = inputArray[2];
-            this.secondName = inputArray[3];
-            this.role = valueOf(inputArray[4].toUpperCase());
-            this.personalId = inputArray[5];
-        } else {
-            System.out.printf("Account creation Failure: input data has incorrect number of fields\n");
-        }
-    }
+
 
     public Account() {
     }
@@ -81,19 +56,27 @@ public /*abstract*/ class Account  implements Serializable {
     }
 
 
-    public String toString(){
-        return "U:" + this.loginId + " N:" + this.firstName + " " + this.secondName + " R:" + this.role.toString();
+    public String toString() {
+        return "Account Data:\n=============\nLogin Name:"
+                + this.loginId + "\nName:" + this.firstName + " " + this.secondName
+                + "\n Password:" + this.password
+                + "\n Role:" + this.role.toString() + "\n"
+                + "\n PersonalId:" + this.personalId
+                ;
     }
 
-    public String toStringCSV(){
+    public String toStringCSV() {
 
-        return  String.join(",", Arrays.asList(this.loginId,this.password,this.firstName,this.secondName,this.role.toString(),this.personalId));
+        return String.join(",", Arrays.asList(this.loginId, this.firstName, this.secondName,
+                this.role.toString(), this.personalId));
 
     }
 
-    static public String printHeaderCSV(){
-        return  "Login,Password,First name,Second name";
+    public String toStringForListing() {
+        return String.format("%-15s %20s %-25s %-8s %-8s", this.loginId, this.firstName, this.secondName,
+                this.role.toString(), this.personalId);
     }
+
 
     public String getLoginId() {
         return loginId;
@@ -137,5 +120,10 @@ public /*abstract*/ class Account  implements Serializable {
 
     public void setPersonalId(String personalId) {
         this.personalId = personalId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return true;
     }
 }

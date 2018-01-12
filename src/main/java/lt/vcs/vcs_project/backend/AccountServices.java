@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Set;
 
-import static lt.vcs.vcs_project.backend.Role.ADMIN;
+import static lt.vcs.vcs_project.backend.Role.*;
 
 public class AccountServices {
     final private String fileName = "AccountList.txt";
     final private Account defaultAdminAccount = new Account("admin", "admin", "Adminu", "adminas", ADMIN);
 
-    private Hashtable<String,Account> accountCollection = new Hashtable<>();
+    private Hashtable<String, Account> accountCollection = new Hashtable<>();
 
     AccountServices() {
         readFromFile();
@@ -22,11 +22,11 @@ public class AccountServices {
     }
 
 
-    public long getCount(){
+    public long getCount() {
         return accountCollection.size();
     }
 
-    public void addAccount(Account account){
+    public void addAccount(Account account) {
         if (!accountCollection.containsKey(account.getLoginId())) {
             accountCollection.put(account.getLoginId(), account);
             writeToFile();
@@ -36,21 +36,25 @@ public class AccountServices {
         }
     }
 
-    public void addAccount(String csv){
-        Account accountCSV = new Account(csv);
-        if (!accountCollection.containsKey(accountCSV.getLoginId())) {
-            accountCollection.put(accountCSV.getLoginId(), accountCSV);
-            writeToFile();
-        } else {
+    public void addAccount(String csv) {
+        //Account accountCSV = new Account(csv);
+        Account accountCSV = AccountOperations.accountFromCSV(csv);
+        if (accountCSV == null) {
+            return;
+        }
+        if (accountCollection.containsKey(accountCSV.getLoginId())) {
             //trow exception - duplicate
             System.out.printf("Account addition failure: User %s already exists\n", accountCSV.getLoginId());
+            return;
         }
+        accountCollection.put(accountCSV.getLoginId(), accountCSV);
+        writeToFile();
     }
 
 
-    public boolean authenticate(String loginId, String password){
+    public boolean authenticate(String loginId, String password) {
 
-        if(accountCollection.containsKey(loginId)) {
+        if (accountCollection.containsKey(loginId)) {
             return accountCollection.get(loginId).authenticate(password);
         } else {
             System.out.printf("loginId or password do not match\n");
@@ -58,7 +62,7 @@ public class AccountServices {
         return false;
     }
 
-    public void updateAccount(Account account){
+    public void updateAccount(Account account) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         if (accountCollection.containsKey(account.getLoginId())) {
             accountCollection.put(account.getLoginId(), account);
@@ -68,9 +72,9 @@ public class AccountServices {
         }
     }
 
-    public void updateAccount(String csv){
+    public void updateAccount(String csv) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas ???
-        Account accountCSV = new Account(csv);
+        Account accountCSV = AccountOperations.accountFromCSV(csv);
         //todo: reikalingas account update -> kad nebutu galima pakeisti account'o ir roles
         if (accountCollection.containsKey(accountCSV.getLoginId())) {
             accountCollection.put(accountCSV.getLoginId(), accountCSV);
@@ -80,41 +84,41 @@ public class AccountServices {
         }
     }
 
-    public void removeAccount(String loginId){
+    public void removeAccount(String loginId) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         accountCollection.remove(loginId);
         writeToFile();
-     }
+    }
 
-    public Account getAccount(String accountId){
-        if (accountCollection.containsKey(accountId))  return accountCollection.get(accountId);
+    public Account getAccount(String accountId) {
+        if (accountCollection.containsKey(accountId)) return accountCollection.get(accountId);
         System.out.printf("Failure: User %s does not exist\n", accountId);
         return null;
     }
 
-    public boolean containsKey(String accountId){
+    public boolean containsKey(String accountId) {
         return accountCollection.containsKey(accountId);
     }
 
-    Integer adminCount(){
+    Integer adminCount() {
         Integer adminCount = 0;
         Set<String> keys = accountCollection.keySet();
-        for (String key:keys) {
+        for (String key : keys) {
             if (accountCollection.get(key).getRole() == ADMIN) adminCount++;
         }
         return adminCount;
     }
 
-    void addAdminIfMissing(){
-        if (this.adminCount()<1) {
+    void addAdminIfMissing() {
+        if (this.adminCount() < 1) {
             this.addAccount(defaultAdminAccount);
         }
     }
 
 
-    private void readFromFile(){
+    private void readFromFile() {
         try {
-        accountCollection = (Hashtable<String, Account>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
+            accountCollection = (Hashtable<String, Account>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
         } catch (FileNotFoundException e) {
             System.out.printf("%s not found in Account Collection \n", fileName);
         }
@@ -122,17 +126,18 @@ public class AccountServices {
     }
 
 
-    private void writeToFile(){
+    private void writeToFile() {
         IOObjectStreamUtils.writeObjectToFile(fileName, accountCollection);
 
     }
 
 
     public String listAccounts() {
+        //todo: refactor
         StringBuilder returnString = new StringBuilder("AccountId\tFirst name\tLast Name\tRole\tstudent\\lecturerId\n=====================================================\n");
         Set<String> keys = accountCollection.keySet();
-        for (String key:keys) {
-            if (accountCollection.get(key).getRole()==Role.ADMIN) {
+        for (String key : keys) {
+            if (accountCollection.get(key).getRole() == Role.ADMIN) {
                 Account listingAccount = accountCollection.get(key);
                 returnString.append(key + "\t" + listingAccount.getFirstName() +
                         "\t" + listingAccount.getSecondName() +
@@ -143,11 +148,11 @@ public class AccountServices {
         return returnString.toString();
     }
 
-    public String toStringCSV(String loginId){
+    public String toStringCSV(String loginId) {
         return accountCollection.get(loginId).toStringCSV();
     }
 
-    public String getStudentId(String loginId){
+    public String getStudentId(String loginId) {
         if (accountCollection.get(loginId).getRole().equals(Role.STUDENT)) {
             return accountCollection.get(loginId).getPersonalId();
         } else {
@@ -155,7 +160,7 @@ public class AccountServices {
         }
     }
 
-    public String getLecturerId(String loginId){
+    public String getLecturerId(String loginId) {
         if (accountCollection.get(loginId).getRole().equals(Role.LECTURER)) {
             return accountCollection.get(loginId).getPersonalId();
         } else {

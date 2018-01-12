@@ -1,9 +1,7 @@
 package lt.vcs.vcs_project.UI;
 //todo: add extra menu item to load demo data
-import lt.vcs.vcs_project.backend.Account;
-import lt.vcs.vcs_project.backend.Backend;
-import lt.vcs.vcs_project.backend.Lecturer;
-import lt.vcs.vcs_project.backend.Student;
+
+import lt.vcs.vcs_project.backend.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class AdminUserInterface implements UserInterface {
@@ -161,7 +159,7 @@ public class AdminUserInterface implements UserInterface {
 
     private void addAccount(){
         System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format\nfollowing template: %s\n:",
-                Account.printHeaderCSV());
+                AccountOperations.getNewAccountDataInputTemplate());
         String userInput = ScannerUtils.scanString()+ ",ADMIN" ;
         System.out.printf("Entered values %s\n",userInput);
         Backend.addAccount(userInput);

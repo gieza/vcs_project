@@ -2,9 +2,7 @@ package lt.vcs.vcs_project.servicelayer;
 
 import lt.vcs.vcs_project.UI.UI_common;
 import lt.vcs.vcs_project.datalayer.Account;
-
 import java.util.Arrays;
-
 import static lt.vcs.vcs_project.datalayer.Role.*;
 
 

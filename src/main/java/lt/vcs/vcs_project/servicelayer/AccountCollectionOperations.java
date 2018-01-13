@@ -25,11 +25,6 @@ public class AccountCollectionOperations {
                 AccountOperations.listOutAccount(accounts.getAccount(key));
             }
         }
-    /*    return returnString.toString();
-
-        //print out header
-        //for each account list accounts
-        AccountOperations.listOutAccount(DataLayer.accounts.getAccount(accountId));*/
     }
 
     static public void addAccount(String csv) {
@@ -43,7 +38,6 @@ public class AccountCollectionOperations {
         System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format" +
                 "\nfollowing template: %s\n:", AccountOperations.NEW_ACCOUNT_DATA_INPUT_TEMPLATE);
         String userInput = ScannerUtils.scanString() + ",ADMIN";
-        //System.out.printf("Entered values %s\n", userInput);
 
         addAccount(userInput);
     }

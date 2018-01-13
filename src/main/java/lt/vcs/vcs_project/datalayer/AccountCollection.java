@@ -80,9 +80,7 @@ public class AccountCollection {
         } catch (FileNotFoundException e) {
             System.out.printf("%s not found in Account Collection \n", fileName);
         }
-
     }
-
 
     private void writeToFile() {
         IOObjectStreamUtils.writeObjectToFile(fileName, accountCollection);

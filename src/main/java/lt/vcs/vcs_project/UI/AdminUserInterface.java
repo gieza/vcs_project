@@ -1,7 +1,8 @@
 package lt.vcs.vcs_project.UI;
 //todo: add extra menu item to load demo data
 
-import lt.vcs.vcs_project.backend.*;
+import lt.vcs.vcs_project.datalayer.*;
+import lt.vcs.vcs_project.servicelayer.AccountOperations;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.UI_common.*;
@@ -25,8 +26,8 @@ public class AdminUserInterface implements UserInterface {
                 break;
             }
             clearScreen();
-            System.out.printf("\nHello %s %s,\n", DataOperations.getFirstName(accountId),
-                    DataOperations.getSecondName(accountId));
+            System.out.printf("\nHello %s %s,\n", DataLayer.getFirstName(accountId),
+                    DataLayer.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
             if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
@@ -52,7 +53,7 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case "LIST_ACCOUNTS":
-                DataOperations.listAccounts();
+                DataLayer.listAccounts();
                 menuPosition = "ACCOUNT";
                 break;
             case "PRINT_ACCOUNT":
@@ -124,7 +125,7 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = "LECTURER";
                 break;
             case "LIST_COURSES":
-                DataOperations.listCourses();
+                DataLayer.listCourses();
                 menuPosition = "COURSE";
                 break;
             case "PRINT_COURSE":
@@ -153,7 +154,7 @@ public class AdminUserInterface implements UserInterface {
                 break;
 
             case "loadsomedata":
-                DataOperations.addSomeData();
+                DataLayer.addSomeData();
                 menuPosition = "COURSE";
                 break;
             default:
@@ -172,7 +173,7 @@ public class AdminUserInterface implements UserInterface {
     private void printAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
-            DataOperations.printAccount(selectedAccount);
+            DataLayer.printAccount(selectedAccount);
         }
     }
 
@@ -181,7 +182,7 @@ public class AdminUserInterface implements UserInterface {
                 AccountOperations.getNewAccountDataInputTemplate());
         String userInput = ScannerUtils.scanString() + ",ADMIN";
         System.out.printf("Entered values %s\n", userInput);
-        DataOperations.addAccount(userInput);
+        DataLayer.addAccount(userInput);
     }
 
     private void updateAccount() {
@@ -190,14 +191,14 @@ public class AdminUserInterface implements UserInterface {
             String headline = AccountOperations.getUpdateHeader();
             System.out.printf("\nCurrent Admin Account values are:\n%s\n", headline);
             printUnderLineForString(headline);
-            System.out.println(DataOperations.getCurrentDataforUpdate(selectedAccount));
+            System.out.println(DataLayer.getCurrentDataforUpdate(selectedAccount));
             System.out.printf("\n\nEnter new Admin Account data in CommaSeparatedValue format" +
                             "\nfollowing template:\n %s\n",
                     AccountOperations.getUpdateAccountDataInputTemplate());
             String userInput = ScannerUtils.scanString();
-            DataOperations.updateAccount(selectedAccount, userInput);
+            DataLayer.updateAccount(selectedAccount, userInput);
             //print updated values
-            DataOperations.printAccount(selectedAccount);
+            DataLayer.printAccount(selectedAccount);
             waitForEnter();
         }
     }
@@ -206,7 +207,7 @@ public class AdminUserInterface implements UserInterface {
         String selectedAccount = selectAccount(currentAccount);
         String newPassword = askForNewPassword();
         if (newPassword.length() > 0) {
-            DataOperations.changeAccountPassword(selectedAccount, newPassword);
+            DataLayer.changeAccountPassword(selectedAccount, newPassword);
         } else {
             System.out.println("User password cannot be empty");
         }
@@ -216,7 +217,7 @@ public class AdminUserInterface implements UserInterface {
     private void removeAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
-            DataOperations.removeAccount(selectedAccount);
+            DataLayer.removeAccount(selectedAccount);
             if (selectedAccount.equals(currentAccount)) {
                 menuPosition = "LOGOUT";
                 //current account does not exist anymore -> it has to leave immediately
@@ -233,7 +234,7 @@ public class AdminUserInterface implements UserInterface {
         if (userInput.equals("")) {
             System.out.printf("Selected account: %s\n", currentAccount);
             return currentAccount;
-        } else if (DataOperations.accountAdminExists(userInput)) {
+        } else if (DataLayer.accountAdminExists(userInput)) {
             System.out.printf("Selected account: %s\n", userInput);
             return userInput;
         } else {
@@ -243,13 +244,13 @@ public class AdminUserInterface implements UserInterface {
     }
 
     private void listStudent() {
-        DataOperations.listStudents(); //todo:not implemented
+        DataLayer.listStudents(); //todo:not implemented
     }
 
     private void printStudent() { //todo:not implemented
         String selectedStudent = selectStudent();
         if (selectedStudent != null) {
-            DataOperations.printAccount(selectedStudent);
+            DataLayer.printAccount(selectedStudent);
         }
     }
 
@@ -258,7 +259,7 @@ public class AdminUserInterface implements UserInterface {
                 Student.printHeaderCSV());
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
-        DataOperations.addStudent(userInput);
+        DataLayer.addStudent(userInput);
     }
 
     private void updateStudent() {//todo:not implemented
@@ -272,7 +273,7 @@ public class AdminUserInterface implements UserInterface {
         String selectedStudent = selectStudent();
         String newPassword = askForNewPassword();
         if (newPassword.length() > 0) {
-            DataOperations.changeStudentPassword(selectedStudent, newPassword);
+            DataLayer.changeStudentPassword(selectedStudent, newPassword);
         } else {
             System.out.println("User password cannot be empty");
         }
@@ -289,7 +290,7 @@ public class AdminUserInterface implements UserInterface {
     private String selectStudent() {
         System.out.printf("\n\nEnter to Student Id to select student:");
         String userInput = ScannerUtils.scanString();
-        if (DataOperations.studentExists(userInput)) {
+        if (DataLayer.studentExists(userInput)) {
             System.out.printf("Selected student: %s\n", userInput);
             return userInput;
         } else {
@@ -300,13 +301,13 @@ public class AdminUserInterface implements UserInterface {
 
 
     private void listLecturer() {
-        DataOperations.listLecturers(); //todo:not implemented
+        DataLayer.listLecturers(); //todo:not implemented
     }
 
     private void printLecturer() { //todo:not implemented
         String selectedLecturer = selectLecturer();
         if (selectedLecturer != null) {
-            DataOperations.printAccount(selectedLecturer);
+            DataLayer.printAccount(selectedLecturer);
         }
     }
 
@@ -315,7 +316,7 @@ public class AdminUserInterface implements UserInterface {
                 Lecturer.printHeaderCSV());
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
-        DataOperations.addLecturer(userInput);
+        DataLayer.addLecturer(userInput);
     }
 
     private void updateLecturer() {//todo:not implemented
@@ -329,7 +330,7 @@ public class AdminUserInterface implements UserInterface {
         String selectedLecturer = selectLecturer();
         String newPassword = askForNewPassword();
         if (newPassword.length() > 0) {
-            DataOperations.changeLecturerPassword(selectedLecturer, newPassword);
+            DataLayer.changeLecturerPassword(selectedLecturer, newPassword);
         } else {
             System.out.println("User password cannot be empty");
         }
@@ -346,7 +347,7 @@ public class AdminUserInterface implements UserInterface {
     private String selectLecturer() {
         System.out.printf("\n\nEnter to Lecturer Id to select Lecturer:");
         String userInput = ScannerUtils.scanString();
-        if (DataOperations.lecturerExists(userInput)) {
+        if (DataLayer.lecturerExists(userInput)) {
             System.out.printf("Selected Lecturer: %s\n", userInput);
             return userInput;
         } else {
@@ -358,7 +359,7 @@ public class AdminUserInterface implements UserInterface {
     private void printCourse() { //todo:not implemented
         String selectedCourse = selectCourse();
         if (selectedCourse != null) {
-            DataOperations.printCourse(selectedCourse);
+            DataLayer.printCourse(selectedCourse);
         }
     }
 
@@ -368,7 +369,7 @@ public class AdminUserInterface implements UserInterface {
                 Lecturer.printHeaderCSV());
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
-        DataOperations.addLecturer(userInput);
+        DataLayer.addLecturer(userInput);
     }
 
     private void updateCourse() {//todo:not implemented
@@ -389,7 +390,7 @@ public class AdminUserInterface implements UserInterface {
         String selectedCourse = selectCourse();
         String selectedStudent = selectStudent();
         if (selectedCourse != null && selectedStudent != null) {
-            DataOperations.assignAnyCourse2Student(selectedCourse, selectedStudent);
+            DataLayer.assignAnyCourse2Student(selectedCourse, selectedStudent);
         }
     }
 
@@ -397,14 +398,14 @@ public class AdminUserInterface implements UserInterface {
         String selectedCourse = selectCourse();
         String selectedLecturer = selectLecturer();
         if (selectedCourse != null && selectedLecturer != null) {
-            DataOperations.assignCourse2Lecturer(selectedCourse, selectedLecturer);
+            DataLayer.assignCourse2Lecturer(selectedCourse, selectedLecturer);
         }
     }
 
     private String selectCourse() {
         System.out.printf("\n\nEnter to Course Code to select Course:");
         String userInput = ScannerUtils.scanString();
-        if (DataOperations.courseExists(userInput)) {
+        if (DataLayer.courseExists(userInput)) {
             System.out.printf("Selected Course: %s\n", userInput);
             return userInput;
         } else {

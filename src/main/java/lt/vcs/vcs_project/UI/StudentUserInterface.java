@@ -1,6 +1,6 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.backend.DataOperations;
+import lt.vcs.vcs_project.datalayer.DataLayer;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class StudentUserInterface implements UserInterface {
@@ -16,8 +16,8 @@ public class StudentUserInterface implements UserInterface {
         menuChoice = "";
         menuPosition = "TOP";
         while (true) {
-            //todo refactor to be only in backend login
-            System.out.printf("\nHello %s %s,\n", DataOperations.getFirstName(accountId), DataOperations.getSecondName(accountId));
+            //todo refactor to be only in datalayer login
+            System.out.printf("\nHello %s %s,\n", DataLayer.getFirstName(accountId), DataLayer.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
             if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
@@ -64,7 +64,7 @@ public class StudentUserInterface implements UserInterface {
     }
 
     private void printStudent() { //todo:not implemented
-        DataOperations.printStudent(currentAccount);
+        DataLayer.printStudent(currentAccount);
     }
 
 

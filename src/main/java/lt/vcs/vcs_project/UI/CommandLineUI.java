@@ -9,8 +9,8 @@ public class CommandLineUI {
     public static void run() {
         UserInterface userInterface = null;
         while (true) {
-            //currentUser = login();
-            currentUser = loginDefault();
+            currentUser = login();
+            //currentUser = loginDefault();
             switch (DataLayer.getRole(currentUser)) {
                 case ADMIN:
                     userInterface = new AdminUserInterface();

@@ -65,7 +65,7 @@ public class LecturerUserInterface implements UserInterface {
 
 
     private void printLecturer() { //todo:not implemented
-        DataLayer.printAccount(currentAccount);
+        //DataLayer.printAccount(currentAccount);
 
     }
 

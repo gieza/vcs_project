@@ -1,11 +1,14 @@
 package lt.vcs.vcs_project.UI;
 //todo: add extra menu item to load demo data
 
-import lt.vcs.vcs_project.datalayer.*;
-import lt.vcs.vcs_project.servicelayer.AccountOperations;
+import lt.vcs.vcs_project.datalayer.DataLayer;
+import lt.vcs.vcs_project.datalayer.Lecturer;
+import lt.vcs.vcs_project.datalayer.Student;
+import lt.vcs.vcs_project.servicelayer.AccountCollectionOperations;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.UI_common.*;
+import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class AdminUserInterface implements UserInterface {
     static String menuPosition = "TOP";
@@ -19,15 +22,14 @@ public class AdminUserInterface implements UserInterface {
         currentAccount = accountId;
         menuChoice = "";
         menuPosition = "TOP";
-        //this.adminUser = (Admin) user;
-        //System.out.println("Administration menuPosition");
+
         while (true) {
             if (menuPosition.equals("LOGOUT")) {
                 break;
             }
             clearScreen();
             System.out.printf("\nHello %s %s,\n", DataLayer.getFirstName(accountId),
-                    DataLayer.getSecondName(accountId));
+                    DataLayer.getSecondName(accountId)); //todo print greeting in login method, here just list current account
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
             if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
@@ -53,7 +55,8 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case "LIST_ACCOUNTS":
-                DataLayer.listAccounts();
+                AccountCollectionOperations.listAccounts();
+                waitForEnter();
                 menuPosition = "ACCOUNT";
                 break;
             case "PRINT_ACCOUNT":
@@ -61,7 +64,8 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = "ACCOUNT";
                 break;
             case "ADD_ACCOUNT":
-                addAccount();
+                AccountCollectionOperations.addAccount();
+                waitForEnter();
                 menuPosition = "ACCOUNT";
                 break;
             case "UPDATE_ACCOUNT":
@@ -154,7 +158,7 @@ public class AdminUserInterface implements UserInterface {
                 break;
 
             case "loadsomedata":
-                DataLayer.addSomeData();
+                addSomeData();
                 menuPosition = "COURSE";
                 break;
             default:
@@ -166,39 +170,22 @@ public class AdminUserInterface implements UserInterface {
         System.out.printf("%s Menu\n============================================\n" +
                 "Enter number to select one of the following:\n", menuPosition);
         System.out.printf(AdminUIMenuDefinition.menuOptions.get(menuPosition));
-        //System.out.printf(menuOptions.get(menuPosition));
     }
 
 
-    private void printAccount() { //todo:not implemented
+    private void printAccount() {
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
-            DataLayer.printAccount(selectedAccount);
+            AccountCollectionOperations.printOutAccount(selectedAccount);
         }
+        waitForEnter();
     }
 
-    private void addAccount() {
-        System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format\nfollowing template: %s\n:",
-                AccountOperations.getNewAccountDataInputTemplate());
-        String userInput = ScannerUtils.scanString() + ",ADMIN";
-        System.out.printf("Entered values %s\n", userInput);
-        DataLayer.addAccount(userInput);
-    }
 
     private void updateAccount() {
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
-            String headline = AccountOperations.getUpdateHeader();
-            System.out.printf("\nCurrent Admin Account values are:\n%s\n", headline);
-            printUnderLineForString(headline);
-            System.out.println(DataLayer.getCurrentDataforUpdate(selectedAccount));
-            System.out.printf("\n\nEnter new Admin Account data in CommaSeparatedValue format" +
-                            "\nfollowing template:\n %s\n",
-                    AccountOperations.getUpdateAccountDataInputTemplate());
-            String userInput = ScannerUtils.scanString();
-            DataLayer.updateAccount(selectedAccount, userInput);
-            //print updated values
-            DataLayer.printAccount(selectedAccount);
+            AccountCollectionOperations.updateAccount(selectedAccount);
             waitForEnter();
         }
     }
@@ -207,7 +194,7 @@ public class AdminUserInterface implements UserInterface {
         String selectedAccount = selectAccount(currentAccount);
         String newPassword = askForNewPassword();
         if (newPassword.length() > 0) {
-            DataLayer.changeAccountPassword(selectedAccount, newPassword);
+            accounts.getAccount(selectedAccount).setPassword(newPassword);
         } else {
             System.out.println("User password cannot be empty");
         }
@@ -217,7 +204,7 @@ public class AdminUserInterface implements UserInterface {
     private void removeAccount() { //todo:not implemented
         String selectedAccount = selectAccount(currentAccount);
         if (selectedAccount != null) {
-            DataLayer.removeAccount(selectedAccount);
+            accounts.removeAccount(selectedAccount);
             if (selectedAccount.equals(currentAccount)) {
                 menuPosition = "LOGOUT";
                 //current account does not exist anymore -> it has to leave immediately
@@ -229,13 +216,14 @@ public class AdminUserInterface implements UserInterface {
     }
 
     private String selectAccount(String currentAccount) {
-        System.out.printf("\n\nCurrent Account %s.\n\tpress Enter to select current account, otherwise enter new account:", currentAccount);
-        String userInput = ScannerUtils.scanString(); //todo pakeisti scannerutils, kad tiktu ir tuscia eilute
+        System.out.printf("\n\nCurrent Account %s.\n" +
+                "\tpress Enter to select current account, otherwise enter new account:\n", currentAccount);
+        String userInput = ScannerUtils.scanString();
         if (userInput.equals("")) {
-            System.out.printf("Selected account: %s\n", currentAccount);
+            System.out.printf("Selected account is: %s\n", currentAccount);
             return currentAccount;
-        } else if (DataLayer.accountAdminExists(userInput)) {
-            System.out.printf("Selected account: %s\n", userInput);
+        } else if (DataLayer.accounts.AdminExists(userInput)) {
+            System.out.printf("Selected account is: %s\n", userInput);
             return userInput;
         } else {
             System.out.printf("\nSorry, Account %s does not exists.\n\treturning to menu\n\n", userInput);
@@ -250,12 +238,12 @@ public class AdminUserInterface implements UserInterface {
     private void printStudent() { //todo:not implemented
         String selectedStudent = selectStudent();
         if (selectedStudent != null) {
-            DataLayer.printAccount(selectedStudent);
+            //DataLayer.printAccount(selectedStudent);
         }
     }
 
     private void addStudent() {
-        System.out.printf("\nEnter new Student data in CommaSeparatedValue format\nfollowing template: %s\n:",
+        System.out.printf("\nEnter new Student data in CommaSeparatedValue format\nfollowing template: %s\n",
                 Student.printHeaderCSV());
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
@@ -307,7 +295,7 @@ public class AdminUserInterface implements UserInterface {
     private void printLecturer() { //todo:not implemented
         String selectedLecturer = selectLecturer();
         if (selectedLecturer != null) {
-            DataLayer.printAccount(selectedLecturer);
+            //DataLayer.printAccount(selectedLecturer);
         }
     }
 
@@ -412,5 +400,15 @@ public class AdminUserInterface implements UserInterface {
             System.out.printf("\nSorry, Course %s does not exists.\n\treturning to menu\n\n", userInput);
             return null;
         }
+    }
+
+    public static void addSomeData() {
+        AccountCollectionOperations.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
+        AccountCollectionOperations.addAccount("admin3,admin,Pekka,Peltonen");
+        DataLayer.students.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
+        DataLayer.students.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
+        DataLayer.students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+        DataLayer.students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+
     }
 }

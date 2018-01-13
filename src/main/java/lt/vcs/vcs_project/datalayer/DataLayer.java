@@ -1,8 +1,5 @@
 package lt.vcs.vcs_project.datalayer;
 
-import static lt.vcs.vcs_project.servicelayer.AccountOperations.*;
-import static lt.vcs.vcs_project.datalayer.Role.*;
-
 public class DataLayer {
     public static AccountCollection accounts = new AccountCollection();
     public static StudentCollection students = new StudentCollection();
@@ -27,49 +24,8 @@ public class DataLayer {
     }
 
 
-    public static void printAccount(String loginId) {
-        System.out.println(accounts.getAccount(loginId).toString());
-    }
-
-
     public static boolean accountExists(String loginId) {
         return accounts.containsKey(loginId);
-    }
-
-
-    public static boolean accountAdminExists(String loginId) {
-        //todo: reikalingas refaktoringas
-        return (accounts.containsKey(loginId) && accounts.getAccount(loginId).getRole() == ADMIN);
-    }
-
-    public static void addAccount(String csv) {
-        accounts.addAccount(csv);
-    }
-
-    public static void updateAccount(String AccountId, String updateCSV) {
-        if (accounts.getAccount(AccountId).getRole() == ADMIN) {
-            updateFromCSV(accounts.getAccount(AccountId), updateCSV);
-        }
-    }
-
-    static public String getCurrentDataforUpdate(String accountID) {
-        return accounts.getAccount(accountID).getCurrentValuesForUpdate();
-
-    }
-
-    static public void changeAccountPassword(String accountId, String newPassword) {
-        if (accounts.containsKey(accountId)) {
-            accounts.getAccount(accountId).setPassword(newPassword);
-        } else {
-            System.out.printf("Account password failed - no such account %s\n", accountId);
-        }
-    }
-
-    public static void removeAccount(String accountId) {
-        if (accounts.containsKey(accountId)) {
-            accounts.removeAccount(accountId);
-        }
-        //UI interface handles case of missing account
     }
 
 
@@ -181,18 +137,4 @@ public class DataLayer {
         }
     }
 
-    public static void addSomeData() {
-        accounts.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
-        accounts.addAccount("admin3,admin,Pekka,Peltonen");
-        students.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
-        students.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
-        students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
-        students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
-
-    }
-
-
-    public static void listAccounts() {
-        System.out.println(accounts.listAccounts());
-    }
 }

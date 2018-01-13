@@ -1,9 +1,8 @@
 package lt.vcs.vcs_project.datalayer;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
-import static lt.vcs.vcs_project.datalayer.Role.*;
+import static lt.vcs.vcs_project.datalayer.Role.ADMIN;
 
 
 public /*abstract*/ class Account implements Serializable {
@@ -54,28 +53,20 @@ public /*abstract*/ class Account implements Serializable {
         return this.role;
     }
 
+    public String getRoleAsString() {
+        return this.role.toString();
+    }
 
+    @Override
     public String toString() {
-        return "Account Data:\n=============\nLogin Name:"
-                + this.loginId + "\nName:" + this.firstName + " " + this.secondName
-                + "\n Password:" + this.password
-                + "\n Role:" + this.role.toString() + "\n";
-    }
-
-    public String toStringCSV() {
-
-        return String.join(",", Arrays.asList(this.loginId, this.firstName, this.secondName,
-                this.role.toString(), this.personalId));
-
-    }
-
-    public String toStringForListing() {
-        return String.format("%-15s %20s %-25s %-8s %-8s", this.loginId, this.firstName, this.secondName,
-                this.role.toString(), this.personalId);
-    }
-
-    public String getCurrentValuesForUpdate() {
-        return String.format("%-20s %-25s", this.firstName, this.secondName);
+        return "Account{" +
+                "loginId='" + loginId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", personalId='" + personalId + '\'' +
+                '}';
     }
 
     public String getLoginId() {
@@ -122,8 +113,5 @@ public /*abstract*/ class Account implements Serializable {
         this.personalId = personalId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return true;
-    }
+
 }

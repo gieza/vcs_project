@@ -19,7 +19,7 @@ public class AccountCollectionTest {
         assertEquals("newly created Account list has 1 members", 1, accountCollection.getCount());
     }
 
-    @Test
+ /*   @Test
     public void givenEmptyAccountList_for_then_has_admin() {
         System.out.println(accountCollection.listAccounts());
         assertEquals("newly created Account list has Admin member", true, accountCollection.containsKey("admin"));
@@ -31,7 +31,7 @@ public class AccountCollectionTest {
         accountCollection.addAccount(defaultAdminAccount2);
         assertEquals("After adding 2 accounts newly created Account list has 2 member", 2, accountCollection.getCount());
         System.out.println(accountCollection.listAccounts());
-    }
+    }*/
 /*
             accountCollection.removeAccount("admin2");
         assertEquals("After 1 account removal, list has 2 member",1, accountCollection.getsize());

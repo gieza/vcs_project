@@ -15,21 +15,15 @@ public class AccountOperations {
 
     public static Account makeAccountFromCSV(String csv) {
         String[] inputArray = csv.split(",");
-        if (inputArray.length < 2 || inputArray.length > 6) {
+        if (inputArray.length < 2 || inputArray.length > 5) {
             System.out.printf("Account creation Failure: input data has incorrect number of fields\n");
             return null;
-        } else if (inputArray.length <= 5) {
+        } else {
             return new Account(inputArray[0], inputArray[1],
-                    inputArray.length < 3 ? "" : inputArray[2],
-                    inputArray.length < 4 ? "" : inputArray[3],
+                    inputArray.length > 2 ? inputArray[2] : "",
+                    inputArray.length > 3 ? inputArray[3] : "",
                     ADMIN);
-        } else if (inputArray.length == 6 && (
-                valueOf(inputArray[4].toUpperCase()) == STUDENT ||
-                        valueOf(inputArray[4].toUpperCase()) == LECTURER)) {
-            return new Account(inputArray[0], inputArray[1], inputArray[2], inputArray[3],
-                    valueOf(inputArray[4].toUpperCase()), inputArray[5]);
         }
-        return null;
     }
 
     public static Account updateAccountFromCSV(Account account, String csv) {

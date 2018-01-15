@@ -1,10 +1,13 @@
 package lt.vcs.vcs_project.UI;
 
 import lt.vcs.vcs_project.servicelayer.OperationsStudent;
+import lt.vcs.vcs_project.servicelayer.PrintingCourse;
 import lt.vcs.vcs_project.servicelayer.PrintingStudent;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
-import static lt.vcs.vcs_project.UI.StudentUIMenuDefinition.*;
+import static lt.vcs.vcs_project.UI.StudentUIMenuDefinition.menuNavigation;
+import static lt.vcs.vcs_project.UI.StudentUIMenuDefinition.menuOptions;
+import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class StudentUserInterface implements UserInterface {
@@ -50,11 +53,37 @@ public class StudentUserInterface implements UserInterface {
             case "PRINT_STUDENT":
                 PrintingStudent.printStudent(currentStudentId);
                 menuPosition = "STUDENT";
+                waitForEnter();
                 break;
             case "UPDATE_STUDENT":
                 OperationsStudent.updateStudent(currentAccount);
                 menuPosition = "STUDENT";
+                waitForEnter();
                 break;
+            case "CHANGE_STUDENT_PASSWORD":
+                OperationsStudent.changeStudentPassword(currentAccount);
+                menuPosition = "STUDENT";
+                waitForEnter();
+            case "ASSIGN_COURSE":
+                OperationsStudent.assignAvailableCourse2Student(currentAccount);
+                //menuPosition = "STUDENT";
+                waitForEnter();
+            case "LIST_COURSES":
+                PrintingCourse.listCourse();
+                menuPosition = "COURSE";
+                waitForEnter();
+            case "LIST_AVAILABLE_COURSES":
+                PrintingCourse.listAvailableCourses();
+                menuPosition = "COURSE";
+                waitForEnter();
+            case "LIST_ENROLLED_COURSES":
+                PrintingCourse.listEnrolledCourses(currentStudentId);
+                menuPosition = "COURSE";
+                waitForEnter();
+            case "PRINT_COURSE":
+                PrintingCourse.printCourse();
+                menuPosition = "COURSE";
+                waitForEnter();
             default:
                 menuPosition = "TOP";
         }

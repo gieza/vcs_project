@@ -16,7 +16,7 @@ public class Student extends Account {
     public Student(String loginId, String firstName, String secondName, String password,
                    String studentId, String personalNumber, String dateOfBirth, String email,
                    String mobileNumber, String gender, String address) {
-        super(loginId, firstName, secondName, password, Role.STUDENT);
+        super(loginId, firstName, secondName, password, Role.STUDENT, studentId);
         this.studentId = studentId;
         this.personalNumber = personalNumber;
         this.dateOfBirth = dateOfBirth;

@@ -37,6 +37,7 @@ public class OperationsAccount {
     }
 
     public static boolean authenticate(String accountId, String password) {
+        if (!accounts.containsKey(accountId)) return false;
         return accounts.getAccount(accountId).authenticate(password);
     }
 

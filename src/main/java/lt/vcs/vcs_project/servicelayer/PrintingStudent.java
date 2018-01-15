@@ -11,7 +11,7 @@ public class PrintingStudent extends PrintService {
             "personalNumber,dateOfBirth,email,mobile,gender,address\n";
 
 
-    public static final String STUDENT_LISTING_FORMATING = "%-8s %20s %-25s %-15s %-12s %-12s %-25s " +
+    public static final String STUDENT_LISTING_FORMATING = "%-8s %20s %-25s %-15s %-12s %-25s " +
             "%-12s %-5s %-40s\n";
     public static final String STUDENT_LISTING_HEADER = String.format(STUDENT_LISTING_FORMATING,
             "Student ID", "First name", "Second name", "Login", "Personal#", "DoB", "email",
@@ -34,17 +34,18 @@ public class PrintingStudent extends PrintService {
 
     public static void listStudent() {
         Set<String> keys = students.getKeyset();
-        listStudent(keys);
+        if (keys != null)
+            listStudent(keys);
     }
 
     public static void printStudent(Student student) {
         System.out.println("Student Details:\n================\n" +
-                "Student ID" + student.getStudentId() +
+                "Student ID: " + student.getStudentId() +
                 "\nName:" + student.getFirstName() + " " + student.getSecondName() +
-                "Login Name:" + student.getLoginId() + "Personal number:" + student.getPersonalNumber() +
-                "Date Of Birth:" + student.getDateOfBirth() + "Email:" + student.getEmail() +
-                "Mobile:" + student.getMobileNumber() + "Gender:" + student.getGender() +
-                "\nRole:" + student.getAddress());
+                "\nLogin Name:" + student.getLoginId() + "\nPersonal number:" + student.getPersonalNumber() +
+                "\nDate Of Birth:" + student.getDateOfBirth() + "\nEmail:" + student.getEmail() +
+                "\nMobile:" + student.getMobileNumber() + "\nGender:" + student.getGender() +
+                "\nAddress:" + student.getAddress());
         PrintingCourse.listCourse(student.getEnrolledCouses());
     }
 

@@ -4,17 +4,14 @@ import lt.vcs.vcs_project.datalayer.Course;
 
 import java.util.Set;
 
-import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
-import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
-import static lt.vcs.vcs_project.datalayer.DataLayer.students;
+import static lt.vcs.vcs_project.datalayer.DataLayer.*;
 
 public class PrintingCourse extends PrintService {
     public static final String COURSE_HEADER_CSV = "courseCode,Title,startDate[yyyy-MM-dd]," +
             "Credit,lecturerCode,Description\n";
 
 
-    public static final String COURSE_LISTING_FORMATING = "%-8s %-25s %-10s %-8s %-12s %-25s %-5s " +
-            "%-12s %-5s %-40s\n";
+    public static final String COURSE_LISTING_FORMATING = "%-8s %-25s %-10s %-5s %-12s %-40s\n";
 
     public static final String COURSE_LISTING_HEADER = String.format(COURSE_LISTING_FORMATING,
             "Code", "title", "start Date", "credit", "lecturer", "# of Students");

@@ -37,13 +37,13 @@ public class PrintingLecturer extends PrintService {
     }
 
     public static void printLecturer(Lecturer lecturer) {
-        System.out.println("Student Details:\n================\n" +
-                "Student ID" + lecturer.getLecturerId() +
+        System.out.println("Lecturer Details:\n================\n" +
+                "Lecturer ID" + lecturer.getLecturerId() +
                 "\nName:" + lecturer.getFirstName() + " " + lecturer.getSecondName() +
                 "Login Name:" + lecturer.getLoginId() + "Personal number:" + lecturer.getPersonalNumber() +
                 "Date Of Birth:" + lecturer.getDateOfBirth() + "Email:" + lecturer.getEmail() +
                 "Mobile:" + lecturer.getMobileNumber() + "Gender:" + lecturer.getGender() +
-                "\nRole:" + lecturer.getAddress());
+                "\nAddress:" + lecturer.getAddress());
         PrintingCourse.listCourse(lecturer.getReadCourses());
     }
 

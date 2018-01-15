@@ -4,6 +4,7 @@ import lt.vcs.vcs_project.datalayer.Course;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
@@ -18,7 +19,8 @@ public class OperationsCourse {
             return null;
         } else {
             return new Course(inputArray[0], inputArray[1],
-                    LocalDate.parse(inputArray[3]), inputArray[2],
+                    LocalDate.parse(inputArray[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    inputArray[3],
                     inputArray.length > 4 ? inputArray[4] : "",
                     inputArray.length > 5 ? inputArray[5] : "");
         }

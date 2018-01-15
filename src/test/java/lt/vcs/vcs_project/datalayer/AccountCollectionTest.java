@@ -22,7 +22,7 @@ public class AccountCollectionTest {
  /*   @Test
     public void givenEmptyAccountList_for_then_has_admin() {
         System.out.println(accountCollection.listAccounts());
-        assertEquals("newly created Account list has Admin member", true, accountCollection.containsKey("admin"));
+        assertEquals("newly created Account list has Admin member", true, accountCollection.courseExists("admin"));
     }
 
     @Test

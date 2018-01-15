@@ -40,7 +40,6 @@ public class LecturerCollection {
     }
 
     public void removeLecturer(String lecturerId) {
-        //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         lecturerCollection.remove(lecturerId);
         writeToFile();
     }

@@ -44,7 +44,7 @@ public class CourseCollection {
         writeToFile();
     }
 
-    public boolean containsKey(String courseCode) {
+    public boolean courseExists(String courseCode) {
         return courseCollection.containsKey(courseCode);
     }
 

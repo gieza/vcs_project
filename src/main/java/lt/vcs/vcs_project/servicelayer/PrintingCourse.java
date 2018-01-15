@@ -20,7 +20,6 @@ public class PrintingCourse extends PrintService {
             "Code", "title", "start Date", "credit", "lecturer", "# of Students");
 
     public static void listCourse(Course course) {
-        //todo: print out Lecturer name instead of code
         System.out.printf(COURSE_LISTING_FORMATING, course.getCourseCode(), course.getTitle(),
                 course.getStartDate(), course.getCredit(), course.getLecturerId(), course.getEnrolledStudentCount());
     }

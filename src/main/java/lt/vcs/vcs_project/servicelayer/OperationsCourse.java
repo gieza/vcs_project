@@ -28,7 +28,7 @@ public class OperationsCourse {
     public static void addCourse(String csv) {
         Course newCourse = makeCourseFromCSV(csv);
 
-        if (courses.containsKey(newCourse.getCourseCode())) {
+        if (courses.courseExists(newCourse.getCourseCode())) {
             System.out.printf("Sorry, cannot add Course, Course Code %s already exists",
                     newCourse.getCourseCode());
         } else {
@@ -104,7 +104,7 @@ public class OperationsCourse {
     public static String selectCourse() {
         System.out.printf("\n\nEnter to Course Code to select Course:");
         String userInput = ScannerUtils.scanString();
-        if (courses.containsKey(userInput)) { //todo:courseExists
+        if (courses.courseExists(userInput)) {
             System.out.printf("Selected Course: %s\n", userInput);
             return userInput;
         } else {

@@ -1,10 +1,10 @@
 package lt.vcs.vcs_project.UI;
-//todo: add extra menu item to load demo data
 
 import lt.vcs.vcs_project.datalayer.DataLayer;
 import lt.vcs.vcs_project.datalayer.Lecturer;
-import lt.vcs.vcs_project.datalayer.Student;
 import lt.vcs.vcs_project.servicelayer.AccountCollectionOperations;
+import lt.vcs.vcs_project.servicelayer.OperationsStudent;
+import lt.vcs.vcs_project.servicelayer.PrintingStudent;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.UI_common.*;
@@ -81,28 +81,34 @@ public class AdminUserInterface implements UserInterface {
                 //menuPosition is being set in removeAccount method
                 break;
             case "LIST_STUDENTS":
-                listStudent();
+                PrintingStudent.listStudent();
+                waitForEnter();
                 menuPosition = "STUDENT";
                 break;
             case "PRINT_STUDENT":
-                printStudent();
+                PrintingStudent.printStudent();
+                waitForEnter();
                 menuPosition = "STUDENT";
                 break;
             case "ADD_STUDENT":
-                addStudent();
+                OperationsStudent.addStudent();
+                waitForEnter();
                 menuPosition = "STUDENT";
                 break;
             case "UPDATE_STUDENT":
-                updateStudent();
+                OperationsStudent.updateStudent();
+                waitForEnter();
                 menuPosition = "STUDENT";
                 break;
             case "CHANGE_STUDENT_PASSWORD":
-                changeStudentPassword();
+                OperationsStudent.changeStudentPassword();
+                waitForEnter();
                 menuPosition = "STUDENT";
                 break;
             case "REMOVE_STUDENT":
-                removeStudent();
+                OperationsStudent.removeStudent();
                 menuPosition = "STUDENT";
+                waitForEnter();
                 break;
             case "LIST_LECTURERS":
                 listLecturer();
@@ -149,7 +155,7 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = "COURSE";
                 break;
             case "ASSIGN_COURSE_STUDENT":
-                assignCourse2Student();
+                OperationsStudent.assignAnyCourse2Student();
                 menuPosition = "COURSE";
                 break;
             case "ASSIGN_COURSE_LECTURER":
@@ -227,62 +233,6 @@ public class AdminUserInterface implements UserInterface {
             return userInput;
         } else {
             System.out.printf("\nSorry, Account %s does not exists.\n\treturning to menu\n\n", userInput);
-            return null;
-        }
-    }
-
-    private void listStudent() {
-        DataLayer.listStudents(); //todo:not implemented
-    }
-
-    private void printStudent() { //todo:not implemented
-        String selectedStudent = selectStudent();
-        if (selectedStudent != null) {
-            //DataLayer.printAccount(selectedStudent);
-        }
-    }
-
-    private void addStudent() {
-        System.out.printf("\nEnter new Student data in CommaSeparatedValue format\nfollowing template: %s\n",
-                Student.printHeaderCSV());
-        String userInput = ScannerUtils.scanString();
-        System.out.printf("Entered values %s\n", userInput);
-        DataLayer.addStudent(userInput);
-    }
-
-    private void updateStudent() {//todo:not implemented
-        String selectedStudent = selectStudent();
-        if (selectedStudent != null) {
-            System.out.printf("\nSorry, Student update functionally not implemented.\n\treturning to menu\n\n");
-        }
-    }
-
-    private void changeStudentPassword() {
-        String selectedStudent = selectStudent();
-        String newPassword = askForNewPassword();
-        if (newPassword.length() > 0) {
-            DataLayer.changeStudentPassword(selectedStudent, newPassword);
-        } else {
-            System.out.println("User password cannot be empty");
-        }
-        waitForEnter();
-    }
-
-    private void removeStudent() {//todo:not implemented - gal atskirai prideti password??
-        String selectedStudent = selectStudent();
-        if (selectedStudent != null) {
-            System.out.printf("\nSorry, Student update functionally not implemented.\n\treturning to menu\n\n");
-        }
-    }
-
-    private String selectStudent() {
-        System.out.printf("\n\nEnter to Student Id to select student:");
-        String userInput = ScannerUtils.scanString();
-        if (DataLayer.studentExists(userInput)) {
-            System.out.printf("Selected student: %s\n", userInput);
-            return userInput;
-        } else {
-            System.out.printf("\nSorry, StudentId %s does not exists.\n\treturning to menu\n\n", userInput);
             return null;
         }
     }
@@ -374,13 +324,6 @@ public class AdminUserInterface implements UserInterface {
         }
     }
 
-    private void assignCourse2Student() {
-        String selectedCourse = selectCourse();
-        String selectedStudent = selectStudent();
-        if (selectedCourse != null && selectedStudent != null) {
-            DataLayer.assignAnyCourse2Student(selectedCourse, selectedStudent);
-        }
-    }
 
     private void assignCourse2Lecturer() {
         String selectedCourse = selectCourse();
@@ -405,10 +348,10 @@ public class AdminUserInterface implements UserInterface {
     public static void addSomeData() {
         AccountCollectionOperations.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
         AccountCollectionOperations.addAccount("admin3,admin,Pekka,Peltonen");
-        DataLayer.students.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
-        DataLayer.students.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
-        DataLayer.students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
-        DataLayer.students.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+        OperationsStudent.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
+        OperationsStudent.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
+        OperationsStudent.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+        OperationsStudent.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
 
     }
 }

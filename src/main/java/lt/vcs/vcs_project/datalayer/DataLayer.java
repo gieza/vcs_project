@@ -29,43 +29,6 @@ public class DataLayer {
     }
 
 
-    public static void listStudents() {
-        System.out.println(students.listStudents());
-    }
-
-    public static void printStudent(String studentId) {
-        System.out.println(students.getStudent(studentId).toString());
-    }
-
-
-    public static boolean studentExists(String loginId) {
-        return students.containsKey(loginId);
-    }
-
-    public static void addStudent(String csv) {
-        Student newStudent = new Student(csv);
-
-        if (!(accounts.containsKey(newStudent.getLoginId()) &&
-                students.containsKey(newStudent.getStudentId()))) {
-            accounts.addAccount(newStudent.getAccount());
-            students.addStudent(newStudent);
-        } else {
-            if (accounts.containsKey(newStudent.getLoginId())) {
-                System.out.printf("Sorry, account %s already exists", newStudent.getLoginId());
-            } else {
-                System.out.printf("Sorry, StudentId %s already exists", newStudent.getStudentId());
-            }
-        }
-    }
-
-
-    static public void changeStudentPassword(String studentId, String newPassword) {
-        if (students.containsKey(studentId)) {
-            students.getStudent(studentId).setPassword(newPassword);
-        } else {
-            System.out.printf("Student password failed - no such account %s\n", studentId);
-        }
-    }
 
     public static void listLecturers() {
         System.out.println(lecturers.listLecturers());
@@ -117,7 +80,7 @@ public class DataLayer {
         return courses.containsKey(courseCode);
     }
 
-    public static void assignAnyCourse2Student(String courseCode, String studentId) {
+   /* public static void assignAnyCourse2Student(String courseCode, String studentId) {
         courses.enrollStudent(courseCode, studentId);
         students.addCourse(studentId, courseCode);
     }
@@ -127,7 +90,7 @@ public class DataLayer {
             courses.enrollStudent(courseCode, studentId);
             students.addCourse(studentId, courseCode);
         }
-    }
+    }*/
 
 
     public static void assignCourse2Lecturer(String courseCode, String lecturerId) {

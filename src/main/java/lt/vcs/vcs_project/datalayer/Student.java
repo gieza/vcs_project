@@ -1,6 +1,5 @@
 package lt.vcs.vcs_project.datalayer;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class Student extends Account {
@@ -14,7 +13,9 @@ public class Student extends Account {
     private String address;
     private HashSet<String> enrolledCourses;
 
-    public Student(String loginId, String firstName, String secondName, String password, String studentId, String personalNumber, String dateOfBirth, String email, String mobileNumber, String gender, String address) {
+    public Student(String loginId, String firstName, String secondName, String password,
+                   String studentId, String personalNumber, String dateOfBirth, String email,
+                   String mobileNumber, String gender, String address) {
         super(loginId, firstName, secondName, password, Role.STUDENT);
         this.studentId = studentId;
         this.personalNumber = personalNumber;
@@ -26,45 +27,8 @@ public class Student extends Account {
         enrolledCourses = new HashSet<>();
     }
 
-
-    public Student(String csv) {
-        super();
-        String[] inputArray = csv.split(",");
-        if (inputArray.length >= 11) {
-            this.setLoginId(inputArray[0]);
-            this.setPassword(inputArray[1]);
-            this.setFirstName(inputArray[2]);
-            this.setSecondName(inputArray[3]);
-            this.setRole(Role.STUDENT);
-            this.setPersonalId(inputArray[4]);
-            this.studentId = inputArray[4];
-            this.personalNumber = inputArray[5];
-            this.dateOfBirth = inputArray[6];
-            this.email = inputArray[7];
-            this.mobileNumber = inputArray[8];
-            this.gender = inputArray[9];
-            this.address = inputArray[10];
-            for (int i = 11; i < inputArray.length; i++) {
-                this.address = this.address + "," + inputArray[11];
-            }
-            enrolledCourses = new HashSet<>();
-        } else {
-            System.out.printf("Failure: cannot create Student -- number of fields do not match required number\n");
-        }
-    }
-
-    public Account getAccount() {
+    public Account makeAccount() {
         return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.studentId);
-    }
-
-    static public String printHeaderCSV() {
-        return "Login,Password,First name,Second name,StudentId,personalNumber,dateOfBirth,email,mobileNumber,gender,address";
-    }
-
-    public String toStringCSV() {
-        return String.join(",", Arrays.asList(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(),
-                this.getRole().toString(), this.studentId, this.personalNumber, this.dateOfBirth, this.email, this.mobileNumber, this.gender, this.address));
-
     }
 
     public void addCourse(String courseId) {
@@ -74,6 +38,10 @@ public class Student extends Account {
             System.out.printf("Student %s is already enrolled into course %s", this.studentId, courseId);
         }
 
+    }
+
+    public HashSet<String> getEnrolledCouses() {
+        return this.enrolledCourses;
     }
 
     public String getStudentId() {

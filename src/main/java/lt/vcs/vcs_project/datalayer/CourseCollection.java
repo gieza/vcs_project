@@ -72,6 +72,10 @@ public class CourseCollection {
         return courseCollection.containsKey(courseCode);
     }
 
+    public Set<String> getKeyset() {
+        return courseCollection.keySet();
+    }
+
     private void readFromFile() {
         try {
             courseCollection = (Hashtable<String, Course>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);

@@ -1,5 +1,6 @@
 package lt.vcs.vcs_project.datalayer;
 
+import lt.vcs.vcs_project.servicelayer.OperationsStudent;
 import lt.vcs.vcs_project.utils.IOObjectStreamUtils;
 //import lt.vcs.vcs_project.datalayer;
 import java.io.FileNotFoundException;
@@ -15,26 +16,22 @@ public class StudentCollection {
         readFromFile();
     }
 
-    public long getCount() {
+    /*public long getCount() {
         return studentCollection.size();
-    }
+    }*/
 
     public void addStudent(Student student) {
         if (!studentCollection.containsKey(student.getStudentId())) {
             studentCollection.put(student.getStudentId(), student);
             writeToFile();
-            //if (accounts.containsKey(student.getLoginId()));
-            //todo: if (AccountCollection.containsKey(student.getLoginId())) {
-
-            // };
         } else {
             //trow exception - duplicate
             System.out.printf("Student addition failure: Student %s already exists\n", student.getStudentId());
         }
     }
 
-    public void addStudent(String csv) {
-        Student studentCSV = new Student(csv);
+/*    public void addStudent(String csv) {
+        Student studentCSV = OperationsStudent.makeStudentFromCSV(csv);
         if (!studentCollection.containsKey(studentCSV.getStudentId())) {
             studentCollection.put(studentCSV.getStudentId(), studentCSV);
             writeToFile();
@@ -42,7 +39,7 @@ public class StudentCollection {
             //trow exception - duplicate
             System.out.printf("Student addition failure: Student %s already exists\n", studentCSV.getStudentId());
         }
-    }
+    }*/
 
     public void updateStudent(Student student) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
@@ -56,7 +53,7 @@ public class StudentCollection {
 
     public void updateStudent(String csv) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas ???
-        Student studentCSV = new Student(csv);
+        Student studentCSV = OperationsStudent.makeStudentFromCSV(csv);
         //todo: reikalingas account update -> kad nebutu galima pakeisti account'o ir roles
         if (studentCollection.containsKey(studentCSV.getStudentId())) {
             studentCollection.put(studentCSV.getLoginId(), studentCSV);
@@ -98,7 +95,7 @@ public class StudentCollection {
     }
 
 
-    public String listStudents() {
+  /*  public String listStudents() {
         //todo:update listing
         StringBuilder returnString = new StringBuilder("AccountId\tFirst name\t" +
                 "Last Name\tRole\tstudentId\tPersonalNumber\tDoB\tEmail\tMobile#\tF/M\tAddress" +
@@ -114,11 +111,11 @@ public class StudentCollection {
                     "\t" + listingStudent.getAddress() + "\n");
         }
         return returnString.toString();
-    }
+    }*/
 
 
-    public String toStringCSV(String studentId) {
-        return studentCollection.get(studentId).toStringCSV();
+    public void setStudent(String studentID, Student student) {
+        studentCollection.put(studentID, student);
     }
 
     public String getLoginId(String studentId) {
@@ -133,6 +130,9 @@ public class StudentCollection {
         return studentCollection.get(studentId);
     }
 
+    public Set<String> getKeyset() {
+        return studentCollection.keySet();
+    }
 
     public void addCourse(String studentId, String courseCode) {
         studentCollection.get(studentId).addCourse(courseCode);

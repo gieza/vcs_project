@@ -1,7 +1,10 @@
 package lt.vcs.vcs_project.UI;
 
 import lt.vcs.vcs_project.datalayer.DataLayer;
+import lt.vcs.vcs_project.servicelayer.PrintingStudent;
 import lt.vcs.vcs_project.utils.ScannerUtils;
+
+import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class StudentUserInterface implements UserInterface {
     static String menuPosition = "TOP";
@@ -44,7 +47,7 @@ public class StudentUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case "PRINT_STUDENT":
-                printStudent(); //todo
+                PrintingStudent.printStudent(accounts.getStudentId(currentAccount)); //todo
                 menuPosition = "STUDENT";
                 break;
             case "UPDATE_STUDENT":
@@ -61,10 +64,6 @@ public class StudentUserInterface implements UserInterface {
                 "Enter number to select one of the following:\n", menuPosition);
         System.out.printf(StudentUIMenuDefinition.menuOptions.get(menuPosition));
         //System.out.printf(menuOptions.get(menuPosition));
-    }
-
-    private void printStudent() { //todo:not implemented
-        DataLayer.printStudent(currentAccount);
     }
 
 

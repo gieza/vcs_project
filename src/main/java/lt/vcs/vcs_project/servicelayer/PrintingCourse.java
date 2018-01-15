@@ -37,6 +37,12 @@ public class PrintingCourse extends PrintService {
         listCourse(keys);
     }
 
+    public static void listAvailableCourses() {
+        Set<String> keys = courses.getAvailableCourseKeyset();
+        listCourse(keys);
+
+    }
+
     public static void printCourse(Course course) {
         System.out.println("Course Details:\n================" +
                 "\nCourse Code" + course.getCourseCode() +

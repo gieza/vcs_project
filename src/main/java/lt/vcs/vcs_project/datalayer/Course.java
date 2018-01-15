@@ -30,22 +30,6 @@ public class Course implements Serializable {
         enrolledStudents = new HashSet<>();
     }
 
-/*    public Course(String csv) {
-        String[] inputArray = csv.split(",");
-        if (inputArray.length == 6) {
-            this.courseCode = inputArray[0];
-            this.title = inputArray[1];
-            this.description = inputArray[2];
-            this.startDate = StringDateConversion.String2Date(inputArray[3]);
-            this.credit = inputArray[4];
-            this.lecturerCode = inputArray[5];
-            this.enrolledStudentCount = 0;
-            enrolledStudents = new HashSet<>();
-        } else {
-            System.out.printf("Incorrect number of fields");
-        }
-    }*/
-
     @Override
     public String toString() {
         String enrolledStudentsList = "";
@@ -81,6 +65,15 @@ public class Course implements Serializable {
 
     }
 
+    public void deEnrollStudent(String studentId) {
+        if (this.enrolledStudents.contains(studentId)) {
+            this.enrolledStudents.remove(studentId);
+            this.enrolledStudentCount--;
+        } else {
+            System.out.printf("Student %s is not enrolled into course %s", studentId, this.courseCode);
+        }
+
+    }
 
     public String getCourseCode() {
         return courseCode;
@@ -110,6 +103,9 @@ public class Course implements Serializable {
         return startDate;
     }
 
+    public String getStartDateAsString() {
+        return this.startDate.toString();
+    }
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }

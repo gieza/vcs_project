@@ -123,6 +123,7 @@ public class OperationsStudent {
         String selectedStudent = OperationsStudent.selectStudent();
         accounts.removeAccount(students.getLoginId(selectedStudent));
         students.removeStudent(selectedStudent);
+        //todo:remove student from enrolled courses
     }
 
     public static String selectStudent() {

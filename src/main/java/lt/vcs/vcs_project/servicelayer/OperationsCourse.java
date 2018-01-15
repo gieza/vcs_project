@@ -1,7 +1,6 @@
 package lt.vcs.vcs_project.servicelayer;
 
 import lt.vcs.vcs_project.datalayer.Course;
-import lt.vcs.vcs_project.datalayer.DataLayer;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 import lt.vcs.vcs_project.utils.StringDateConversion;
 
@@ -83,21 +82,16 @@ public class OperationsCourse {
     public static void removeCourse() {
         String selectedCourse = selectCourse();
         courses.removeCourse(selectedCourse);
+        //OperationsStudent.removeCourse(selectedCourse);
+        //OperationsLecturer.removeCourse(selectedCourse);
+        //todo:remove course from students and lecturer collections
     }
 
-    public static void assignCourse2Lecturer() {
-        //todo: needs implementation
-        /*String selectedCourse = selectCourse();
-        String selectedLecturer = selectLecturer();
-        if (selectedCourse != null && selectedLecturer != null) {
-            DataLayer.assignCourse2Lecturer(selectedCourse, selectedLecturer);
-        }*/
-    }
 
     public static String selectCourse() {
         System.out.printf("\n\nEnter to Course Code to select Course:");
         String userInput = ScannerUtils.scanString();
-        if (DataLayer.courseExists(userInput)) {
+        if (courses.containsKey(userInput)) { //todo:courseExists
             System.out.printf("Selected Course: %s\n", userInput);
             return userInput;
         } else {

@@ -121,8 +121,17 @@ public class OperationsLecturer {
         String selectedLecturer = selectLecturer();
         accounts.removeAccount(lecturers.getLoginId(selectedLecturer));
         lecturers.removeLecturer(selectedLecturer);
+        //todo:remove lecturer for given course
     }
 
+    public static void assignCourse2Lecturer() {
+        //todo: needs implementation
+        /*String selectedCourse = selectCourse();
+        String selectedLecturer = selectLecturer();
+        if (selectedCourse != null && selectedLecturer != null) {
+            DataLayer.assignCourse2Lecturer(selectedCourse, selectedLecturer);
+        }*/
+    }
 
     public static String selectLecturer() {
         System.out.printf("\n\nEnter to Lecturer Id to select Lecturer:");

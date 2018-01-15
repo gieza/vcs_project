@@ -25,22 +25,11 @@ public class CourseCollection {
             courseCollection.put(course.getCourseCode(), course);
             writeToFile();
         } else {
-            //todo: trow exception - duplicate
             System.out.printf("Student addition failure: Lecturer %s already exists\n", course.getCourseCode());
         }
     }
 
-    /*  public void addCourse(String csv) {
-          Course courseCSV = new Course(csv);
-          if (!courseCollection.containsKey(courseCSV.getCourseCode())) {
-              courseCollection.put(courseCSV.getCourseCode(), courseCSV);
-              writeToFile();
-          } else {
-              //trow exception - duplicate
-              System.out.printf("Student addition failure: lecturer %s already exists\n", courseCSV.getCourseCode());
-          }
-      }
-  */
+
     public void updateCourse(Course course) {
         if (courseCollection.containsKey(course.getCourseCode())) {
             courseCollection.put(course.getCourseCode(), course);
@@ -50,19 +39,7 @@ public class CourseCollection {
         }
     }
 
-   /* public void updateCourse(String csv) {
-        Course courseCSV = new Course(csv);
-        if (courseCollection.containsKey(courseCSV.getCourseCode())) {
-            courseCollection.put(courseCSV.getCourseCode(), courseCSV);
-            writeToFile();
-        } else {
-            System.out.printf("Student update failure: lecturer %s does not exist\n", courseCSV.getCourseCode());
-        }
-    }*/
-
-
     public void removeCourse(String courseCode) {
-        //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
         courseCollection.remove(courseCode);
         writeToFile();
     }
@@ -73,6 +50,15 @@ public class CourseCollection {
 
     public Set<String> getKeyset() {
         return courseCollection.keySet();
+    }
+
+    public Set<String> getAvailableCourseKeyset() {
+        Set<String> availableCourses = courseCollection.keySet();
+        for (String key : availableCourses) {
+            if (!courseCollection.get(key).available())
+                availableCourses.remove(key);
+        }
+        return availableCourses;
     }
 
     private void readFromFile() {
@@ -90,34 +76,6 @@ public class CourseCollection {
 
     }
 
-    //  code
-//  tittle
-//  desciption
-//  startDate
-//  credit
-//  lecturerCode
-    public String listCourses() {
-        //todo:update listing
-        StringBuilder returnString = new StringBuilder("Course Code\tTitle\tStart Date\tCredit\tlecturer\t# of Students\n" +
-                "\n=====================================================\n");
-        Set<String> keys = courseCollection.keySet();
-        for (String key : keys) {
-            Course listingCourse = courseCollection.get(key);
-            returnString.append(key + "\t" + listingCourse.getCourseCode() +
-                    "\t" + listingCourse.getTitle() + "\t" + listingCourse.getTitle() +
-                    "\t" + listingCourse.getStartDate().toString() + "\t" + listingCourse.getCredit() +
-                    "\t" + DataLayer.lecturers.getLecturerName(listingCourse.getLecturerCode()) + "\t" +
-                    "\t" + listingCourse.getEnrolledStudentCount() + "\n");
-        }
-        return returnString.toString();
-    }
-
-    public String listAvailableCourses() {
-        //todo:update listing
-
-
-        return "";
-    }
 
     public Course getCourse(String CourseCode) {
         return courseCollection.get(CourseCode);
@@ -125,11 +83,9 @@ public class CourseCollection {
 
     public void enrollStudent(String courseCode, String studentId) {
         courseCollection.get(courseCode).enrollStudent(studentId);
-
-
     }
 
-    public void derollStudent() {
-
+    public void deEnrollStudent(String courseCode, String studentId) {
+        courseCollection.get(courseCode).deEnrollStudent(studentId);
     }
 }

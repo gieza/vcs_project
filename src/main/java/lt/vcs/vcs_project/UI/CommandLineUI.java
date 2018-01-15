@@ -1,9 +1,10 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.datalayer.DataLayer;
 import lt.vcs.vcs_project.servicelayer.OperationsAccount;
 import lt.vcs.vcs_project.servicelayer.PrintingAccount;
 import lt.vcs.vcs_project.utils.ScannerUtils;
+
+import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class CommandLineUI {
     private static String currentUser = "";
@@ -13,7 +14,7 @@ public class CommandLineUI {
         while (true) {
             currentUser = login();
             //currentUser = loginDefault();
-            switch (DataLayer.getRole(currentUser)) {
+            switch (accounts.getRole(currentUser)) {
                 case ADMIN:
                     userInterface = new AdminUserInterface();
                     break;

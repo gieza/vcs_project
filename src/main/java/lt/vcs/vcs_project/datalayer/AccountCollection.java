@@ -107,4 +107,7 @@ public class AccountCollection {
         }
     }
 
+    public Role getRole(String accountId) {
+        return accountCollection.get(accountId).getRole();
+    }
 }

@@ -7,10 +7,6 @@ public class DataLayer {
     public static CourseCollection courses = new CourseCollection();
 
 
-    public static Role getRole(String loginId) {
-        return accounts.getAccount(loginId).getRole();
-    }
-
     public static String getFirstName(String loginId) {
         return accounts.getAccount(loginId).getFirstName();
     }

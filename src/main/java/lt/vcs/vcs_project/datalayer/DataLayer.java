@@ -67,7 +67,7 @@ public class DataLayer {
         }
     }
 
-    public static void listCourses() {
+   /* public static void listCourses() {
         System.out.println(courses.listCourses());
     }
 
@@ -76,9 +76,9 @@ public class DataLayer {
         //todo: not implemented
     }
 
-    public static boolean courseExists(String courseCode) {
+   public static boolean courseExists(String courseCode) {
         return courses.containsKey(courseCode);
-    }
+    }*/
 
    /* public static void assignAnyCourse2Student(String courseCode, String studentId) {
         courses.enrollStudent(courseCode, studentId);
@@ -93,11 +93,11 @@ public class DataLayer {
     }*/
 
 
-    public static void assignCourse2Lecturer(String courseCode, String lecturerId) {
+    /*public static void assignCourse2Lecturer(String courseCode, String lecturerId) {
         if (courses.containsKey(courseCode) && lecturers.containsKey(lecturerId)) {
             courses.getCourse(courseCode).setLecturerCode(lecturerId);
             lecturers.getLecturer(lecturerId).addCourse(courseCode);
         }
-    }
+    }*/
 
 }

@@ -3,7 +3,6 @@ package lt.vcs.vcs_project.datalayer;
 import lt.vcs.vcs_project.utils.StringDateConversion;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -19,7 +18,8 @@ public class Course implements Serializable {
 
     private final Integer MAX_STUDENTS_IN_COURSE = 12;
 
-    public Course(String courseCode, String title, String description, Date startDate, String credit, String lecturerCode) {
+    public Course(String courseCode, String title, Date startDate, String credit,
+                  String lecturerCode, String description) {
         this.courseCode = courseCode;
         this.title = title;
         this.description = description;
@@ -30,7 +30,7 @@ public class Course implements Serializable {
         enrolledStudents = new HashSet<>();
     }
 
-    public Course(String csv) {
+/*    public Course(String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length == 6) {
             this.courseCode = inputArray[0];
@@ -44,16 +44,15 @@ public class Course implements Serializable {
         } else {
             System.out.printf("Incorrect number of fields");
         }
-    }
+    }*/
 
     @Override
     public String toString() {
         String enrolledStudentsList = "";
         for (String student : enrolledStudents) {
             enrolledStudentsList = student + "\n";
-            //todo paimti print line is student objekto
         }
-        return "Course{" + //todo pataisyti formata
+        return "Course{" +
                 "courseCode='" + courseCode + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
@@ -66,15 +65,6 @@ public class Course implements Serializable {
     }
 
 
-    public String toStringCSV() {
-
-        return String.join(",", Arrays.asList(this.courseCode, this.title,
-                this.description, this.startDate.toString(), this.credit, this.lecturerCode));
-    }
-
-    static public String printHeaderCSV() {
-        return "courseCode,title,Description,startDate[yyyy-MM-dd],credit,lecturerCode";
-    }
 
     public boolean available() {
 
@@ -122,6 +112,10 @@ public class Course implements Serializable {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = StringDateConversion.String2Date(startDate);
     }
 
     public String getCredit() {

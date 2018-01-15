@@ -30,28 +30,27 @@ public class CourseCollection {
         }
     }
 
-    public void addCourse(String csv) {
-        Course courseCSV = new Course(csv);
-        if (!courseCollection.containsKey(courseCSV.getCourseCode())) {
-            courseCollection.put(courseCSV.getCourseCode(), courseCSV);
-            writeToFile();
-        } else {
-            //trow exception - duplicate
-            System.out.printf("Student addition failure: lecturer %s already exists\n", courseCSV.getCourseCode());
-        }
-    }
-
+    /*  public void addCourse(String csv) {
+          Course courseCSV = new Course(csv);
+          if (!courseCollection.containsKey(courseCSV.getCourseCode())) {
+              courseCollection.put(courseCSV.getCourseCode(), courseCSV);
+              writeToFile();
+          } else {
+              //trow exception - duplicate
+              System.out.printf("Student addition failure: lecturer %s already exists\n", courseCSV.getCourseCode());
+          }
+      }
+  */
     public void updateCourse(Course course) {
-
         if (courseCollection.containsKey(course.getCourseCode())) {
             courseCollection.put(course.getCourseCode(), course);
             writeToFile();
         } else {
-            System.out.printf("Update failure: lecturer %s does not exist\n", course.getCourseCode());
+            System.out.printf("Update failure: course %s does not exist\n", course.getCourseCode());
         }
     }
 
-    public void updateCourse(String csv) {
+   /* public void updateCourse(String csv) {
         Course courseCSV = new Course(csv);
         if (courseCollection.containsKey(courseCSV.getCourseCode())) {
             courseCollection.put(courseCSV.getCourseCode(), courseCSV);
@@ -59,7 +58,7 @@ public class CourseCollection {
         } else {
             System.out.printf("Student update failure: lecturer %s does not exist\n", courseCSV.getCourseCode());
         }
-    }
+    }*/
 
 
     public void removeCourse(String courseCode) {

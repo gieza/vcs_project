@@ -11,11 +11,6 @@ public class PrintingStudent extends PrintService {
             "personalNumber,dateOfBirth,email,mobile,gender,address\n";
 
 
-
-    /*static public String printHeaderCSV() {
-        return STUDENT_HEADER_CSV;
-    }*/
-
     public static final String STUDENT_LISTING_FORMATING = "%-8s %20s %-25s %-15s %-12s %-12s %-25s " +
             "%-12s %-5s %-40s\n";
     public static final String STUDENT_LISTING_HEADER = String.format(STUDENT_LISTING_FORMATING,
@@ -78,9 +73,4 @@ public class PrintingStudent extends PrintService {
                 student.getGender(), student.getAddress());
     }
 
-   /* public String printStudentCSV() {
-        return String.join(",", Arrays.asList(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(),
-                this.getRole().toString(), this.studentId, this.personalNumber, this.dateOfBirth, this.email, this.mobileNumber, this.gender, this.address));
-
-    }*/
 }

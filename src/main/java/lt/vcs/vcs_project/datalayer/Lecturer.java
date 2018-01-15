@@ -26,7 +26,7 @@ public class Lecturer extends Account {
         this.readCourses = new HashSet<>();
     }
 
-    public Lecturer(String csv) {
+  /*  public Lecturer(String csv) {
         super();
         String[] inputArray = csv.split(",");
         if (inputArray.length >= 11) {
@@ -50,7 +50,7 @@ public class Lecturer extends Account {
         } else {
             System.out.printf("Failure: cannot create Lecturer -- number of fields do not match required number\n");
         }
-    }
+    }*/
 
     public Account makeAccount() {
         return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.lecturerId);

@@ -36,13 +36,6 @@ public class OperationsAccount {
         }
     }
 
-/*    public String printAccountInCSV(Account account) {
-
-        return String.join(",", Arrays.asList(account.getLoginId(), account.getFirstName(),
-                account.getSecondName(), account.getRoleAsString(), account.getPersonalId()));
-
-    }*/
-
 
     static public void addAccount(String csv) {
         Account accountCSV = makeAccountFromCSV(csv);

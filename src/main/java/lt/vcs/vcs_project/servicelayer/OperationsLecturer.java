@@ -122,7 +122,7 @@ public class OperationsLecturer {
         String selectedLecturer = selectLecturer();
         accounts.removeAccount(lecturers.getLoginId(selectedLecturer));
         Set<String> courseList = lecturers.getLecturer(selectedLecturer).getReadCourses();
-        removeCourse(courseList, selectedLecturer);
+        removeCourseFromLecturer(courseList, selectedLecturer);
         lecturers.removeLecturer(selectedLecturer);
     }
 
@@ -135,14 +135,14 @@ public class OperationsLecturer {
         }
     }
 
-    static public void removeCourse(Set<String> courseList, String lecturerId) {
+    static public void removeCourseFromLecturer(Set<String> courseList, String lecturerId) {
         if (courseList == null || lecturerId == null) return;
         for (String courseId : courseList) {
             lecturers.removeCourse(lecturerId, courseId);
         }
     }
 
-    static public void removeCourse(String courseId, String lecturerId) {
+    static public void removeCourseFromLecturer(String courseId, String lecturerId) {
         if (courseId == null || lecturerId == null) return;
 
         lecturers.removeCourse(lecturerId, courseId);

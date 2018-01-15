@@ -123,7 +123,7 @@ public class OperationsStudent {
         String selectedStudent = OperationsStudent.selectStudent();
         //remove student from courses
         Set<String> courseList = students.getStudent(selectedStudent).getEnrolledCouses();
-        OperationsCourse.removeStudent(courseList, selectedStudent);
+        OperationsCourse.deEnrollStudent(courseList, selectedStudent);
         //remove student itself
         accounts.removeAccount(students.getLoginId(selectedStudent));
         students.removeStudent(selectedStudent);

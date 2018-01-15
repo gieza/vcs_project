@@ -94,7 +94,7 @@ public class OperationsCourse {
         courses.removeCourse(selectedCourse);
     }
 
-    public static void removeStudent(Set<String> CourseList, String studentId) {
+    public static void deEnrollStudent(Set<String> CourseList, String studentId) {
         if (CourseList == null || studentId == null) return;
         for (String courseCode : CourseList) {
             courses.deEnrollStudent(courseCode, studentId);

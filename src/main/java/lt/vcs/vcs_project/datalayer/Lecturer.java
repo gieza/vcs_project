@@ -70,9 +70,17 @@ public class Lecturer extends Account {
         if (!this.readCourses.contains(courseId)) {
             this.readCourses.add(courseId);
         } else {
-            System.out.printf("Student %s is already giving into course %s", this.lecturerId, courseId);
+            System.out.printf("Lecturer %s is already giving into course %s", this.lecturerId, courseId);
         }
 
+    }
+
+    public void removeCourse(String courseId) {
+        if (this.readCourses.contains(courseId)) {
+            this.readCourses.remove(courseId);
+        } else {
+            System.out.printf("Lecturer %s is not giving course %s", this.lecturerId, courseId);
+        }
     }
 
     public String getLecturerId() {

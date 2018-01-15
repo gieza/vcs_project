@@ -3,10 +3,10 @@ package lt.vcs.vcs_project.servicelayer;
 import lt.vcs.vcs_project.datalayer.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
+import java.util.Set;
+
 import static lt.vcs.vcs_project.UI.UI_common.askForNewPassword;
-import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
-import static lt.vcs.vcs_project.datalayer.DataLayer.students;
-import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
+import static lt.vcs.vcs_project.datalayer.DataLayer.*;
 
 public class OperationsStudent {
 
@@ -121,9 +121,12 @@ public class OperationsStudent {
 
     static public void removeStudent() {
         String selectedStudent = OperationsStudent.selectStudent();
+        //remove student from courses
+        Set<String> courseList = students.getStudent(selectedStudent).getEnrolledCouses();
+        OperationsCourse.removeStudent(courseList, selectedStudent);
+        //remove student itself
         accounts.removeAccount(students.getLoginId(selectedStudent));
         students.removeStudent(selectedStudent);
-        //todo:remove student from enrolled courses
     }
 
     public static String selectStudent() {
@@ -152,4 +155,12 @@ public class OperationsStudent {
             students.addCourse(studentId, selectedCourse);
         }
     }
+
+    public static void removeCourse(Set<String> StudentList, String courseCode) {
+        if (StudentList == null || courseCode == null) return;
+        for (String studentId : StudentList) {
+            students.removeCourse(studentId, courseCode);
+        }
+    }
+
 }

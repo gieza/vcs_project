@@ -122,11 +122,11 @@ public class Course implements Serializable {
         this.credit = credit;
     }
 
-    public String getLecturerCode() {
+    public String getLecturerId() {
         return lecturerCode;
     }
 
-    public void setLecturerCode(String lecturerCode) {
+    public void setLecturerId(String lecturerCode) {
         this.lecturerCode = lecturerCode;
     }
 

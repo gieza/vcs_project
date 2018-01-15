@@ -169,7 +169,7 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = "COURSE";
                 break;
             case "ASSIGN_COURSE_LECTURER":
-                OperationsCourse.assignCourse2Lecturer();
+                OperationsLecturer.assignCourse2Lecturer();
                 waitForEnter();
                 menuPosition = "COURSE";
                 break;

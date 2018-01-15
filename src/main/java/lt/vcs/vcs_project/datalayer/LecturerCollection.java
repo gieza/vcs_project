@@ -139,12 +139,16 @@ public class LecturerCollection {
         return lecturerCollection.get(lecturerId);
     }
 
+    public Set<String> getKeyset() {
+        return lecturerCollection.keySet();
+    }
 
     public void addCourse(String lecturerId, String courseCode) {
         lecturerCollection.get(lecturerId).addCourse(courseCode);
     }
 
-    public Set<String> getKeyset() {
-        return lecturerCollection.keySet();
+    public void removeCourse(String lecturerId, String courseCode) {
+        lecturerCollection.get(lecturerId).removeCourse(courseCode);
     }
+
 }

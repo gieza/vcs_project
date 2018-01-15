@@ -20,7 +20,7 @@ public class PrintingCourse extends PrintService {
     public static void listCourse(Course course) {
         //todo: print out Lecturer name instead of code
         System.out.printf(COURSE_LISTING_FORMATING, course.getCourseCode(), course.getTitle(),
-                course.getStartDate(), course.getCredit(), course.getLecturerCode(), course.getEnrolledStudentCount());
+                course.getStartDate(), course.getCredit(), course.getLecturerId(), course.getEnrolledStudentCount());
     }
 
     public static void listCourse(Set<String> CourseList) {
@@ -49,7 +49,7 @@ public class PrintingCourse extends PrintService {
                 "\nTitle:" + course.getTitle() + "\n:" + course.getDescription() +
                 "\nStartDate:" + course.getStartDate() +
                 "\nCredit:" + course.getCredit() +
-                "\nEmail:" + course.getLecturerCode() +
+                "\nEmail:" + course.getLecturerId() +
                 "\nLecturer Name:" +//todo: prideti Lecturer name
                 "\n# of Enrolled Students:" + course.getEnrolledStudentCount());
         PrintingStudent.listStudent(course.getEnrolledStudents());

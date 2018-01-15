@@ -3,6 +3,8 @@ package lt.vcs.vcs_project.servicelayer;
 import lt.vcs.vcs_project.datalayer.Lecturer;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
+import java.util.Set;
+
 import static lt.vcs.vcs_project.UI.UI_common.askForNewPassword;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
@@ -120,8 +122,9 @@ public class OperationsLecturer {
     static public void removeLecturer() {
         String selectedLecturer = selectLecturer();
         accounts.removeAccount(lecturers.getLoginId(selectedLecturer));
+        Set<String> courseList = lecturers.getLecturer(selectedLecturer).getReadCourses();
+        removeCourse(courseList, selectedLecturer);
         lecturers.removeLecturer(selectedLecturer);
-        //todo:remove lecturer for given course
     }
 
     public static void assignCourse2Lecturer() {
@@ -131,6 +134,19 @@ public class OperationsLecturer {
         if (selectedCourse != null && selectedLecturer != null) {
             DataLayer.assignCourse2Lecturer(selectedCourse, selectedLecturer);
         }*/
+    }
+
+    static public void removeCourse(Set<String> courseList, String lecturerId) {
+        if (courseList == null || lecturerId == null) return;
+        for (String courseId : courseList) {
+            lecturers.removeCourse(lecturerId, courseId);
+        }
+    }
+
+    static public void removeCourse(String courseId, String lecturerId) {
+        if (courseId == null || lecturerId == null) return;
+
+        lecturers.removeCourse(lecturerId, courseId);
     }
 
     public static String selectLecturer() {

@@ -4,7 +4,10 @@ import lt.vcs.vcs_project.datalayer.Course;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 import lt.vcs.vcs_project.utils.StringDateConversion;
 
+import java.util.Set;
+
 import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
+import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
 
 public class OperationsCourse {
 
@@ -81,12 +84,22 @@ public class OperationsCourse {
 
     public static void removeCourse() {
         String selectedCourse = selectCourse();
+        //remove course from Lecturer collection
+        String lecturerId = courses.getCourse(selectedCourse).getLecturerId();
+        lecturers.removeCourse(lecturerId, selectedCourse);
+        //remove course from Student collection
+        Set<String> studentList = courses.getCourse(selectedCourse).getEnrolledStudents();
+        OperationsStudent.removeCourse(studentList, selectedCourse);
+        //remove course itself
         courses.removeCourse(selectedCourse);
-        //OperationsStudent.removeCourse(selectedCourse);
-        //OperationsLecturer.removeCourse(selectedCourse);
-        //todo:remove course from students and lecturer collections
     }
 
+    public static void removeStudent(Set<String> CourseList, String studentId) {
+        if (CourseList == null || studentId == null) return;
+        for (String courseCode : CourseList) {
+            courses.deEnrollStudent(courseCode, studentId);
+        }
+    }
 
     public static String selectCourse() {
         System.out.printf("\n\nEnter to Course Code to select Course:");

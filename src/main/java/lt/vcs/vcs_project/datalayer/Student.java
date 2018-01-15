@@ -40,6 +40,14 @@ public class Student extends Account {
 
     }
 
+    public void removeCourse(String courseId) {
+        if (this.enrolledCourses.contains(courseId)) {
+            this.enrolledCourses.remove(courseId);
+        } else {
+            System.out.printf("Student %s is not enrolled into course %s", this.studentId, courseId);
+        }
+    }
+
     public HashSet<String> getEnrolledCouses() {
         return this.enrolledCourses;
     }

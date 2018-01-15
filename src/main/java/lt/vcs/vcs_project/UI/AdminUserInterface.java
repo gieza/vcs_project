@@ -1,12 +1,13 @@
 package lt.vcs.vcs_project.UI;
 
 import lt.vcs.vcs_project.datalayer.DataLayer;
-import lt.vcs.vcs_project.datalayer.Lecturer;
 import lt.vcs.vcs_project.servicelayer.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.UI_common.*;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
+import static lt.vcs.vcs_project.servicelayer.OperationsLecturer.*;
+import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.*;
 
 public class AdminUserInterface implements UserInterface {
     static String menuPosition = "TOP";
@@ -242,62 +243,6 @@ public class AdminUserInterface implements UserInterface {
         }
     }
 
-
-    private void listLecturer() {
-        DataLayer.listLecturers(); //todo:not implemented
-    }
-
-    private void printLecturer() { //todo:not implemented
-        String selectedLecturer = selectLecturer();
-        if (selectedLecturer != null) {
-            //DataLayer.printAccount(selectedLecturer);
-        }
-    }
-
-    private void addLecturer() {
-        System.out.printf("\nEnter new Lecturer data in CommaSeparatedValue format\nfollowing template: %s\n:",
-                Lecturer.printHeaderCSV());
-        String userInput = ScannerUtils.scanString();
-        System.out.printf("Entered values %s\n", userInput);
-        DataLayer.addLecturer(userInput);
-    }
-
-    private void updateLecturer() {//todo:not implemented
-        String selectedLecturer = selectLecturer();
-        if (selectedLecturer != null) {
-            System.out.printf("\nSorry, Lecturer update functionally not implemented.\n\treturning to menu\n\n");
-        }
-    }
-
-    private void changeLecturerPassword() {
-        String selectedLecturer = selectLecturer();
-        String newPassword = askForNewPassword();
-        if (newPassword.length() > 0) {
-            DataLayer.changeLecturerPassword(selectedLecturer, newPassword);
-        } else {
-            System.out.println("User password cannot be empty");
-        }
-        waitForEnter();
-    }
-
-    private void removeLecturer() {//todo:not implemented - gal atskirai prideti password??
-        String selectedLecturer = selectLecturer();
-        if (selectedLecturer != null) {
-            System.out.printf("\nSorry, Lecturer update functionally not implemented.\n\treturning to menu\n\n");
-        }
-    }
-
-    private String selectLecturer() {
-        System.out.printf("\n\nEnter to Lecturer Id to select Lecturer:");
-        String userInput = ScannerUtils.scanString();
-        if (DataLayer.lecturerExists(userInput)) {
-            System.out.printf("Selected Lecturer: %s\n", userInput);
-            return userInput;
-        } else {
-            System.out.printf("\nSorry, Lecturer Id %s does not exists.\n\treturning to menu\n\n", userInput);
-            return null;
-        }
-    }
 
     public static void addSomeData() {
         AccountCollectionOperations.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");

@@ -143,4 +143,8 @@ public class LecturerCollection {
     public void addCourse(String lecturerId, String courseCode) {
         lecturerCollection.get(lecturerId).addCourse(courseCode);
     }
+
+    public Set<String> getKeyset() {
+        return lecturerCollection.keySet();
+    }
 }

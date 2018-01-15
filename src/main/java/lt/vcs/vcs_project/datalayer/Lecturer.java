@@ -52,7 +52,7 @@ public class Lecturer extends Account {
         }
     }
 
-    public Account getAccount() {
+    public Account makeAccount() {
         return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.lecturerId);
     }
 
@@ -131,4 +131,7 @@ public class Lecturer extends Account {
         this.address = address;
     }
 
+    public HashSet<String> getReadCourses() {
+        return this.readCourses;
+    }
 }

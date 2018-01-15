@@ -1,10 +1,13 @@
 package lt.vcs.vcs_project.UI;
 
 import lt.vcs.vcs_project.servicelayer.OperationsLecturer;
+import lt.vcs.vcs_project.servicelayer.PrintingCourse;
 import lt.vcs.vcs_project.servicelayer.PrintingLecturer;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
-import static lt.vcs.vcs_project.UI.LecturerUIMenuDefinition.*;
+import static lt.vcs.vcs_project.UI.LecturerUIMenuDefinition.menuNavigation;
+import static lt.vcs.vcs_project.UI.LecturerUIMenuDefinition.menuOptions;
+import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class LecturerUserInterface implements UserInterface {
@@ -50,11 +53,31 @@ public class LecturerUserInterface implements UserInterface {
             case "PRINT_LECTURER":
                 PrintingLecturer.printLecturer(currentLecturerId);
                 menuPosition = "LECTURER";
+                waitForEnter();
                 break;
             case "UPDATE_LECTURER":
                 OperationsLecturer.updateLecturer(currentLecturerId);
                 menuPosition = "LECTURER";
+                waitForEnter();
                 break;
+            case "CHANGE_LECTURER_PASSWORD":
+                OperationsLecturer.changeLecturerPassword(currentLecturerId);
+                menuPosition = "LECTURER";
+                waitForEnter();
+                break;
+            case "LIST_ASSIGNED_COURSES":
+                PrintingCourse.listAssignedCourses(currentLecturerId);
+
+                waitForEnter();
+                break;
+            case "LIST_COURSES":
+                PrintingCourse.listCourse();
+                menuPosition = "COURSE";
+                waitForEnter();
+            case "PRINT_COURSE":
+                PrintingCourse.printCourse();
+                menuPosition = "COURSE";
+                waitForEnter();
             default:
                 menuPosition = "TOP";
         }

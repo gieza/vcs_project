@@ -5,6 +5,7 @@ import lt.vcs.vcs_project.datalayer.Course;
 import java.util.Set;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
+import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
 import static lt.vcs.vcs_project.datalayer.DataLayer.students;
 
 public class PrintingCourse extends PrintService {
@@ -46,6 +47,11 @@ public class PrintingCourse extends PrintService {
 
     public static void listEnrolledCourses(String studentId) {
         Set<String> keys = students.getStudent(studentId).getEnrolledCouses();
+        listCourse(keys);
+    }
+
+    public static void listAssignedCourses(String lecturerId) {
+        Set<String> keys = lecturers.getLecturer(lecturerId).getReadCourses();
         listCourse(keys);
     }
 

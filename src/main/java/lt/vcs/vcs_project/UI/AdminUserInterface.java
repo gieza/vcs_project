@@ -4,10 +4,11 @@ import lt.vcs.vcs_project.datalayer.DataLayer;
 import lt.vcs.vcs_project.servicelayer.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
-import static lt.vcs.vcs_project.UI.UI_common.*;
+import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.servicelayer.OperationsLecturer.*;
-import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.*;
+import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.listLecturer;
+import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.printLecturer;
 
 public class AdminUserInterface implements UserInterface {
     static String menuPosition = "TOP";
@@ -23,10 +24,6 @@ public class AdminUserInterface implements UserInterface {
         menuPosition = "TOP";
 
         while (true) {
-            if (menuPosition.equals("LOGOUT")) {
-                break;
-            }
-            clearScreen();
             System.out.printf("\nHello %s %s,\n", DataLayer.getFirstName(accountId),
                     DataLayer.getSecondName(accountId)); //todo print greeting in login method, here just list current account
             printMenuOptions();
@@ -35,6 +32,10 @@ public class AdminUserInterface implements UserInterface {
                 break;
             }
             runDecision(menuPosition, menuChoice);
+            //check if current account still exists, otherwise logout - account might have been removed
+            if (!accounts.containsKey(currentAccount)) {
+                break;
+            }
         }
     }
 
@@ -54,30 +55,34 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case "LIST_ACCOUNTS":
-                AccountCollectionOperations.listAccounts();
+                PrintingAccount.listAccounts();
                 waitForEnter();
                 menuPosition = "ACCOUNT";
                 break;
             case "PRINT_ACCOUNT":
-                printAccount();
+                PrintingAccount.printAccount(currentAccount);
+                waitForEnter();
                 menuPosition = "ACCOUNT";
                 break;
             case "ADD_ACCOUNT":
-                AccountCollectionOperations.addAccount();
+                OperationsAccount.addAccount();
                 waitForEnter();
                 menuPosition = "ACCOUNT";
                 break;
             case "UPDATE_ACCOUNT":
-                updateAccount();
+                OperationsAccount.updateAccount(currentAccount);
+                waitForEnter();
                 menuPosition = "ACCOUNT";
                 break;
             case "CHANGE_ACCOUNT_PASSWORD":
-                changeAccountPassword();
+                OperationsAccount.changeAccountPassword(currentAccount);
+                waitForEnter();
                 menuPosition = "ACCOUNT";
                 break;
             case "REMOVE_ACCOUNT":
-                removeAccount();
-                //menuPosition is being set in removeAccount method
+                OperationsAccount.removeAccount(currentAccount);
+                waitForEnter();
+                menuPosition = "ACCOUNT";
                 break;
             case "LIST_STUDENTS":
                 PrintingStudent.listStudent();
@@ -185,68 +190,10 @@ public class AdminUserInterface implements UserInterface {
     }
 
 
-    private void printAccount() {
-        String selectedAccount = selectAccount(currentAccount);
-        if (selectedAccount != null) {
-            AccountCollectionOperations.printOutAccount(selectedAccount);
-        }
-        waitForEnter();
-    }
-
-
-    private void updateAccount() {
-        String selectedAccount = selectAccount(currentAccount);
-        if (selectedAccount != null) {
-            AccountCollectionOperations.updateAccount(selectedAccount);
-            waitForEnter();
-        }
-    }
-
-    private void changeAccountPassword() {
-        String selectedAccount = selectAccount(currentAccount);
-        String newPassword = askForNewPassword();
-        if (newPassword.length() > 0) {
-            accounts.getAccount(selectedAccount).setPassword(newPassword);
-        } else {
-            System.out.println("User password cannot be empty");
-        }
-        waitForEnter();
-    }
-
-    private void removeAccount() { //todo:not implemented
-        String selectedAccount = selectAccount(currentAccount);
-        if (selectedAccount != null) {
-            accounts.removeAccount(selectedAccount);
-            if (selectedAccount.equals(currentAccount)) {
-                menuPosition = "LOGOUT";
-                //current account does not exist anymore -> it has to leave immediately
-            } else {
-                menuPosition = "ACCOUNT";
-            }
-        }
-        waitForEnter();
-    }
-
-    private String selectAccount(String currentAccount) {
-        System.out.printf("\n\nCurrent Account %s.\n" +
-                "\tpress Enter to select current account, otherwise enter new account:\n", currentAccount);
-        String userInput = ScannerUtils.scanString();
-        if (userInput.equals("")) {
-            System.out.printf("Selected account is: %s\n", currentAccount);
-            return currentAccount;
-        } else if (DataLayer.accounts.AdminExists(userInput)) {
-            System.out.printf("Selected account is: %s\n", userInput);
-            return userInput;
-        } else {
-            System.out.printf("\nSorry, Account %s does not exists.\n\treturning to menu\n\n", userInput);
-            return null;
-        }
-    }
-
 
     public static void addSomeData() {
-        AccountCollectionOperations.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
-        AccountCollectionOperations.addAccount("admin3,admin,Pekka,Peltonen");
+        OperationsAccount.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
+        OperationsAccount.addAccount("admin3,admin,Pekka,Peltonen");
         OperationsStudent.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
         OperationsStudent.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
         OperationsStudent.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");

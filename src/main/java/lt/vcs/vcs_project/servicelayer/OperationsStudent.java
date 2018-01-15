@@ -67,7 +67,7 @@ public class OperationsStudent {
         Student updatedStudent = updateStudentFromCSV(students.getStudent(studentId), userInput);
         students.updateStudent(updatedStudent);
         //synchronize data in account collection
-        accounts.setAccount(updatedStudent.getLoginId(), updatedStudent.makeAccount());
+        accounts.updateAccount(updatedStudent.makeAccount());
         //print updated values
         System.out.println("\nNew Values Are:");
         PrintingStudent.printStudentForUpdate(students.getStudent(studentId));

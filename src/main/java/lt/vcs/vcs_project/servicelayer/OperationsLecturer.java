@@ -65,7 +65,7 @@ public class OperationsLecturer {
         Lecturer updatedLecturer = updateLecturerFromCSV(lecturers.getLecturer(lecturerId), userInput);
         lecturers.updateLecturer(updatedLecturer);
         //synchronize data in account collection
-        accounts.setAccount(updatedLecturer.getLoginId(), updatedLecturer.makeAccount());
+        accounts.updateAccount(updatedLecturer.makeAccount());
         //print updated values
         System.out.println("\nNew Values Are:");
         PrintingLecturer.printLecturerForUpdate(lecturers.getLecturer(lecturerId));

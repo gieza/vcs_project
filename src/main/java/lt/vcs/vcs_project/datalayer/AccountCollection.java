@@ -28,8 +28,8 @@ public class AccountCollection {
                 && accountCollection.get(loginId).getRole() == ADMIN);
     }
 
-    public void setAccount(String accountID, Account account) {
-        accountCollection.put(accountID, account);
+    public void updateAccount(Account account) {
+        accountCollection.put(account.getLoginId(), account);
     }
 
     public void addAccount(Account account) {

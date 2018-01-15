@@ -45,7 +45,7 @@ public class AdminUIMenuDefinition {
                 put(STUDENT, "4", UPDATE_STUDENT);
                 put(STUDENT, "5", CHANGE_STUDENT_PASSWORD);
                 put(STUDENT, "6", REMOVE_STUDENT);
-                put(STUDENT, "7", ASSIGN_COURSE);
+                put(STUDENT, "7", ASSIGN_COURSE_STUDENT);
                 put(LECTURER, "0", TOP);
                 put(LECTURER, "1", LIST_LECTURERS);
                 put(LECTURER, "2", PRINT_LECTURER);
@@ -53,7 +53,7 @@ public class AdminUIMenuDefinition {
                 put(LECTURER, "4", UPDATE_LECTURER);
                 put(LECTURER, "5", CHANGE_LECTURER_PASSWORD);
                 put(LECTURER, "6", REMOVE_LECTURER);
-                put(LECTURER, "7", ASSIGN_COURSE);
+                put(LECTURER, "7", ASSIGN_COURSE_LECTURER);
                 put(COURSE, "0", TOP);
                 put(COURSE, "1", LIST_COURSES);
                 put(COURSE, "2", PRINT_COURSE);

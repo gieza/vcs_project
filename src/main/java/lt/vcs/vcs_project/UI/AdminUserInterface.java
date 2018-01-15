@@ -185,7 +185,7 @@ public class AdminUserInterface implements UserInterface {
     }
 
     private void printMenuOptions() {
-        System.out.print("Logged-in User: " + currentAccount);
+        System.out.printf("\n\nLogged-in User: %s\n\n", currentAccount);
         System.out.print(menuPosition + " Menu\n============================================\n" +
                 "Enter number to select one of the following:\n");
         System.out.printf(menuOptions.get(menuPosition.toString()));

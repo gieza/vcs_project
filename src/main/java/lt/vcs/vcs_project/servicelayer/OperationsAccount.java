@@ -3,9 +3,9 @@ package lt.vcs.vcs_project.servicelayer;
 import lt.vcs.vcs_project.datalayer.Account;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
-import static lt.vcs.vcs_project.UI.UI_common.askForNewPassword;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.datalayer.Role.ADMIN;
+import static lt.vcs.vcs_project.servicelayer.PrintService.askForNewPassword;
 
 
 public class OperationsAccount {

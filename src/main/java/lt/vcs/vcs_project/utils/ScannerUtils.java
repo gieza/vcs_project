@@ -9,5 +9,8 @@ public class ScannerUtils {
         return scanner.nextLine();
     }
 
-
+    public static void waitForEnter() {
+        System.out.println("\npress Enter to continue...");
+        scanString();
+    }
 }

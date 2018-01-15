@@ -3,11 +3,13 @@ package lt.vcs.vcs_project.UI;
 import lt.vcs.vcs_project.servicelayer.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
-import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
+import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuNavigation;
+import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuOptions;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.servicelayer.OperationsLecturer.*;
-import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.*;
-import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.*;
+import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.listLecturer;
+import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.printLecturer;
+import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class AdminUserInterface implements UserInterface {
     static String menuPosition = "TOP";

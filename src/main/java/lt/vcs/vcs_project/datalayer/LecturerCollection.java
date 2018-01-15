@@ -30,17 +30,6 @@ public class LecturerCollection {
         }
     }
 
-    /*    public void addLecturer(String csv) {
-            Lecturer lecturerCSV = new Lecturer(csv);
-            if (!lecturerCollection.containsKey(lecturerCSV.getLecturerId())) {
-                lecturerCollection.put(lecturerCSV.getLecturerId(), lecturerCSV);
-                writeToFile();
-            } else {
-                //trow exception - duplicate
-                System.out.printf("Student addition failure: lecturer %s already exists\n", lecturerCSV.getLecturerId());
-            }
-        }
-    */
     public void updateLecturer(Lecturer lecturer) {
         if (lecturerCollection.containsKey(lecturer.getLecturerId())) {
             lecturerCollection.put(lecturer.getLecturerId(), lecturer);
@@ -49,19 +38,6 @@ public class LecturerCollection {
             System.out.printf("Update failure: lecturer %s does not exist\n", lecturer.getLecturerId());
         }
     }
-
- /*   public void updateLecturer(String csv) {
-        //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas ???
-        Lecturer lecturerCSV = new Lecturer(csv);
-        //todo: reikalingas account update -> kad nebutu galima pakeisti account'o ir roles
-        if (lecturerCollection.containsKey(lecturerCSV.getLecturerId())) {
-            lecturerCollection.put(lecturerCSV.getLoginId(), lecturerCSV);
-            writeToFile();
-        } else {
-            System.out.printf("Student update failure: lecturer %s does not exist\n", lecturerCSV.getLecturerId());
-        }
-    }*/
-
 
     public void removeLecturer(String lecturerId) {
         //todo: jeigu studentas arba destytojas, reikia pataisyti ir ju kolekcijas
@@ -99,29 +75,6 @@ public class LecturerCollection {
 
     }
 
-
-    /*    public String listLecturers() {
-            //todo:update listing
-            StringBuilder returnString = new StringBuilder("AccountId\tFirst name\tLast Name\tRole\tlecturerId\tPersonalNumber\tDoB\tEmail\tMobile#\tF/M\tAddress" +
-                    "\n=====================================================\n");
-            Set<String> keys = lecturerCollection.keySet();
-            for (String key : keys) {
-                Lecturer listingLecturer = lecturerCollection.get(key);
-                returnString.append(key + "\t" + listingLecturer.getFirstName() +
-                        "\t" + listingLecturer.getSecondName() + "\t" + listingLecturer.getRole().toString() +
-                        "\t" + listingLecturer.getLecturerId() + "\t" + listingLecturer.getPersonalNumber() +
-                        "\t" + listingLecturer.getDateOfBirth() + "\t" + listingLecturer.getEmail() +
-                        "\t" + listingLecturer.getMobileNumber() + "\t" + listingLecturer.getGender() +
-                        "\t" + listingLecturer.getAddress() + "\n");
-            }
-            return returnString.toString();
-        }
-
-
-        public String toStringCSV(String lecturerId) {
-            return lecturerCollection.get(lecturerId).toStringCSV();
-        }
-    */
     public String getLoginId(String lecturerId) {
         if (lecturerCollection.containsKey(lecturerId)) {
             return lecturerCollection.get(lecturerId).getLoginId();

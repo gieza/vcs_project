@@ -1,6 +1,5 @@
 package lt.vcs.vcs_project.servicelayer;
 
-import lt.vcs.vcs_project.UI.UI_common;
 import lt.vcs.vcs_project.datalayer.Account;
 
 import java.util.Set;
@@ -24,7 +23,7 @@ public class PrintingAccount extends PrintService {
 
     public static void listAccounts() {
         System.out.println(ACCOUNT_LISTING_HEADER);
-        UI_common.printUnderLineForString(ACCOUNT_LISTING_HEADER);
+        printUnderLineForString(ACCOUNT_LISTING_HEADER);
         Set<String> keys = accounts.getKeyset();
         for (String key : keys) {
             if (accounts.getAccount(key).getRole() == ADMIN) {
@@ -48,7 +47,7 @@ public class PrintingAccount extends PrintService {
 
     static public void printAccountForUpdate(Account account) {
         System.out.print(ACCOUNT_UPDATE_HEADER);
-        UI_common.printUnderLineForString(ACCOUNT_UPDATE_HEADER);
+        printUnderLineForString(ACCOUNT_UPDATE_HEADER);
         System.out.printf("%-20s %-25s\n", account.getFirstName(), account.getSecondName());
     }
 

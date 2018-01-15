@@ -35,12 +35,6 @@ public class StudentCollection {
         writeToFile();
     }
 
-    /*   public Account getAccount(String studentId) {
-           if (studentCollection.containsKey(studentId)) return studentCollection.get(studentId);
-           System.out.printf("Get student failure: student %s does not exist\n", studentId);
-           return null;
-       }
-   */
     public boolean containsKey(String accountId) {
         return studentCollection.containsKey(accountId);
     }

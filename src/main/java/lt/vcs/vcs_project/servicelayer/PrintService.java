@@ -1,5 +1,7 @@
 package lt.vcs.vcs_project.servicelayer;
 
+import lt.vcs.vcs_project.utils.ScannerUtils;
+
 public class PrintService {
     public static void printUnderLineForString(String forUnderlining) {
         int underlineLength = forUnderlining.length() + 1;
@@ -7,5 +9,10 @@ public class PrintService {
             System.out.print("=");
         System.out.println();
 
+    }
+
+    public static String askForNewPassword() {
+        System.out.println("Please, enter new password:");
+        return ScannerUtils.scanString();
     }
 }

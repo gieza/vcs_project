@@ -42,9 +42,6 @@ public /*abstract*/ class Account implements Serializable {
     }
 
 
-   /* public Account() {
-    }*/
-
     public boolean authenticate(String password) {
         return this.password.equals(password);
     }

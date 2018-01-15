@@ -5,8 +5,9 @@ import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import java.util.Set;
 
-import static lt.vcs.vcs_project.UI.UI_common.askForNewPassword;
+
 import static lt.vcs.vcs_project.datalayer.DataLayer.*;
+import static lt.vcs.vcs_project.servicelayer.PrintService.askForNewPassword;
 
 public class OperationsLecturer {
 

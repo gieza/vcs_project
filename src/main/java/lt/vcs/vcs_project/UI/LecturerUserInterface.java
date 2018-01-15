@@ -7,8 +7,9 @@ import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.LecturerUIMenuDefinition.menuNavigation;
 import static lt.vcs.vcs_project.UI.LecturerUIMenuDefinition.menuOptions;
-import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
+//import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
+import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class LecturerUserInterface implements UserInterface {
     static String menuPosition = "TOP";
@@ -89,7 +90,6 @@ public class LecturerUserInterface implements UserInterface {
         System.out.print(menuPosition + " Menu\n============================================\n" +
                 "Enter number to select one of the following:\n");
         System.out.printf(menuOptions.get(menuPosition));
-        //System.out.printf(menuOptions.get(menuPosition));
     }
 
 }

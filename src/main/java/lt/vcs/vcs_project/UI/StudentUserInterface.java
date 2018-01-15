@@ -7,8 +7,8 @@ import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.StudentUIMenuDefinition.menuNavigation;
 import static lt.vcs.vcs_project.UI.StudentUIMenuDefinition.menuOptions;
-import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
+import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class StudentUserInterface implements UserInterface {
     static String menuPosition = "TOP";

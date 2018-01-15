@@ -6,14 +6,4 @@ public class DataLayer {
     public static LecturerCollection lecturers = new LecturerCollection();
     public static CourseCollection courses = new CourseCollection();
 
-
-    public static String getFirstName(String loginId) {
-        return accounts.getAccount(loginId).getFirstName();
-    }
-
-    public static String getSecondName(String loginId) {
-        return accounts.getAccount(loginId).getSecondName();
-    }
-
-
 }

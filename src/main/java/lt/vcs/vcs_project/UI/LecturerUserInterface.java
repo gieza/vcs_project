@@ -1,7 +1,11 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.datalayer.DataLayer;
+import lt.vcs.vcs_project.servicelayer.OperationsLecturer;
+import lt.vcs.vcs_project.servicelayer.PrintingLecturer;
 import lt.vcs.vcs_project.utils.ScannerUtils;
+
+import static lt.vcs.vcs_project.UI.LecturerUIMenuDefinition.*;
+import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class LecturerUserInterface implements UserInterface {
     static String menuPosition = "TOP";
@@ -9,18 +13,18 @@ public class LecturerUserInterface implements UserInterface {
 
 
     private String currentAccount;
+    private String currentLecturerId;
 
     @Override
-    public void open(String accountId) {
+    public void navigateMenu(String accountId) {
         currentAccount = accountId;
+        currentLecturerId = accounts.getAccount(currentAccount).getPersonalId();
         menuChoice = "";
         menuPosition = "TOP";
         while (true) {
-            //todo refactor to be only in datalayer login
-            System.out.printf("\nHello %s %s,\n", DataLayer.getFirstName(accountId), DataLayer.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
-            if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
+            if (menuNavigation.get(menuPosition, menuChoice).equals("LOGOUT")) {
                 break;
             } else {
                 runDecision(menuPosition, menuChoice);
@@ -29,7 +33,7 @@ public class LecturerUserInterface implements UserInterface {
     }
 
     private void runDecision(String menu, String subMenu) {
-        String decision = LecturerUIMenuDefinition.menuNavigation.get(menu, subMenu);
+        String decision = menuNavigation.get(menu, subMenu);
         System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = "TOP";
@@ -44,11 +48,11 @@ public class LecturerUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case "PRINT_LECTURER":
-                printLecturer();
+                PrintingLecturer.printLecturer(currentLecturerId);
                 menuPosition = "LECTURER";
                 break;
             case "UPDATE_LECTURER":
-                updateLecturer();
+                OperationsLecturer.updateLecturer(currentLecturerId);
                 menuPosition = "LECTURER";
                 break;
             default:
@@ -57,23 +61,12 @@ public class LecturerUserInterface implements UserInterface {
     }
 
     private void printMenuOptions() {
-        System.out.printf("%s Menu\n============================================\n" +
-                "Enter number to select one of the following:\n", menuPosition);
-        System.out.printf(LecturerUIMenuDefinition.menuOptions.get(menuPosition));
+        System.out.print("Logged-in User: " + currentAccount);
+        System.out.print("Lecturer ID: " + currentLecturerId);
+        System.out.print(menuPosition + " Menu\n============================================\n" +
+                "Enter number to select one of the following:\n");
+        System.out.printf(menuOptions.get(menuPosition));
         //System.out.printf(menuOptions.get(menuPosition));
     }
-
-
-    private void printLecturer() { //todo:not implemented
-        //DataLayer.printAccount(currentAccount);
-
-    }
-
-
-    private void updateLecturer() {//todo:not implemented
-
-        System.out.printf("\nSorry, Lecturer update functionally not implemented.\n\treturning to menu\n\n");
-    }
-
 
 }

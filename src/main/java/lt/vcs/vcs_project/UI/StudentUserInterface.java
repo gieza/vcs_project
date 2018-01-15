@@ -1,9 +1,10 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.datalayer.DataLayer;
+import lt.vcs.vcs_project.servicelayer.OperationsStudent;
 import lt.vcs.vcs_project.servicelayer.PrintingStudent;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
+import static lt.vcs.vcs_project.UI.StudentUIMenuDefinition.*;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class StudentUserInterface implements UserInterface {
@@ -12,19 +13,19 @@ public class StudentUserInterface implements UserInterface {
 
 
     private String currentAccount;
+    private String currentStudentId;
 
     @Override
-    public void open(String accountId) {
+    public void navigateMenu(String accountId) {
         currentAccount = accountId;
+        currentStudentId = accounts.getAccount(currentStudentId).getPersonalId();
         menuChoice = "";
         menuPosition = "TOP";
         while (true) {
-            //todo refactor to be only in datalayer login
-            System.out.printf("\nHello %s %s,\n", DataLayer.getFirstName(accountId), DataLayer.getSecondName(accountId));
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
-            if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
-                break;
+            if (menuNavigation.get(menuPosition, menuChoice).equals("LOGOUT")) {
+                break;      //logout - no need to proceed further
             } else {
                 runDecision(menuPosition, menuChoice);
             }
@@ -32,8 +33,8 @@ public class StudentUserInterface implements UserInterface {
     }
 
     private void runDecision(String menu, String subMenu) {
-        String decision = StudentUIMenuDefinition.menuNavigation.get(menu, subMenu);
-        System.out.printf("Next action: %s\n\n", decision);
+        String decision = menuNavigation.get(menu, subMenu);
+        //System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = "TOP";
             return;
@@ -47,11 +48,11 @@ public class StudentUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case "PRINT_STUDENT":
-                PrintingStudent.printStudent(accounts.getStudentId(currentAccount)); //todo
+                PrintingStudent.printStudent(currentStudentId);
                 menuPosition = "STUDENT";
                 break;
             case "UPDATE_STUDENT":
-                updateStudent();
+                OperationsStudent.updateStudent(currentAccount);
                 menuPosition = "STUDENT";
                 break;
             default:
@@ -60,15 +61,12 @@ public class StudentUserInterface implements UserInterface {
     }
 
     private void printMenuOptions() {
-        System.out.printf("%s Menu\n============================================\n" +
-                "Enter number to select one of the following:\n", menuPosition);
-        System.out.printf(StudentUIMenuDefinition.menuOptions.get(menuPosition));
+        System.out.print("Logged-in User: " + currentAccount);
+        System.out.print("Student ID: " + currentStudentId);
+        System.out.print(menuPosition + " Menu\n============================================\n" +
+                "Enter number to select one of the following:\n");
+        System.out.printf(menuOptions.get(menuPosition));
         //System.out.printf(menuOptions.get(menuPosition));
-    }
-
-
-    private void updateStudent() {//todo:not implemented
-        System.out.printf("\nSorry, Student update functionally not implemented.\n\treturning to menu\n\n");
     }
 
 }

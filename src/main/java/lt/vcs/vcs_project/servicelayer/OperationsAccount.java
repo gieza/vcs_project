@@ -36,6 +36,9 @@ public class OperationsAccount {
         }
     }
 
+    public static boolean authenticate(String accountId, String password) {
+        return accounts.getAccount(accountId).authenticate(password);
+    }
 
     static public void addAccount(String csv) {
         Account accountCSV = makeAccountFromCSV(csv);

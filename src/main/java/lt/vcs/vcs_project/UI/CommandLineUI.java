@@ -1,6 +1,8 @@
 package lt.vcs.vcs_project.UI;
 
 import lt.vcs.vcs_project.datalayer.DataLayer;
+import lt.vcs.vcs_project.servicelayer.OperationsAccount;
+import lt.vcs.vcs_project.servicelayer.PrintingAccount;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 public class CommandLineUI {
@@ -22,7 +24,7 @@ public class CommandLineUI {
                     userInterface = new LecturerUserInterface();
                     break;
             }
-            userInterface.open(currentUser);
+            userInterface.navigateMenu(currentUser);
         }
     }
 
@@ -34,7 +36,8 @@ public class CommandLineUI {
             System.out.print("Password: ");
             String password = ScannerUtils.scanString();
 
-            if (DataLayer.authenticate(username, password)) {
+            if (OperationsAccount.authenticate(username, password)) {
+                PrintingAccount.printGreetings(username);
                 return username;
             }
             System.out.println("Login failed, please try again");

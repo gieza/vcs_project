@@ -19,10 +19,5 @@ public class DataLayer {
         return accounts.getAccount(loginId).getSecondName();
     }
 
-    public static boolean authenticate(String accountId, String password) {
-        return accounts.getAccount(accountId).authenticate(password);
-    }
-
-
 
 }

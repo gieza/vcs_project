@@ -1,14 +1,13 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.datalayer.DataLayer;
 import lt.vcs.vcs_project.servicelayer.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.servicelayer.OperationsLecturer.*;
-import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.listLecturer;
-import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.printLecturer;
+import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.*;
+import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.*;
 
 public class AdminUserInterface implements UserInterface {
     static String menuPosition = "TOP";
@@ -18,19 +17,17 @@ public class AdminUserInterface implements UserInterface {
     private String currentAccount;
 
     @Override
-    public void open(String accountId) {
+    public void navigateMenu(String accountId) {
         currentAccount = accountId;
         menuChoice = "";
         menuPosition = "TOP";
 
         while (true) {
-            System.out.printf("\nHello %s %s,\n", DataLayer.getFirstName(accountId),
-                    DataLayer.getSecondName(accountId)); //todo print greeting in login method, here just list current account
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
-            if (menuChoice.equals("9") && menuPosition.equals("TOP")) {
+            if (menuNavigation.get(menuPosition, menuChoice).equals("LOGOUT"))
                 break;
-            }
+
             runDecision(menuPosition, menuChoice);
             //check if current account still exists, otherwise logout - account might have been removed
             if (!accounts.containsKey(currentAccount)) {
@@ -40,8 +37,8 @@ public class AdminUserInterface implements UserInterface {
     }
 
     private void runDecision(String menu, String subMenu) {
-        String decision = AdminUIMenuDefinition.menuNavigation.get(menu, subMenu);
-        System.out.printf("Next action: %s\n\n", decision);
+        String decision = menuNavigation.get(menu, subMenu);
+        //System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = "TOP";
             return;
@@ -184,9 +181,10 @@ public class AdminUserInterface implements UserInterface {
     }
 
     private void printMenuOptions() {
-        System.out.printf("%s Menu\n============================================\n" +
-                "Enter number to select one of the following:\n", menuPosition);
-        System.out.printf(AdminUIMenuDefinition.menuOptions.get(menuPosition));
+        System.out.print("Logged-in User: " + currentAccount);
+        System.out.print(menuPosition + " Menu\n============================================\n" +
+                "Enter number to select one of the following:\n");
+        System.out.printf(menuOptions.get(menuPosition));
     }
 
 

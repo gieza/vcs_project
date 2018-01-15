@@ -52,5 +52,10 @@ public class PrintingAccount extends PrintService {
         System.out.printf("%-20s %-25s\n", account.getFirstName(), account.getSecondName());
     }
 
+    static public void printGreetings(String accountId) {
+        System.out.printf("\n%s %s, welcome!\n", accounts.getAccount(accountId).getFirstName(),
+                accounts.getAccount(accountId).getSecondName());
+    }
+
 
 }

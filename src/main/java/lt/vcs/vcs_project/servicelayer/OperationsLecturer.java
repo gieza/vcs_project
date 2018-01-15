@@ -6,8 +6,7 @@ import lt.vcs.vcs_project.utils.ScannerUtils;
 import java.util.Set;
 
 import static lt.vcs.vcs_project.UI.UI_common.askForNewPassword;
-import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
-import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
+import static lt.vcs.vcs_project.datalayer.DataLayer.*;
 
 public class OperationsLecturer {
 
@@ -128,12 +127,12 @@ public class OperationsLecturer {
     }
 
     public static void assignCourse2Lecturer() {
-        //todo: needs implementation
-        /*String selectedCourse = selectCourse();
+        String selectedCourse = OperationsCourse.selectCourse();
         String selectedLecturer = selectLecturer();
         if (selectedCourse != null && selectedLecturer != null) {
-            DataLayer.assignCourse2Lecturer(selectedCourse, selectedLecturer);
-        }*/
+            courses.getCourse(selectedCourse).setLecturerId(selectedLecturer);
+            lecturers.getLecturer(selectedLecturer).addCourse(selectedCourse);
+        }
     }
 
     static public void removeCourse(Set<String> courseList, String lecturerId) {

@@ -10,9 +10,10 @@ import static lt.vcs.vcs_project.UI.LecturerUIMenuDefinition.menuOptions;
 //import static lt.vcs.vcs_project.UI.UI_common.waitForEnter;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
+import static lt.vcs.vcs_project.UI.MenuTitle.*;
 
 public class LecturerUserInterface implements UserInterface {
-    static String menuPosition = "TOP";
+    static MenuTitle menuPosition = TOP;
     static String menuChoice = "";
 
 
@@ -24,11 +25,12 @@ public class LecturerUserInterface implements UserInterface {
         currentAccount = accountId;
         currentLecturerId = accounts.getAccount(currentAccount).getPersonalId();
         menuChoice = "";
-        menuPosition = "TOP";
+        menuPosition = TOP;
         while (true) {
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
-            if (menuNavigation.get(menuPosition, menuChoice).equals("LOGOUT")) {
+            if (menuNavigation.get(menuPosition, menuChoice) != null &&
+                    menuNavigation.get(menuPosition, menuChoice) == (LOGOUT)) {
                 break;
             } else {
                 runDecision(menuPosition, menuChoice);
@@ -36,51 +38,51 @@ public class LecturerUserInterface implements UserInterface {
         }
     }
 
-    private void runDecision(String menu, String subMenu) {
-        String decision = menuNavigation.get(menu, subMenu);
+    private void runDecision(MenuTitle menu, String subMenu) {
+        MenuTitle decision = menuNavigation.get(menu, subMenu);
         System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
-            menuPosition = "TOP";
+            menuPosition = TOP;
             return;
         }
         switch (decision) {
-            case "ACCOUNT":
-            case "STUDENT":
-            case "LECTURER":
-            case "COURSE":
-            case "TOP":
+            case ACCOUNT:
+            case STUDENT:
+            case LECTURER:
+            case COURSE:
+            case TOP:
                 menuPosition = decision;
                 break;
-            case "PRINT_LECTURER":
+            case PRINT_LECTURER:
                 PrintingLecturer.printLecturer(currentLecturerId);
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 waitForEnter();
                 break;
-            case "UPDATE_LECTURER":
+            case UPDATE_LECTURER:
                 OperationsLecturer.updateLecturer(currentLecturerId);
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 waitForEnter();
                 break;
-            case "CHANGE_LECTURER_PASSWORD":
+            case CHANGE_LECTURER_PASSWORD:
                 OperationsLecturer.changeLecturerPassword(currentLecturerId);
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 waitForEnter();
                 break;
-            case "LIST_ASSIGNED_COURSES":
+            case LIST_ASSIGNED_COURSES:
                 PrintingCourse.listAssignedCourses(currentLecturerId);
 
                 waitForEnter();
                 break;
-            case "LIST_COURSES":
+            case LIST_COURSES:
                 PrintingCourse.listCourse();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 waitForEnter();
-            case "PRINT_COURSE":
+            case PRINT_COURSE:
                 PrintingCourse.printCourse();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 waitForEnter();
             default:
-                menuPosition = "TOP";
+                menuPosition = TOP;
         }
     }
 

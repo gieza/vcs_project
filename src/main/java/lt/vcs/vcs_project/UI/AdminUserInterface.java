@@ -117,27 +117,33 @@ public class AdminUserInterface implements UserInterface {
                 break;
             case LIST_LECTURERS:
                 listLecturer();
+                waitForEnter();
                 menuPosition = LECTURER;
                 break;
             case PRINT_LECTURER:
                 printLecturer();
+                waitForEnter();
                 menuPosition = LECTURER;
                 break;
             case ADD_LECTURER:
                 addLecturer();
+                waitForEnter();
                 menuPosition = LECTURER;
                 break;
             case CHANGE_LECTURER_PASSWORD:
                 changeLecturerPassword();
                 menuPosition = LECTURER;
+                waitForEnter();
                 break;
             case UPDATE_LECTURER:
                 updateLecturer();
                 menuPosition = LECTURER;
+                waitForEnter();
                 break;
             case REMOVE_LECTURER:
                 removeLecturer();
                 menuPosition = LECTURER;
+                waitForEnter();
                 break;
             case LIST_COURSES:
                 PrintingCourse.listCourse();
@@ -186,9 +192,10 @@ public class AdminUserInterface implements UserInterface {
 
     private void printMenuOptions() {
         System.out.printf("\n\nLogged-in User: %s\n\n", currentAccount);
-        System.out.print(menuPosition + " Menu\n============================================\n" +
+        System.out.print(menuPosition.toString() +
+                " Menu\n============================================\n" +
                 "Enter number to select one of the following:\n");
-        System.out.printf(menuOptions.get(menuPosition.toString()));
+        System.out.printf(menuOptions.get(menuPosition));
     }
 
 

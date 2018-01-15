@@ -22,11 +22,11 @@ public class PrintingLecturer extends PrintService {
                 lecturer.getEmail(), lecturer.getGender(), lecturer.getAddress());
     }
 
-    public static void listLecturer(Set<String> StudentList) {
-        if (StudentList == null) return;
+    public static void listLecturer(Set<String> lecturerList) {
+        if (lecturerList == null) return;
 
         System.out.print(LECTURER_LISTING_HEADER);
-        for (String key : StudentList) {
+        for (String key : lecturerList) {
             listLecturer(lecturers.getLecturer(key));
         }
     }
@@ -38,11 +38,11 @@ public class PrintingLecturer extends PrintService {
 
     public static void printLecturer(Lecturer lecturer) {
         System.out.println("Lecturer Details:\n================\n" +
-                "Lecturer ID" + lecturer.getLecturerId() +
+                "\nLecturer ID" + lecturer.getLecturerId() +
                 "\nName:" + lecturer.getFirstName() + " " + lecturer.getSecondName() +
-                "Login Name:" + lecturer.getLoginId() + "Personal number:" + lecturer.getPersonalNumber() +
-                "Date Of Birth:" + lecturer.getDateOfBirth() + "Email:" + lecturer.getEmail() +
-                "Mobile:" + lecturer.getMobileNumber() + "Gender:" + lecturer.getGender() +
+                "\nLogin Name:" + lecturer.getLoginId() + "\nPersonal number:" + lecturer.getPersonalNumber() +
+                "\nDate Of Birth:" + lecturer.getDateOfBirth() + "\nEmail:" + lecturer.getEmail() +
+                "\nMobile:" + lecturer.getMobileNumber() + "\nGender:" + lecturer.getGender() +
                 "\nAddress:" + lecturer.getAddress());
         PrintingCourse.listCourse(lecturer.getReadCourses());
     }

@@ -17,7 +17,7 @@ public class OperationsCourse {
         if (inputArray.length < 4 || inputArray.length > 6) {
             System.out.printf("Course creation failure: input data has too few input fields\n");
             return null;
-        } else {
+        } else { //todo: padaryti taip kad dataformateris neluztu
             return new Course(inputArray[0], inputArray[1],
                     LocalDate.parse(inputArray[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                     inputArray[3],

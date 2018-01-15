@@ -7,11 +7,11 @@ import java.util.Hashtable;
 import static lt.vcs.vcs_project.UI.MenuTitle.*;
 
 public class LecturerUIMenuDefinition {
-    public static final Hashtable<String, String> menuOptions = new Hashtable<>() {{
-        put("TOP", "\t1 Lecturer menu\n\t2 Course menu\n\t9 Logout\nPossible options[1,2,9]:");
-        put("LECTURER", "\t0 Top menu\n\t1 Print Lecturer data\n2 Update Lecturer\n" +
+    public static final Hashtable<MenuTitle, String> menuOptions = new Hashtable<>() {{
+        put(TOP, "\t1 Lecturer menu\n\t2 Course menu\n\t9 Logout\nPossible options[1,2,9]:");
+        put(LECTURER, "\t0 Top menu\n\t1 Print Lecturer data\n2 Update Lecturer\n" +
                 "\t3 Change Lecturer Password\n\t4 List Assigned Courses\nPossible options[0-4]:");
-        put("COURSE", "\t0 Top menu\n\t1 List Courses\n\t2 List Assigned Courses\n\t3 Print Course\n\t\nPossible options[0-3]:");
+        put(COURSE, "\t0 Top menu\n\t1 List Courses\n\t2 List Assigned Courses\n\t3 Print Course\n\t\nPossible options[0-3]:");
     }};
 
     public static final BiHashMap<MenuTitle, String, MenuTitle> menuNavigation

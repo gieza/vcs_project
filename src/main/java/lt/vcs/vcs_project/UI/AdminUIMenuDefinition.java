@@ -6,24 +6,24 @@ import java.util.Hashtable;
 
 import static lt.vcs.vcs_project.UI.MenuTitle.*;
 
-public class AdminUIMenuDefinition {
-    public static final Hashtable<String, String> menuOptions = new Hashtable<>() {{
-        put("TOP", "\t1 Account Menu\n\t2 Student Menu\n\t3 Lecturer menu\n\t4 Course menu\n" +
+class AdminUIMenuDefinition {
+    static final Hashtable<MenuTitle, String> menuOptions = new Hashtable<>() {{
+        put(TOP, "\t1 Account Menu\n\t2 Student Menu\n\t3 Lecturer menu\n\t4 Course menu\n" +
                 "\t9 Logout\nPossible options[1-4,9]:");
-        put("ACCOUNT", "\t0 Top menu\n\t1 List Accounts\n\t2 Print Account\n\t3 Add Account\n" +
+        put(ACCOUNT, "\t0 Top menu\n\t1 List Accounts\n\t2 Print Account\n\t3 Add Account\n" +
                 "\t4 Update Account\n\t5 Change Password \n\t6 Remove account\nPossible options[0-6]:");
-        put("STUDENT", "\t0 Top menu\n\t1 List Students\n\t2 Print Student\n\t3 Add Student\n" +
+        put(STUDENT, "\t0 Top menu\n\t1 List Students\n\t2 Print Student\n\t3 Add Student\n" +
                 "\t4 Update Student\n\t5 Change password\n\t6 Remove Student\n" +
                 "\t7 Assign Student to Course\nPossible options[0-7]:");
-        put("LECTURER", "\t0 Top menu\n\t1 List Lecturers\n\t2 Print Lecturer\n\t3 Add Lecturer\n" +
+        put(LECTURER, "\t0 Top menu\n\t1 List Lecturers\n\t2 Print Lecturer\n\t3 Add Lecturer\n" +
                 "\t4 Update Lecturer\n\t5 Change Password\n\t6 Remove Lecturer\n\t" +
                 "7 Assign Lecturer to course\nPossible options[0-7]:");
-        put("COURSE", "\t0 Top menu\n\t1 List Courses\n\t2 Print Course\n\t3 Add Course\n" +
+        put(COURSE, "\t0 Top menu\n\t1 List Courses\n\t2 Print Course\n\t3 Add Course\n" +
                 "\t4 Update Course\n\t5 Remove Course\n\t6 Assign Course to Student\n" +
                 "\t7 Assign Course to Lecturer\nPossible options[0-7]:");
     }};
 
-    public static final BiHashMap<MenuTitle, String, MenuTitle> menuNavigation =
+    static final BiHashMap<MenuTitle, String, MenuTitle> menuNavigation =
             new BiHashMap<MenuTitle, String, MenuTitle>() {{
                 put(TOP, "1", ACCOUNT);
                 put(TOP, "2", STUDENT);

@@ -73,9 +73,9 @@ public class PrintingStudent extends PrintService {
         System.out.print(STUDENT_UPDATE_HEADER);
         printUnderLineForString(STUDENT_UPDATE_HEADER);
         System.out.printf("%-20s %-25s %-12s %-12s %-25s %-12s %-5s %-40s\n",
-                student.getFirstName(), student.getSecondName() + student.getPersonalNumber() +
-                        student.getDateOfBirth() + student.getEmail() + student.getMobileNumber() +
-                        student.getGender() + student.getAddress());
+                student.getFirstName(), student.getSecondName(), student.getPersonalNumber(),
+                student.getDateOfBirth(), student.getEmail(), student.getMobileNumber(),
+                student.getGender(), student.getAddress());
     }
 
    /* public String printStudentCSV() {

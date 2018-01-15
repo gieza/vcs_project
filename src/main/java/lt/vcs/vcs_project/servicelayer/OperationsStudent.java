@@ -65,7 +65,7 @@ public class OperationsStudent {
         System.out.println(PrintingStudent.UPDATE_STUDENT_DATA_INPUT_TEMPLATE);
         String userInput = ScannerUtils.scanString();
         Student updatedStudent = updateStudentFromCSV(students.getStudent(studentId), userInput);
-        students.setStudent(studentId, updatedStudent);
+        students.updateStudent(updatedStudent);
         //synchronize data in account collection
         accounts.setAccount(updatedStudent.getLoginId(), updatedStudent.makeAccount());
         //print updated values
@@ -84,8 +84,8 @@ public class OperationsStudent {
     public static Student updateStudentFromCSV(Student student, String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length < 8) {
-            System.out.printf("Account update Failure: input data has incorrect number of fields\n");
-            return student;
+            System.out.printf("Student update Failure: input data has incorrect number of fields\n");
+            return student; //no updates are applied --> input student is returned
         } else {
             //address field might contain commas, there anything beyond 8th column should be combined
             String address = "";

@@ -46,7 +46,7 @@ public class LecturerCollection {
 
     public Account getAccount(String lecturerId) {
         if (lecturerCollection.containsKey(lecturerId)) return lecturerCollection.get(lecturerId);
-        System.out.printf("Get student failure: student %s does not exist\n", lecturerId);
+        System.out.printf("Get student failure: lecturer %s does not exist\n", lecturerId);
         return null;
     }
 

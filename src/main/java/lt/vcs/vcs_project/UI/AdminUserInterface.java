@@ -5,6 +5,7 @@ import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuNavigation;
 import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuOptions;
+import static lt.vcs.vcs_project.UI.MenuTitle.*;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.servicelayer.OperationsLecturer.*;
 import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.listLecturer;
@@ -12,7 +13,7 @@ import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.printLecturer;
 import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class AdminUserInterface implements UserInterface {
-    static String menuPosition = "TOP";
+    static MenuTitle menuPosition = TOP;
     static String menuChoice = "";
 
 
@@ -22,12 +23,13 @@ public class AdminUserInterface implements UserInterface {
     public void navigateMenu(String accountId) {
         currentAccount = accountId;
         menuChoice = "";
-        menuPosition = "TOP";
+        menuPosition = TOP;
 
         while (true) {
             printMenuOptions();
             menuChoice = ScannerUtils.scanString();
-            if (menuNavigation.get(menuPosition, menuChoice).equals("LOGOUT"))
+            if (menuNavigation.get(menuPosition, menuChoice) != null &&
+                    menuNavigation.get(menuPosition, menuChoice) == LOGOUT)
                 break;
 
             runDecision(menuPosition, menuChoice);
@@ -38,147 +40,147 @@ public class AdminUserInterface implements UserInterface {
         }
     }
 
-    private void runDecision(String menu, String subMenu) {
-        String decision = menuNavigation.get(menu, subMenu);
+    private void runDecision(MenuTitle menu, String subMenu) {
+        MenuTitle decision = menuNavigation.get(menu, subMenu);
         //System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
-            menuPosition = "TOP";
+            menuPosition = TOP;
             return;
         }
         switch (decision) {
-            case "ACCOUNT":
-            case "STUDENT":
-            case "LECTURER":
-            case "COURSE":
-            case "TOP":
+            case ACCOUNT:
+            case STUDENT:
+            case LECTURER:
+            case COURSE:
+            case TOP:
                 menuPosition = decision;
                 break;
-            case "LIST_ACCOUNTS":
+            case LIST_ACCOUNTS:
                 PrintingAccount.listAccounts();
                 waitForEnter();
-                menuPosition = "ACCOUNT";
+                menuPosition = ACCOUNT;
                 break;
-            case "PRINT_ACCOUNT":
+            case PRINT_ACCOUNT:
                 PrintingAccount.printAccount(currentAccount);
                 waitForEnter();
-                menuPosition = "ACCOUNT";
+                menuPosition = ACCOUNT;
                 break;
-            case "ADD_ACCOUNT":
+            case ADD_ACCOUNT:
                 OperationsAccount.addAccount();
                 waitForEnter();
-                menuPosition = "ACCOUNT";
+                menuPosition = ACCOUNT;
                 break;
-            case "UPDATE_ACCOUNT":
+            case UPDATE_ACCOUNT:
                 OperationsAccount.updateAccount(currentAccount);
                 waitForEnter();
-                menuPosition = "ACCOUNT";
+                menuPosition = ACCOUNT;
                 break;
-            case "CHANGE_ACCOUNT_PASSWORD":
+            case CHANGE_ACCOUNT_PASSWORD:
                 OperationsAccount.changeAccountPassword(currentAccount);
                 waitForEnter();
-                menuPosition = "ACCOUNT";
+                menuPosition = ACCOUNT;
                 break;
-            case "REMOVE_ACCOUNT":
+            case REMOVE_ACCOUNT:
                 OperationsAccount.removeAccount(currentAccount);
                 waitForEnter();
-                menuPosition = "ACCOUNT";
+                menuPosition = ACCOUNT;
                 break;
-            case "LIST_STUDENTS":
+            case LIST_STUDENTS:
                 PrintingStudent.listStudent();
                 waitForEnter();
-                menuPosition = "STUDENT";
+                menuPosition = STUDENT;
                 break;
-            case "PRINT_STUDENT":
+            case PRINT_STUDENT:
                 PrintingStudent.printStudent();
                 waitForEnter();
-                menuPosition = "STUDENT";
+                menuPosition = STUDENT;
                 break;
-            case "ADD_STUDENT":
+            case ADD_STUDENT:
                 OperationsStudent.addStudent();
                 waitForEnter();
-                menuPosition = "STUDENT";
+                menuPosition = STUDENT;
                 break;
-            case "UPDATE_STUDENT":
+            case UPDATE_STUDENT:
                 OperationsStudent.updateStudent();
                 waitForEnter();
-                menuPosition = "STUDENT";
+                menuPosition = STUDENT;
                 break;
-            case "CHANGE_STUDENT_PASSWORD":
+            case CHANGE_STUDENT_PASSWORD:
                 OperationsStudent.changeStudentPassword();
                 waitForEnter();
-                menuPosition = "STUDENT";
+                menuPosition = STUDENT;
                 break;
-            case "REMOVE_STUDENT":
+            case REMOVE_STUDENT:
                 OperationsStudent.removeStudent();
-                menuPosition = "STUDENT";
+                menuPosition = STUDENT;
                 waitForEnter();
                 break;
-            case "LIST_LECTURERS":
+            case LIST_LECTURERS:
                 listLecturer();
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 break;
-            case "PRINT_LECTURER":
+            case PRINT_LECTURER:
                 printLecturer();
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 break;
-            case "ADD_LECTURER":
+            case ADD_LECTURER:
                 addLecturer();
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 break;
-            case "CHANGE_LECTURER_PASSWORD":
+            case CHANGE_LECTURER_PASSWORD:
                 changeLecturerPassword();
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 break;
-            case "UPDATE_LECTURER":
+            case UPDATE_LECTURER:
                 updateLecturer();
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 break;
-            case "REMOVE_LECTURERS":
+            case REMOVE_LECTURER:
                 removeLecturer();
-                menuPosition = "LECTURER";
+                menuPosition = LECTURER;
                 break;
-            case "LIST_COURSES":
+            case LIST_COURSES:
                 PrintingCourse.listCourse();
                 waitForEnter();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 break;
-            case "PRINT_COURSE":
+            case PRINT_COURSE:
                 PrintingCourse.printCourse();
                 waitForEnter();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 break;
-            case "ADD_COURSE":
+            case ADD_COURSE:
                 OperationsCourse.addCourse();
                 waitForEnter();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 break;
-            case "UPDATE_COURSE":
+            case UPDATE_COURSE:
                 OperationsCourse.updateCourse();
                 waitForEnter();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 break;
-            case "REMOVE_COURSE":
+            case REMOVE_COURSE:
                 OperationsCourse.removeCourse();
                 waitForEnter();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 break;
-            case "ASSIGN_COURSE_STUDENT":
+            case ASSIGN_COURSE_STUDENT:
                 OperationsStudent.assignAnyCourse2Student();
                 waitForEnter();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 break;
-            case "ASSIGN_COURSE_LECTURER":
+            case ASSIGN_COURSE_LECTURER:
                 OperationsLecturer.assignCourse2Lecturer();
                 waitForEnter();
-                menuPosition = "COURSE";
+                menuPosition = COURSE;
                 break;
 
-            case "loadsomedata":
+            case loadsomedata:
                 addSomeData();
-                menuPosition = "COURSE";
+                menuPosition = TOP;
                 break;
             default:
-                menuPosition = "TOP";
+                menuPosition = TOP;
         }
     }
 
@@ -186,7 +188,7 @@ public class AdminUserInterface implements UserInterface {
         System.out.print("Logged-in User: " + currentAccount);
         System.out.print(menuPosition + " Menu\n============================================\n" +
                 "Enter number to select one of the following:\n");
-        System.out.printf(menuOptions.get(menuPosition));
+        System.out.printf(menuOptions.get(menuPosition.toString()));
     }
 
 

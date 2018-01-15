@@ -1,16 +1,16 @@
 package lt.vcs.vcs_project.datalayer;
 
-import lt.vcs.vcs_project.utils.StringDateConversion;
-
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
+
+import static java.time.LocalDate.now;
 
 public class Course implements Serializable {
     private String courseCode;
     private String title;
     private String description;
-    private Date startDate;
+    private LocalDate startDate;
     private String credit;
     private String lecturerCode;
     private Integer enrolledStudentCount;
@@ -18,7 +18,7 @@ public class Course implements Serializable {
 
     private final Integer MAX_STUDENTS_IN_COURSE = 12;
 
-    public Course(String courseCode, String title, Date startDate, String credit,
+    public Course(String courseCode, String title, LocalDate startDate, String credit,
                   String lecturerCode, String description) {
         this.courseCode = courseCode;
         this.title = title;
@@ -52,7 +52,8 @@ public class Course implements Serializable {
 
     public boolean available() {
 
-        return (this.enrolledStudentCount < MAX_STUDENTS_IN_COURSE && (this.startDate.after(new Date())));
+        return (this.enrolledStudentCount < MAX_STUDENTS_IN_COURSE &&
+                (this.startDate.isAfter(now())));
     }
 
     public void enrollStudent(String studentId) {
@@ -99,19 +100,20 @@ public class Course implements Serializable {
         this.description = description;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
     public String getStartDateAsString() {
         return this.startDate.toString();
     }
-    public void setStartDate(Date startDate) {
+
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
     public void setStartDate(String startDate) {
-        this.startDate = StringDateConversion.String2Date(startDate);
+        this.startDate = LocalDate.parse(startDate);
     }
 
     public String getCredit() {

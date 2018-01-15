@@ -2,8 +2,8 @@ package lt.vcs.vcs_project.servicelayer;
 
 import lt.vcs.vcs_project.datalayer.Course;
 import lt.vcs.vcs_project.utils.ScannerUtils;
-import lt.vcs.vcs_project.utils.StringDateConversion;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
@@ -18,7 +18,7 @@ public class OperationsCourse {
             return null;
         } else {
             return new Course(inputArray[0], inputArray[1],
-                    StringDateConversion.String2Date(inputArray[3]), inputArray[2],
+                    LocalDate.parse(inputArray[3]), inputArray[2],
                     inputArray.length > 4 ? inputArray[4] : "",
                     inputArray.length > 5 ? inputArray[5] : "");
         }

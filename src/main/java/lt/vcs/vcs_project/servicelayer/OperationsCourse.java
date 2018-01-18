@@ -3,12 +3,11 @@ package lt.vcs.vcs_project.servicelayer;
 import lt.vcs.vcs_project.datalayer.Course;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
 import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
+import static lt.vcs.vcs_project.utils.DateConversionUtils.parseLocalDate;
 
 public class OperationsCourse {
 
@@ -17,9 +16,13 @@ public class OperationsCourse {
         if (inputArray.length < 4 || inputArray.length > 6) {
             System.out.printf("Course creation failure: input data has too few input fields\n");
             return null;
-        } else { //todo: padaryti taip kad dataformateris neluztu
+        } else {
+            if (parseLocalDate(inputArray[2]) == null) {
+                System.out.println("Date is provided in wrong format, try \"yyyy-MM-dd\" instead");
+                return null;
+            }
             return new Course(inputArray[0], inputArray[1],
-                    LocalDate.parse(inputArray[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    parseLocalDate(inputArray[2]),
                     inputArray[3],
                     inputArray.length > 4 ? inputArray[4] : "",
                     inputArray.length > 5 ? inputArray[5] : "");

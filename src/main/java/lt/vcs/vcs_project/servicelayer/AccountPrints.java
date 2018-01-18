@@ -7,7 +7,7 @@ import java.util.Set;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.datalayer.Role.ADMIN;
 
-public class PrintingAccount extends PrintService {
+public class AccountPrints extends PrintService {
 
     public static final String NEW_ACCOUNT_DATA_INPUT_TEMPLATE = "Login,Password,First name,Second name";
     public static final String UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE = "First name,Second name";
@@ -41,7 +41,7 @@ public class PrintingAccount extends PrintService {
     }
 
     public static void printAccount(String currentAccountId) {
-        String selectedAccount = OperationsAccount.selectAccount(currentAccountId);
+        String selectedAccount = AccountOperations.selectAccount(currentAccountId);
         printAccount(accounts.getAccount(selectedAccount));
     }
 

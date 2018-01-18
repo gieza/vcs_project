@@ -1,6 +1,6 @@
 package lt.vcs.vcs_project.datalayer;
 
-import lt.vcs.vcs_project.servicelayer.OperationsAccount;
+import lt.vcs.vcs_project.servicelayer.AccountOperations;
 import org.junit.Test;
 
 import static lt.vcs.vcs_project.datalayer.Role.ADMIN;
@@ -12,9 +12,9 @@ public class AccountTest {
     //private Account account = new Account();
     public Account AdminAccount1 = new Account("admin1", "admin", "Adminu", "Adminas", ADMIN);
     private Account AdminAccount1_onlyMandatory = new Account("admin1", "admin", "", "", ADMIN);
-    private Account AdminAccount1_CSV = OperationsAccount.makeAccountFromCSV("admin1,admin,Adminu,Adminas,ADMIN");
-    private Account AdminAccount1_CSV_onlyMandatory = OperationsAccount.makeAccountFromCSV("admin1,admin");
-    private Account AdminAccount1_CSV_tooShort = OperationsAccount.makeAccountFromCSV("");
+    private Account AdminAccount1_CSV = AccountOperations.makeAccountFromCSV("admin1,admin,Adminu,Adminas,ADMIN");
+    private Account AdminAccount1_CSV_onlyMandatory = AccountOperations.makeAccountFromCSV("admin1,admin");
+    private Account AdminAccount1_CSV_tooShort = AccountOperations.makeAccountFromCSV("");
     private String AdminAccount1_CSV_asStudent = "admin1,admin,Adminu,Adminas,ADMIN,123";
 
     //private Account defaultAdminAccount2 = new Account("admin2", "admin2", "Adminas", "Admintauskas", Role.ADMIN);

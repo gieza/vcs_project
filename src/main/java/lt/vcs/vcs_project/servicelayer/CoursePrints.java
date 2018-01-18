@@ -6,7 +6,7 @@ import java.util.Set;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.*;
 
-public class PrintingCourse extends PrintService {
+public class CoursePrints extends PrintService {
     public static final String COURSE_HEADER_CSV = "courseCode,Title,startDate[yyyy-MM-dd]," +
             "Credit,lecturerCode,Description\n";
 
@@ -60,7 +60,7 @@ public class PrintingCourse extends PrintService {
                 "\nEmail:" + course.getLecturerId() +
                 "\nLecturer Name:" +//todo: prideti Lecturer name
                 "\n# of Enrolled Students:" + course.getEnrolledStudentCount());
-        PrintingStudent.listStudent(course.getEnrolledStudents());
+        StudentPrints.listStudent(course.getEnrolledStudents());
     }
 
     public static void printCourse(String CourseId) {
@@ -68,7 +68,7 @@ public class PrintingCourse extends PrintService {
     }
 
     public static void printCourse() {
-        String selectedCourse = OperationsCourse.selectCourse();
+        String selectedCourse = CourseOperations.selectCourse();
         if (selectedCourse != null) {
             printCourse(selectedCourse);
         }

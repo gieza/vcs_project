@@ -9,7 +9,7 @@ import java.util.Set;
 import static lt.vcs.vcs_project.datalayer.DataLayer.*;
 import static lt.vcs.vcs_project.servicelayer.PrintService.askForNewPassword;
 
-public class OperationsLecturer {
+public class LecturerOperations {
 
     public static Lecturer makeLecturerFromCSV(String csv) {
         String[] inputArray = csv.split(",");
@@ -50,7 +50,7 @@ public class OperationsLecturer {
 
     public static void addLecturer() {
         System.out.printf("\nEnter new Lecturer data in CommaSeparatedValue format\nfollowing template: %s\n",
-                PrintingLecturer.LECTURER_HEADER_CSV);
+                LecturerPrints.LECTURER_HEADER_CSV);
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
         addLecturer(userInput);
@@ -58,11 +58,11 @@ public class OperationsLecturer {
 
     public static void updateLecturer(String lecturerId) {
         System.out.printf("\nCurrent Lecturer %s values are:\n", lecturerId);
-        PrintingLecturer.printLecturerForUpdate(lecturers.getLecturer(lecturerId));
+        LecturerPrints.printLecturerForUpdate(lecturers.getLecturer(lecturerId));
 
         System.out.println("\n\nEnter new Lecturer data in CommaSeparatedValue format" +
                 "\nfollowing template:");
-        System.out.println(PrintingLecturer.UPDATE_LECTURER_DATA_INPUT_TEMPLATE);
+        System.out.println(LecturerPrints.UPDATE_LECTURER_DATA_INPUT_TEMPLATE);
         String userInput = ScannerUtils.scanString();
         Lecturer updatedLecturer = updateLecturerFromCSV(lecturers.getLecturer(lecturerId), userInput);
         lecturers.updateLecturer(updatedLecturer);
@@ -70,7 +70,7 @@ public class OperationsLecturer {
         accounts.updateAccount(updatedLecturer.makeAccount());
         //print updated values
         System.out.println("\nNew Values Are:");
-        PrintingLecturer.printLecturerForUpdate(lecturers.getLecturer(lecturerId));
+        LecturerPrints.printLecturerForUpdate(lecturers.getLecturer(lecturerId));
 
     }
 
@@ -128,7 +128,7 @@ public class OperationsLecturer {
     }
 
     public static void assignCourse2Lecturer() {
-        String selectedCourse = OperationsCourse.selectCourse();
+        String selectedCourse = CourseOperations.selectCourse();
         String selectedLecturer = selectLecturer();
         if (selectedCourse != null && selectedLecturer != null) {
             courses.getCourse(selectedCourse).setLecturerId(selectedLecturer);

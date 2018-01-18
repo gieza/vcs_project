@@ -9,7 +9,7 @@ import static lt.vcs.vcs_project.datalayer.DataLayer.courses;
 import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
 import static lt.vcs.vcs_project.utils.DateConversionUtils.parseLocalDate;
 
-public class OperationsCourse {
+public class CourseOperations {
 
     public static Course makeCourseFromCSV(String csv) {
         String[] inputArray = csv.split(",");
@@ -43,7 +43,7 @@ public class OperationsCourse {
 
     public static void addCourse() {
         System.out.printf("\nEnter new Course data in CommaSeparatedValue format\nfollowing template: %s\n",
-                PrintingCourse.COURSE_HEADER_CSV);
+                CoursePrints.COURSE_HEADER_CSV);
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
         addCourse(userInput);
@@ -52,22 +52,22 @@ public class OperationsCourse {
 
     public static void updateCourse(String courseCode) {
         System.out.printf("\nCurrent Student %s values are:\n", courseCode);
-        PrintingCourse.printCourseForUpdate(courses.getCourse(courseCode));
+        CoursePrints.printCourseForUpdate(courses.getCourse(courseCode));
 
         System.out.println("\n\nEnter new Course data in CommaSeparatedValue format" +
                 "\nfollowing template:");
-        System.out.println(PrintingCourse.UPDATE_COURSE_DATA_INPUT_TEMPLATE);
+        System.out.println(CoursePrints.UPDATE_COURSE_DATA_INPUT_TEMPLATE);
         String userInput = ScannerUtils.scanString();
         Course updatedCourse = updateCourseFromCSV(courses.getCourse(courseCode), userInput);
         courses.updateCourse(updatedCourse);
 
         //print updated values
         System.out.println("\nNew Values Are:");
-        PrintingCourse.printCourseForUpdate(courses.getCourse(courseCode));
+        CoursePrints.printCourseForUpdate(courses.getCourse(courseCode));
     }
 
     public static void updateCourse() {
-        String selectedCourse = OperationsCourse.selectCourse();
+        String selectedCourse = CourseOperations.selectCourse();
         if (selectedCourse != null) {
             updateCourse(selectedCourse);
         }
@@ -94,7 +94,7 @@ public class OperationsCourse {
         lecturers.removeCourse(lecturerId, selectedCourse);
         //remove course from Student collection
         Set<String> studentList = courses.getCourse(selectedCourse).getEnrolledStudents();
-        OperationsStudent.removeCourse(studentList, selectedCourse);
+        StudentOperations.removeCourse(studentList, selectedCourse);
         //remove course itself
         courses.removeCourse(selectedCourse);
     }

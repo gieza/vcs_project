@@ -8,7 +8,7 @@ import java.util.Set;
 import static lt.vcs.vcs_project.datalayer.DataLayer.*;
 import static lt.vcs.vcs_project.servicelayer.PrintService.askForNewPassword;
 
-public class OperationsStudent {
+public class StudentOperations {
 
 
     public static Student makeStudentFromCSV(String csv) {
@@ -50,7 +50,7 @@ public class OperationsStudent {
 
     public static void addStudent() {
         System.out.printf("\nEnter new Student data in CommaSeparatedValue format\nfollowing template: %s\n",
-                PrintingStudent.STUDENT_HEADER_CSV);
+                StudentPrints.STUDENT_HEADER_CSV);
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
         addStudent(userInput);
@@ -58,11 +58,11 @@ public class OperationsStudent {
 
     public static void updateStudent(String studentId) {
         System.out.printf("\nCurrent Student %s values are:\n", studentId);
-        PrintingStudent.printStudentForUpdate(students.getStudent(studentId));
+        StudentPrints.printStudentForUpdate(students.getStudent(studentId));
 
         System.out.println("\n\nEnter new Student data in CommaSeparatedValue format" +
                 "\nfollowing template:");
-        System.out.println(PrintingStudent.UPDATE_STUDENT_DATA_INPUT_TEMPLATE);
+        System.out.println(StudentPrints.UPDATE_STUDENT_DATA_INPUT_TEMPLATE);
         String userInput = ScannerUtils.scanString();
         Student updatedStudent = updateStudentFromCSV(students.getStudent(studentId), userInput);
         students.updateStudent(updatedStudent);
@@ -70,12 +70,12 @@ public class OperationsStudent {
         accounts.updateAccount(updatedStudent.makeAccount());
         //print updated values
         System.out.println("\nNew Values Are:");
-        PrintingStudent.printStudentForUpdate(students.getStudent(studentId));
+        StudentPrints.printStudentForUpdate(students.getStudent(studentId));
 
     }
 
     public static void updateStudent() {
-        String selectedStudent = OperationsStudent.selectStudent();
+        String selectedStudent = StudentOperations.selectStudent();
         if (selectedStudent != null) {
             updateStudent(selectedStudent);
         }
@@ -115,15 +115,15 @@ public class OperationsStudent {
     }
 
     static public void changeStudentPassword() {
-        String selectedStudent = OperationsStudent.selectStudent();
+        String selectedStudent = StudentOperations.selectStudent();
         changeStudentPassword(selectedStudent);
     }
 
     static public void removeStudent() {
-        String selectedStudent = OperationsStudent.selectStudent();
+        String selectedStudent = StudentOperations.selectStudent();
         //remove student from courses
         Set<String> courseList = students.getStudent(selectedStudent).getEnrolledCouses();
-        OperationsCourse.deEnrollStudent(courseList, selectedStudent);
+        CourseOperations.deEnrollStudent(courseList, selectedStudent);
         //remove student itself
         accounts.removeAccount(students.getLoginId(selectedStudent));
         students.removeStudent(selectedStudent);
@@ -142,14 +142,14 @@ public class OperationsStudent {
     }
 
     public static void assignAnyCourse2Student() {
-        String selectedCourse = OperationsCourse.selectCourse();
-        String selectedStudent = OperationsStudent.selectStudent();
+        String selectedCourse = CourseOperations.selectCourse();
+        String selectedStudent = StudentOperations.selectStudent();
         courses.enrollStudent(selectedCourse, selectedStudent);
         students.addCourse(selectedStudent, selectedCourse);
     }
 
     public static void assignAvailableCourse2Student(String studentId) {
-        String selectedCourse = OperationsCourse.selectCourse();
+        String selectedCourse = CourseOperations.selectCourse();
         if (courses.getCourse(selectedCourse).available()) {
             courses.enrollStudent(selectedCourse, studentId);
             students.addCourse(studentId, selectedCourse);

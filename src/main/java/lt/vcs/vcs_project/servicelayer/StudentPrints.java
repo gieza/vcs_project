@@ -6,7 +6,7 @@ import java.util.Set;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.students;
 
-public class PrintingStudent extends PrintService {
+public class StudentPrints extends PrintService {
     public static final String STUDENT_HEADER_CSV = "Login,Password,First name,Second name,StudentId," +
             "personalNumber,dateOfBirth,email,mobile,gender,address\n";
 
@@ -46,7 +46,7 @@ public class PrintingStudent extends PrintService {
                 "\nDate Of Birth:" + student.getDateOfBirth() + "\nEmail:" + student.getEmail() +
                 "\nMobile:" + student.getMobileNumber() + "\nGender:" + student.getGender() +
                 "\nAddress:" + student.getAddress());
-        PrintingCourse.listCourse(student.getEnrolledCouses());
+        CoursePrints.listCourse(student.getEnrolledCouses());
     }
 
     public static void printStudent(String studentId) {
@@ -54,7 +54,7 @@ public class PrintingStudent extends PrintService {
     }
 
     public static void printStudent() {
-        String selectedStudent = OperationsStudent.selectStudent();
+        String selectedStudent = StudentOperations.selectStudent();
         if (selectedStudent != null) {
             printStudent(selectedStudent);
         }

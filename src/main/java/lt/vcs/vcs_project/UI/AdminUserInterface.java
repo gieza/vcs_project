@@ -7,9 +7,9 @@ import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuNavigation;
 import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuOptions;
 import static lt.vcs.vcs_project.UI.MenuTitle.*;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
-import static lt.vcs.vcs_project.servicelayer.OperationsLecturer.*;
-import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.listLecturer;
-import static lt.vcs.vcs_project.servicelayer.PrintingLecturer.printLecturer;
+import static lt.vcs.vcs_project.servicelayer.LecturerOperations.*;
+import static lt.vcs.vcs_project.servicelayer.LecturerPrints.listLecturer;
+import static lt.vcs.vcs_project.servicelayer.LecturerPrints.printLecturer;
 import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class AdminUserInterface implements UserInterface {
@@ -56,62 +56,62 @@ public class AdminUserInterface implements UserInterface {
                 menuPosition = decision;
                 break;
             case LIST_ACCOUNTS:
-                PrintingAccount.listAccounts();
+                AccountPrints.listAccounts();
                 waitForEnter();
                 menuPosition = ACCOUNT;
                 break;
             case PRINT_ACCOUNT:
-                PrintingAccount.printAccount(currentAccount);
+                AccountPrints.printAccount(currentAccount);
                 waitForEnter();
                 menuPosition = ACCOUNT;
                 break;
             case ADD_ACCOUNT:
-                OperationsAccount.addAccount();
+                AccountOperations.addAccount();
                 waitForEnter();
                 menuPosition = ACCOUNT;
                 break;
             case UPDATE_ACCOUNT:
-                OperationsAccount.updateAccount(currentAccount);
+                AccountOperations.updateAccount(currentAccount);
                 waitForEnter();
                 menuPosition = ACCOUNT;
                 break;
             case CHANGE_ACCOUNT_PASSWORD:
-                OperationsAccount.changeAccountPassword(currentAccount);
+                AccountOperations.changeAccountPassword(currentAccount);
                 waitForEnter();
                 menuPosition = ACCOUNT;
                 break;
             case REMOVE_ACCOUNT:
-                OperationsAccount.removeAccount(currentAccount);
+                AccountOperations.removeAccount(currentAccount);
                 waitForEnter();
                 menuPosition = ACCOUNT;
                 break;
             case LIST_STUDENTS:
-                PrintingStudent.listStudent();
+                StudentPrints.listStudent();
                 waitForEnter();
                 menuPosition = STUDENT;
                 break;
             case PRINT_STUDENT:
-                PrintingStudent.printStudent();
+                StudentPrints.printStudent();
                 waitForEnter();
                 menuPosition = STUDENT;
                 break;
             case ADD_STUDENT:
-                OperationsStudent.addStudent();
+                StudentOperations.addStudent();
                 waitForEnter();
                 menuPosition = STUDENT;
                 break;
             case UPDATE_STUDENT:
-                OperationsStudent.updateStudent();
+                StudentOperations.updateStudent();
                 waitForEnter();
                 menuPosition = STUDENT;
                 break;
             case CHANGE_STUDENT_PASSWORD:
-                OperationsStudent.changeStudentPassword();
+                StudentOperations.changeStudentPassword();
                 waitForEnter();
                 menuPosition = STUDENT;
                 break;
             case REMOVE_STUDENT:
-                OperationsStudent.removeStudent();
+                StudentOperations.removeStudent();
                 menuPosition = STUDENT;
                 waitForEnter();
                 break;
@@ -146,37 +146,37 @@ public class AdminUserInterface implements UserInterface {
                 waitForEnter();
                 break;
             case LIST_COURSES:
-                PrintingCourse.listCourse();
+                CoursePrints.listCourse();
                 waitForEnter();
                 menuPosition = COURSE;
                 break;
             case PRINT_COURSE:
-                PrintingCourse.printCourse();
+                CoursePrints.printCourse();
                 waitForEnter();
                 menuPosition = COURSE;
                 break;
             case ADD_COURSE:
-                OperationsCourse.addCourse();
+                CourseOperations.addCourse();
                 waitForEnter();
                 menuPosition = COURSE;
                 break;
             case UPDATE_COURSE:
-                OperationsCourse.updateCourse();
+                CourseOperations.updateCourse();
                 waitForEnter();
                 menuPosition = COURSE;
                 break;
             case REMOVE_COURSE:
-                OperationsCourse.removeCourse();
+                CourseOperations.removeCourse();
                 waitForEnter();
                 menuPosition = COURSE;
                 break;
             case ASSIGN_COURSE_STUDENT:
-                OperationsStudent.assignAnyCourse2Student();
+                StudentOperations.assignAnyCourse2Student();
                 waitForEnter();
                 menuPosition = COURSE;
                 break;
             case ASSIGN_COURSE_LECTURER:
-                OperationsLecturer.assignCourse2Lecturer();
+                LecturerOperations.assignCourse2Lecturer();
                 waitForEnter();
                 menuPosition = COURSE;
                 break;
@@ -201,12 +201,12 @@ public class AdminUserInterface implements UserInterface {
 
 
     public static void addSomeData() {
-        OperationsAccount.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
-        OperationsAccount.addAccount("admin3,admin,Pekka,Peltonen");
-        OperationsStudent.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
-        OperationsStudent.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
-        OperationsStudent.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
-        OperationsStudent.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+        AccountOperations.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
+        AccountOperations.addAccount("admin3,admin,Pekka,Peltonen");
+        StudentOperations.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
+        StudentOperations.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
+        StudentOperations.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
+        StudentOperations.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
 
     }
 }

@@ -1,7 +1,7 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.servicelayer.OperationsAccount;
-import lt.vcs.vcs_project.servicelayer.PrintingAccount;
+import lt.vcs.vcs_project.servicelayer.AccountOperations;
+import lt.vcs.vcs_project.servicelayer.AccountPrints;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
@@ -37,8 +37,8 @@ public class CommandLineUI {
             System.out.print("Password: ");
             String password = ScannerUtils.scanString();
 
-            if (OperationsAccount.authenticate(username, password)) {
-                PrintingAccount.printGreetings(username);
+            if (AccountOperations.authenticate(username, password)) {
+                AccountPrints.printGreetings(username);
                 return username;
             }
             System.out.println("Login failed, please try again");

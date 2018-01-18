@@ -8,7 +8,7 @@ import static lt.vcs.vcs_project.datalayer.Role.ADMIN;
 import static lt.vcs.vcs_project.servicelayer.PrintService.askForNewPassword;
 
 
-public class OperationsAccount {
+public class AccountOperations {
 
 
     public static Account makeAccountFromCSV(String csv) {
@@ -50,7 +50,7 @@ public class OperationsAccount {
 
     static public void addAccount() {
         System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format" +
-                "\nfollowing template: %s\n:", PrintingAccount.NEW_ACCOUNT_DATA_INPUT_TEMPLATE);
+                "\nfollowing template: %s\n:", AccountPrints.NEW_ACCOUNT_DATA_INPUT_TEMPLATE);
         String userInput = ScannerUtils.scanString() + ",ADMIN";
 
         addAccount(userInput);
@@ -61,16 +61,16 @@ public class OperationsAccount {
 
         System.out.printf("\nCurrent Account %s values are:\n", accountIdForUpdate);
         Account accountForUpdate = accounts.getAccount(accountIdForUpdate);
-        PrintingAccount.printAccountForUpdate(accountForUpdate);
+        AccountPrints.printAccountForUpdate(accountForUpdate);
 
         System.out.println("\n\nEnter new Admin Account data in CommaSeparatedValue format" +
                 "\nfollowing template:");
-        System.out.println(PrintingAccount.UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE);
+        System.out.println(AccountPrints.UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE);
         String userInput = ScannerUtils.scanString();
-        accounts.updateAccount(OperationsAccount.updateAccountFromCSV(accountForUpdate, userInput));
+        accounts.updateAccount(AccountOperations.updateAccountFromCSV(accountForUpdate, userInput));
         //print updated values
         System.out.println("\nNew Values Are:");
-        PrintingAccount.printAccountForUpdate(accounts.getAccount(accountIdForUpdate));
+        AccountPrints.printAccountForUpdate(accounts.getAccount(accountIdForUpdate));
     }
 
 

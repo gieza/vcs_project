@@ -3,6 +3,7 @@ package lt.vcs.vcs_project.datalayer;
 import lt.vcs.vcs_project.utils.IOObjectStreamUtils;
 
 import java.io.FileNotFoundException;
+import java.io.InvalidClassException;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -48,7 +49,10 @@ public class StudentCollection {
             studentCollection = (Hashtable<String, Student>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
         } catch (FileNotFoundException e) {
             System.out.printf("File %s not found. Creating new one.\n", fileName);
+        } catch (InvalidClassException e) {
+            System.out.printf("File %s is corrupt. \n", fileName);
         }
+
 
     }
 

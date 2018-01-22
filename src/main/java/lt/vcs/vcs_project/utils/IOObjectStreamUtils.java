@@ -1,25 +1,21 @@
 package lt.vcs.vcs_project.utils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class IOObjectStreamUtils {
-    public static Object readFirstObjectFromFile(String fileName) throws FileNotFoundException {
+    public static Object readFirstObjectFromFile(String fileName) throws FileNotFoundException, InvalidClassException {
         try (
                 ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))
         ) {
             return inputStream.readObject();
         }  catch (FileNotFoundException e) {
             throw new FileNotFoundException();
+        } catch (InvalidClassException e) {
+            throw new InvalidClassException(e.getMessage());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
-//todo: InvalidClassException
     }
 
     public static void writeObjectToFile(String fileName, Object o) {

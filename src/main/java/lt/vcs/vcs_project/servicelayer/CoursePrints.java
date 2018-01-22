@@ -58,7 +58,7 @@ public class CoursePrints extends PrintService {
                 "\nStartDate:" + course.getStartDate() +
                 "\nCredit:" + course.getCredit() +
                 "\nEmail:" + course.getLecturerId() +
-                "\nLecturer Name:" +//todo: prideti Lecturer name
+                "\nLecturer Name:" +
                 "\n# of Enrolled Students:" + course.getEnrolledStudentCount());
         StudentPrints.listStudent(course.getEnrolledStudents());
     }

@@ -19,7 +19,7 @@ public class IOObjectStreamUtils {
             e.printStackTrace();
             return null;
         }
-
+//todo: InvalidClassException
     }
 
     public static void writeObjectToFile(String fileName, Object o) {

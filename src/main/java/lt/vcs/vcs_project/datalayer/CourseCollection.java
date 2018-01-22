@@ -25,7 +25,7 @@ public class CourseCollection {
             courseCollection.put(course.getCourseCode(), course);
             writeToFile();
         } else {
-            System.out.printf("Student addition failure: Lecturer %s already exists\n", course.getCourseCode());
+            System.out.printf("Course addition failure: Course %s already exists\n", course.getCourseCode());
         }
     }
 
@@ -65,7 +65,7 @@ public class CourseCollection {
         try {
             courseCollection = (Hashtable<String, Course>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
         } catch (FileNotFoundException e) {
-            System.out.printf("%s not found in Account Collection \n", fileName);
+            System.out.printf("File %s not found. Creating new one.\n", fileName);
         }
 
     }

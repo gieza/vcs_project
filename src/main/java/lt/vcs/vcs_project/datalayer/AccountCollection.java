@@ -54,7 +54,7 @@ public class AccountCollection {
         return null;
     }
 
-    public boolean containsKey(String accountId) {
+    public boolean accountExists(String accountId) {
         return accountCollection.containsKey(accountId);
     }
 
@@ -78,7 +78,7 @@ public class AccountCollection {
         try {
             accountCollection = (Hashtable<String, Account>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
         } catch (FileNotFoundException e) {
-            System.out.printf("%s not found in Account Collection \n", fileName);
+            System.out.printf("File %s not found. Creating new one.\n", fileName);
         }
     }
 

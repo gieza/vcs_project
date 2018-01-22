@@ -13,7 +13,7 @@ public class AccountOperations {
 
     public static Account makeAccountFromCSV(String csv) {
         String[] inputArray = csv.split(",");
-        if (inputArray.length < 2 || inputArray.length > 5) {
+        if (inputArray.length < 2 || inputArray.length > 4) {
             System.out.printf("Account creation Failure: input data has incorrect number of fields\n");
             return null;
         } else {
@@ -37,7 +37,7 @@ public class AccountOperations {
     }
 
     public static boolean authenticate(String accountId, String password) {
-        if (!accounts.containsKey(accountId)) return false;
+        if (!accounts.accountExists(accountId)) return false;
         return accounts.getAccount(accountId).authenticate(password);
     }
 

@@ -13,7 +13,7 @@ public class CourseOperations {
 
     public static Course makeCourseFromCSV(String csv) {
         String[] inputArray = csv.split(",");
-        if (inputArray.length < 4 || inputArray.length > 6) {
+        if (inputArray.length < 4) {
             System.out.printf("Course creation failure: input data has too few input fields\n");
             return null;
         } else {
@@ -21,11 +21,17 @@ public class CourseOperations {
                 System.out.println("Date is provided in wrong format, try \"yyyy-MM-dd\" instead");
                 return null;
             }
+            String description = "";
+            if (inputArray.length >= 6) {
+                for (int i = 5; i < inputArray.length; i++)
+                    description = description + inputArray[i] + ",";
+                description = description.substring(0, description.length() - 1);
+            }
             return new Course(inputArray[0], inputArray[1],
                     parseLocalDate(inputArray[2]),
                     inputArray[3],
                     inputArray.length > 4 ? inputArray[4] : "",
-                    inputArray.length > 5 ? inputArray[5] : "");
+                    inputArray.length > 5 ? description : "");
         }
     }
 
@@ -75,14 +81,18 @@ public class CourseOperations {
 
     public static Course updateCourseFromCSV(Course course, String csv) {
         String[] inputArray = csv.split(",");
-        if (inputArray.length != 4) {
+        if (inputArray.length < 4) {
             System.out.printf("Course update Failure: input data has incorrect number of fields\n");
             return course; //no updates are applied --> input course is returned
         } else {
+            String description = "";
+            for (int i = 3; i < inputArray.length; i++)
+                description = description + inputArray[i] + ",";
+            description = description.substring(0, description.length() - 1);
             course.setTitle(inputArray[0]);
             course.setStartDate(inputArray[1]);
             course.setCredit(inputArray[2]);
-            course.setDescription(inputArray[3]);
+            course.setDescription(description);
             return course;
         }
     }

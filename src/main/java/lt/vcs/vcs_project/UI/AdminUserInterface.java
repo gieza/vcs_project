@@ -34,7 +34,7 @@ public class AdminUserInterface implements UserInterface {
 
             runDecision(menuPosition, menuChoice);
             //check if current account still exists, otherwise logout - account might have been removed
-            if (!accounts.containsKey(currentAccount)) {
+            if (!accounts.accountExists(currentAccount)) {
                 break;
             }
         }

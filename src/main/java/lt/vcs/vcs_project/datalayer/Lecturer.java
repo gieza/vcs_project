@@ -13,8 +13,8 @@ public class Lecturer extends Account {
     private String address;
     private HashSet<String> readCourses;
 
-    public Lecturer(String loginId, String firstName, String secondName, String password, String lecturerId, String personalNumber, String dateOfBirth, String email, String mobileNumber, String gender, String address) {
-        super(loginId, firstName, secondName, password, Role.LECTURER);
+    public Lecturer(String loginId, String password, String firstName, String secondName, String lecturerId, String personalNumber, String dateOfBirth, String email, String mobileNumber, String gender, String address) {
+        super(loginId, password, firstName, secondName, Role.LECTURER, lecturerId);
         this.lecturerId = lecturerId;
         this.personalNumber = personalNumber;
         this.dateOfBirth = dateOfBirth;
@@ -104,5 +104,9 @@ public class Lecturer extends Account {
 
     public HashSet<String> getReadCourses() {
         return this.readCourses;
+    }
+
+    public boolean isReadingCourse(String courseCode) {
+        return readCourses.contains(courseCode);
     }
 }

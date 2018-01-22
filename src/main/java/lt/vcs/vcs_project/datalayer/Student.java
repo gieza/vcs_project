@@ -13,10 +13,10 @@ public class Student extends Account {
     private String address;
     private HashSet<String> enrolledCourses;
 
-    public Student(String loginId, String firstName, String secondName, String password,
+    public Student(String loginId, String password, String firstName, String secondName,
                    String studentId, String personalNumber, String dateOfBirth, String email,
                    String mobileNumber, String gender, String address) {
-        super(loginId, firstName, secondName, password, Role.STUDENT, studentId);
+        super(loginId, password, firstName, secondName, Role.STUDENT, studentId);
         this.studentId = studentId;
         this.personalNumber = personalNumber;
         this.dateOfBirth = dateOfBirth;
@@ -26,6 +26,7 @@ public class Student extends Account {
         this.address = address;
         enrolledCourses = new HashSet<>();
     }
+
 
     public Account makeAccount() {
         return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.studentId);
@@ -104,5 +105,7 @@ public class Student extends Account {
         this.address = address;
     }
 
-
+    public boolean hasCourse(String courseCode) {
+        return enrolledCourses.contains(courseCode);
+    }
 }

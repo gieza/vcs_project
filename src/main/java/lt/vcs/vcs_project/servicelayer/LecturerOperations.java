@@ -14,13 +14,14 @@ public class LecturerOperations {
     public static Lecturer makeLecturerFromCSV(String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length < 5) {
-            System.out.printf("Lecturer creation failure: input data has too few input fields\n");
+            System.out.print("Lecturer creation failure: input data has too few input fields\n");
             return null;
         } else {
             String address = "";
             if (inputArray.length >= 11) {
                 for (int i = 10; i < inputArray.length; i++)
-                    address = address + "," + inputArray[i];
+                    address = address + inputArray[i] + ",";
+                address = address.substring(0, address.length() - 1);
             }
             return new Lecturer(inputArray[0], inputArray[1], inputArray[2],
                     inputArray[3], inputArray[4],
@@ -36,10 +37,10 @@ public class LecturerOperations {
     public static void addLecturer(String csv) {
         Lecturer newLecturer = makeLecturerFromCSV(csv);
 
-        if (lecturers.containsKey(newLecturer.getLecturerId())) {
+        if (lecturers.lecturerExists(newLecturer.getLecturerId())) {
             System.out.printf("Sorry, cannot add Lecturer, LecturerId %s already exists",
                     newLecturer.getLecturerId());
-        } else if (accounts.containsKey(newLecturer.getLoginId())) {
+        } else if (accounts.accountExists(newLecturer.getLoginId())) {
             System.out.printf("Sorry, cannot add Lecturer, login account %s already exists",
                     newLecturer.getLoginId());
         } else {
@@ -90,7 +91,8 @@ public class LecturerOperations {
             //address field might contain commas, there anything beyond 8th column should be combined
             String address = "";
             for (int i = 7; i < inputArray.length; i++)
-                address = address + "," + inputArray[i];
+                address = address + inputArray[i] + ",";
+            address = address.substring(0, address.length() - 1);
             lecturer.setFirstName(inputArray[0]);
             lecturer.setSecondName(inputArray[1]);
             lecturer.setPersonalNumber(inputArray[2]);
@@ -107,7 +109,7 @@ public class LecturerOperations {
         String newPassword = askForNewPassword();
         if (newPassword.length() < 1) {
             System.out.println("User password cannot be empty");
-        } else if (lecturers.containsKey(lecturerId)) {
+        } else if (lecturers.lecturerExists(lecturerId)) {
             lecturers.getLecturer(lecturerId).setPassword(newPassword);
         } else {
             System.out.printf("Lecturer password failed - no such account %s\n", lecturerId);
@@ -127,13 +129,17 @@ public class LecturerOperations {
         lecturers.removeLecturer(selectedLecturer);
     }
 
+    public static void assignCourse2Lecturer(String courseId, String LecturerId) {
+        if (courseId != null && LecturerId != null) {
+            courses.getCourse(courseId).setLecturerId(LecturerId);
+            lecturers.getLecturer(LecturerId).addCourse(courseId);
+        }
+    }
+
     public static void assignCourse2Lecturer() {
         String selectedCourse = CourseOperations.selectCourse();
         String selectedLecturer = selectLecturer();
-        if (selectedCourse != null && selectedLecturer != null) {
-            courses.getCourse(selectedCourse).setLecturerId(selectedLecturer);
-            lecturers.getLecturer(selectedLecturer).addCourse(selectedCourse);
-        }
+        assignCourse2Lecturer(selectedCourse, selectedLecturer);
     }
 
     static public void removeCourseFromLecturer(Set<String> courseList, String lecturerId) {
@@ -152,7 +158,7 @@ public class LecturerOperations {
     public static String selectLecturer() {
         System.out.printf("\n\nEnter to Lecturer Id to select Lecturer:");
         String userInput = ScannerUtils.scanString();
-        if (lecturers.containsKey(userInput)) {
+        if (lecturers.lecturerExists(userInput)) {
             System.out.printf("Selected Lecturer: %s\n", userInput);
             return userInput;
         } else {

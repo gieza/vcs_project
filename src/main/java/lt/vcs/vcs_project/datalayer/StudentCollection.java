@@ -11,6 +11,10 @@ public class StudentCollection {
 
     private Hashtable<String, Student> studentCollection = new Hashtable<>();
 
+    public long getCount() {
+        return studentCollection.size();
+    }
+
     StudentCollection() {
         readFromFile();
     }
@@ -35,7 +39,7 @@ public class StudentCollection {
         writeToFile();
     }
 
-    public boolean containsKey(String accountId) {
+    public boolean studentExists(String accountId) {
         return studentCollection.containsKey(accountId);
     }
 
@@ -43,7 +47,7 @@ public class StudentCollection {
         try {
             studentCollection = (Hashtable<String, Student>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
         } catch (FileNotFoundException e) {
-            System.out.printf("%s not found in Account Collection \n", fileName);
+            System.out.printf("File %s not found. Creating new one.\n", fileName);
         }
 
     }

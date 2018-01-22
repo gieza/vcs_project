@@ -61,7 +61,7 @@ public class Course implements Serializable {
             this.enrolledStudents.add(studentId);
             this.enrolledStudentCount++;
         } else {
-            System.out.printf("Student %s is already enrolled into course %s", studentId, this.courseCode);
+            System.out.printf("Student %s is already enrolled into course %s\n", studentId, this.courseCode);
         }
 
     }
@@ -71,7 +71,7 @@ public class Course implements Serializable {
             this.enrolledStudents.remove(studentId);
             this.enrolledStudentCount--;
         } else {
-            System.out.printf("Student %s is not enrolled into course %s", studentId, this.courseCode);
+            System.out.printf("Student %s is not enrolled into course %s\n", studentId, this.courseCode);
         }
 
     }
@@ -146,5 +146,9 @@ public class Course implements Serializable {
 
     public void setEnrolledStudents(HashSet<String> enrolledStudents) {
         this.enrolledStudents = enrolledStudents;
+    }
+
+    public boolean isEnrolled(String studentId) {
+        return enrolledStudents.contains(studentId);
     }
 }

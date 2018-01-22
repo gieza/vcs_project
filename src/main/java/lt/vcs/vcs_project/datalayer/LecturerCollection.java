@@ -26,7 +26,7 @@ public class LecturerCollection {
             writeToFile();
         } else {
             //trow exception - duplicate
-            System.out.printf("Student addition failure: Lecturer %s already exists\n", lecturer.getLecturerId());
+            System.out.printf("Lecturer addition failure: Lecturer %s already exists\n", lecturer.getLecturerId());
         }
     }
 
@@ -46,11 +46,11 @@ public class LecturerCollection {
 
     public Account getAccount(String lecturerId) {
         if (lecturerCollection.containsKey(lecturerId)) return lecturerCollection.get(lecturerId);
-        System.out.printf("Get student failure: lecturer %s does not exist\n", lecturerId);
+        System.out.printf("Get Lecturer failure: lecturer %s does not exist\n", lecturerId);
         return null;
     }
 
-    public boolean containsKey(String lecturerId) {
+    public boolean lecturerExists(String lecturerId) {
         return lecturerCollection.containsKey(lecturerId);
     }
 
@@ -63,7 +63,7 @@ public class LecturerCollection {
         try {
             lecturerCollection = (Hashtable<String, Lecturer>) IOObjectStreamUtils.readFirstObjectFromFile(fileName);
         } catch (FileNotFoundException e) {
-            System.out.printf("%s not found in Account Collection \n", fileName);
+            System.out.printf("File %s not found. Creating new one.\n", fileName);
         }
 
     }

@@ -20,8 +20,10 @@ public class StudentOperations {
             String address = "";
             if (inputArray.length >= 11) {
                 for (int i = 10; i < inputArray.length; i++)
-                    address = address + "," + inputArray[i];
+                    address = address + inputArray[i] + ",";
+                address = address.substring(0, address.length() - 1);
             }
+
             return new Student(inputArray[0], inputArray[1], inputArray[2],
                     inputArray[3], inputArray[4],
                     inputArray.length > 5 ? inputArray[5] : "",
@@ -36,10 +38,10 @@ public class StudentOperations {
     public static void addStudent(String csv) {
         Student newStudent = makeStudentFromCSV(csv);
 
-        if (students.containsKey(newStudent.getStudentId())) {
+        if (students.studentExists(newStudent.getStudentId())) {
             System.out.printf("Sorry, cannot add Student, StudentId %s already exists",
                     newStudent.getStudentId());
-        } else if (accounts.containsKey(newStudent.getLoginId())) {
+        } else if (accounts.accountExists(newStudent.getLoginId())) {
             System.out.printf("Sorry, cannot add Student, login account %s already exists",
                     newStudent.getLoginId());
         } else {
@@ -90,7 +92,8 @@ public class StudentOperations {
             //address field might contain commas, there anything beyond 8th column should be combined
             String address = "";
             for (int i = 7; i < inputArray.length; i++)
-                address = address + "," + inputArray[i];
+                address = address + inputArray[i] + ",";
+            address = address.substring(0, address.length() - 1);
             student.setFirstName(inputArray[0]);
             student.setSecondName(inputArray[1]);
             student.setPersonalNumber(inputArray[2]);
@@ -107,7 +110,7 @@ public class StudentOperations {
         String newPassword = askForNewPassword();
         if (newPassword.length() < 1) {
             System.out.println("User password cannot be empty");
-        } else if (students.containsKey(studentId)) {
+        } else if (students.studentExists(studentId)) {
             students.getStudent(studentId).setPassword(newPassword);
         } else {
             System.out.printf("Student password failed - no such account %s\n", studentId);
@@ -132,7 +135,7 @@ public class StudentOperations {
     public static String selectStudent() {
         System.out.printf("\n\nEnter to Student Id to select student:");
         String userInput = ScannerUtils.scanString();
-        if (students.containsKey(userInput)) {
+        if (students.studentExists(userInput)) {
             System.out.printf("Selected student: %s\n", userInput);
             return userInput;
         } else {
@@ -148,13 +151,18 @@ public class StudentOperations {
         students.addCourse(selectedStudent, selectedCourse);
     }
 
-    public static void assignAvailableCourse2Student(String studentId) {
-        String selectedCourse = CourseOperations.selectCourse();
-        if (courses.getCourse(selectedCourse).available()) {
-            courses.enrollStudent(selectedCourse, studentId);
-            students.addCourse(studentId, selectedCourse);
+    public static void assignAvailableCourse2Student(String courseCode, String studentId) {
+        if (courses.getCourse(courseCode).available()) {
+            courses.enrollStudent(courseCode, studentId);
+            students.addCourse(studentId, courseCode);
         }
     }
+
+    public static void assignAvailableCourse2Student(String studentId) {
+        String selectedCourse = CourseOperations.selectCourse();
+        assignAvailableCourse2Student(selectedCourse, studentId);
+    }
+
 
     public static void removeCourse(Set<String> StudentList, String courseCode) {
         if (StudentList == null || courseCode == null) return;

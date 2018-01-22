@@ -1,84 +1,111 @@
 package lt.vcs.vcs_project.datalayer;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class AccountCollectionTest {
-    private AccountCollection accountCollection = new AccountCollection();
-    private Account defaultAdminAccount1 = new Account("admin1", "admin", "", "admin", Role.ADMIN);
-    private Account defaultAdminAccount2 = new Account("admin2", "admin2", "Adminas", "Admintauskas", Role.ADMIN);
+    private AccountCollection accountCollection;
+    private Account adminAccount1 = new Account("admin1", "admin", "", "admin", Role.ADMIN);
+    private Account adminAccount2 = new Account("admin2", "admin2", "Adminas", "Admintauskas", Role.ADMIN);
+    private Account adminAccount2_updated = new Account("admin2", "admin2", "Jonas", "Jonaitis", Role.ADMIN);
 
-    @Test
-    public void givenEmptyAccountList_for_then_AccountListSize_is_1() {
-        //ismesti account faila
+    @Before
+    public void InitializeAccountCollection() {
+        //account file is removed
         File accountCollectionFile = new File("AccountList.txt");
         accountCollectionFile.delete();
-        assertEquals("newly created Account list has 1 members", 1, accountCollection.getCount());
-    }
-
- /*   @Test
-    public void givenEmptyAccountList_for_then_has_admin() {
-        System.out.println(accountCollection.listAccounts());
-        assertEquals("newly created Account list has Admin member", true, accountCollection.courseExists("admin"));
+        accountCollection = new AccountCollection();
     }
 
     @Test
-    public void givenEmptyAccountList_with_2_accounts_when_account_is_removed_then_AccountListSize_is_1() {
-        // accountCollection.addAccount(defaultAdminAccount);
-        accountCollection.addAccount(defaultAdminAccount2);
-        assertEquals("After adding 2 accounts newly created Account list has 2 member", 2, accountCollection.getCount());
-        System.out.println(accountCollection.listAccounts());
-    }*/
-/*
-            accountCollection.removeAccount("admin2");
-        assertEquals("After 1 account removal, list has 2 member",1, accountCollection.getsize());
-        System.out.println("2:" + accountCollection.toString());
-        accountCollection.removeAccount("admin2");
-        System.out.println("3:" + accountCollection.toString());
+    public void givenNewAccountList_whenGetCount_thenListSizeIs1() {
+        assertEquals(1, accountCollection.getCount());
+    }
+
+    @Test
+    public void givenNewAccountList_whenCheckingForAdminExistence_thenTrueIsReturned() {
+        assertEquals(true, accountCollection.accountExists("admin"));
+    }
+
+    @Test
+    public void givenNewAccountList_whenCheckingForAdmin2Exitence_thenFalseIsReturned() {
+        assertEquals(false, accountCollection.accountExists("admin2"));
+    }
+
+    @Test
+    public void givenNewAccountList_When2ndAccountIsAdded_thenAccountListSizeIs2() {
+        //when
+        accountCollection.addAccount(adminAccount2);
+        //then
+        assertEquals(true, accountCollection.accountExists(adminAccount2.getLoginId()));
+    }
+
+    @Test
+    public void givenAccountListWith2Accounts_WhenSame2ndAccountIsAdded_thenAccountListSizeIs2() {
+        //given
+        accountCollection.addAccount(adminAccount2);
+        //when
+        accountCollection.addAccount(adminAccount2);
+        //then
+        assertEquals(2, accountCollection.getCount());
+    }
+
+    @Test
+    public void givenAccountListWith2Accounts_when2ndAccountIsRemoved_thenAccountListSizeIs1() {
+        //given
+        accountCollection.addAccount(adminAccount2);
+        //when
+        accountCollection.removeAccount(adminAccount2.getLoginId());
+        //then
+        assertEquals(1, accountCollection.getCount());
+    }
+
+    @Test
+    public void givenAccountListWith2Accounts_whenWrongAccountIsRemoved_thenAccountListSizeIs2() {
+        //given
+        accountCollection.addAccount(adminAccount2);
+        //when
+        accountCollection.removeAccount(adminAccount1.getLoginId());
+        //then
+        assertEquals(2, accountCollection.getCount());
+    }
+
+    @Test
+    public void givenAccountListWith2Accounts_whenBothAccountsAreRemoved_thenAdminAccountIsPresent() {
+        //given
+        accountCollection.addAccount(adminAccount2);
+        //when
         accountCollection.removeAccount("admin");
-        System.out.println("4:" + accountCollection.toString());
-    }
-    */
-
-  /*   @Test
-    public void givenEmptyAccountHandler_for_then_1_Admin_Account_Returned() {
-        assertEquals("For newly created empty Account list, there is always 1 Admin account",
-                1, (long) accountHandler.adminCount());
+        accountCollection.removeAccount(adminAccount2.getLoginId());
+        //then
+        assertEquals(true, accountCollection.accountExists("admin"));
     }
 
     @Test
-    public void givenEmptyAccountHandler_when_new_account_is_added_then_Listsize_is_2(){
-        accountHandler.addAccount(defaultAdminAccount2);
-        assertEquals("Expected Account count is 2",
-                2, (long) accountHandler.getsize());
+    public void givenAccountListWith2Accounts_when2ndAccountIsUpdated_thenItIsEqualToUpdatedAccount() {
+        //given
+        accountCollection.addAccount(adminAccount2);
+        // when
+        accountCollection.updateAccount(adminAccount2_updated);
+        //then
+        assertThat(accountCollection.getAccount(adminAccount2.getLoginId()))
+                .isEqualToComparingFieldByFieldRecursively(adminAccount2_updated);
     }
 
-    /*@Test
-    public void givenAccountHandler_when_new_account_is_added_then_Listsize_is_2(){
-        accountHandler.addAccount(defaultAdminAccount2);
-        assertEquals("Expected Account count is 2",
-                2, (long) accountHandler.getsize());*/
-/*
+
     @Test
-    public void givenAccountHandler_with_Admin_account_then_AdminCount_returns_1(){
-        accountHandler.addAccount(defaultAdminAccount);
-        assertEquals("Expected Account count is 1",
-                1, (long) accountHandler.adminCount());
+    public void givenAccountListWith2Accounts_whenNonExistingAccountIsUpdated_thenItIsNotAddedOrUpdated() {
+        //given
+        accountCollection.addAccount(adminAccount2);
+        //when
+        accountCollection.updateAccount(adminAccount1);
+        //then
+        assertEquals(true, accountCollection.accountExists(adminAccount1.getLoginId()));
     }
-
-    @Test
-    public void givenEmptyAccountList_with_2_accounts_when_account_is_removed_then_AccountListSize_is_1() {
-        accountHandler.addAccount(defaultAdminAccount);
-        accountHandler.addAccount(defaultAdminAccount2);
-        System.out.println(accountHandler.toString());
-        accountHandler.removeAccount("admin2");
-        System.out.println(accountHandler.toString());
-        accountHandler.removeAccount("admin");
-        System.out.println(accountHandler.toString());
-
-    }*/
 }
 

@@ -174,7 +174,7 @@ public class AdminUserInterface implements UserInterface {
             case ASSIGN_COURSE_STUDENT:
                 StudentOperations.assignAnyCourse2Student();
                 waitForEnter();
-                menuPosition = COURSE;
+                //menuPosition = COURSE;
                 break;
             case ASSIGN_COURSE_LECTURER:
                 LecturerOperations.assignCourse2Lecturer();

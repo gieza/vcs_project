@@ -129,6 +129,8 @@ public class StudentOperations {
 
     static public void removeStudent() {
         String selectedStudent = StudentOperations.selectStudent();
+        if (selectedStudent == null)
+            return;
         //remove student from courses
         Set<String> courseList = students.getStudent(selectedStudent).getEnrolledCouses();
         CourseOperations.deEnrollStudent(courseList, selectedStudent);

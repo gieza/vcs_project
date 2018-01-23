@@ -99,6 +99,8 @@ public class CourseOperations {
 
     public static void removeCourse() {
         String selectedCourse = selectCourse();
+        if (selectedCourse == null)
+            return;
         //remove course from Lecturer collection
         String lecturerId = courses.getCourse(selectedCourse).getLecturerId();
         lecturers.removeCourse(lecturerId, selectedCourse);

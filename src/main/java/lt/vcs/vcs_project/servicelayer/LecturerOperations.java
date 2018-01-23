@@ -129,6 +129,8 @@ public class LecturerOperations {
 
     static public void removeLecturer() {
         String selectedLecturer = selectLecturer();
+        if (selectedLecturer == null)
+            return;
         accounts.removeAccount(lecturers.getLoginId(selectedLecturer));
         Set<String> courseList = lecturers.getLecturer(selectedLecturer).getReadCourses();
         removeCourseFromLecturer(courseList, selectedLecturer);

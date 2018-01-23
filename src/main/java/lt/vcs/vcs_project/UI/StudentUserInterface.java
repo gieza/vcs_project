@@ -38,7 +38,6 @@ public class StudentUserInterface implements UserInterface {
 
     private void runDecision(MenuTitle menu, String subMenu) {
         MenuTitle decision = menuNavigation.get(menu, subMenu);
-        //System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = TOP;
             return;
@@ -57,12 +56,12 @@ public class StudentUserInterface implements UserInterface {
                 waitForEnter();
                 break;
             case UPDATE_STUDENT:
-                StudentOperations.updateStudent(currentAccount);
+                StudentOperations.updateStudent(currentStudentId);
                 menuPosition = STUDENT;
                 waitForEnter();
                 break;
             case CHANGE_STUDENT_PASSWORD:
-                StudentOperations.changeStudentPassword(currentAccount);
+                StudentOperations.changeStudentPassword(currentStudentId);
                 menuPosition = STUDENT;
                 waitForEnter();
                 break;
@@ -97,12 +96,12 @@ public class StudentUserInterface implements UserInterface {
     }
 
     private void printMenuOptions() {
-        System.out.print("Logged-in User: " + currentAccount);
-        System.out.print("Student ID: " + currentStudentId);
-        System.out.print(menuPosition.toString() +
+        System.out.println("\nLogged-in User: " + currentAccount);
+        System.out.println("Student ID: " + currentStudentId);
+        System.out.println(menuPosition.toString() +
                 " Menu\n============================================\n" +
                 "Enter number to select one of the following:\n");
-        System.out.print(menuOptions.get(menuPosition));
+        System.out.println(menuOptions.get(menuPosition));
     }
 
 }

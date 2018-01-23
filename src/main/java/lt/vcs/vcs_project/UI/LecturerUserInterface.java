@@ -40,7 +40,6 @@ public class LecturerUserInterface implements UserInterface {
 
     private void runDecision(MenuTitle menu, String subMenu) {
         MenuTitle decision = menuNavigation.get(menu, subMenu);
-        System.out.printf("Next action: %s\n\n", decision);
         if (decision == null) {
             menuPosition = TOP;
             return;
@@ -93,7 +92,7 @@ public class LecturerUserInterface implements UserInterface {
         System.out.println("Lecturer ID: " + currentLecturerId);
         System.out.println(menuPosition.toString() +
                 " Menu\n============================================\n" +
-                "Enter number to select one of the following:\n");
+                "Enter number to select one of the following:");
         System.out.println(menuOptions.get(menuPosition));
     }
 

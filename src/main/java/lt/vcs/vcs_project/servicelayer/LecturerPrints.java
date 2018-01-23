@@ -60,13 +60,15 @@ public class LecturerPrints extends PrintService {
 
     public static final String UPDATE_LECTURER_DATA_INPUT_TEMPLATE = "First name,Second name,Personal#,DoB,Email," +
             "Mobile#,Gender,address";
-    public static final String LECTURER_UPDATE_HEADER = "First name,Second name,Personal#,DoB,Email,Mobile#," +
-            "Gender,address\n";
+    private static final String LECTURER_UPDATE_FORMATER = "%-20s %-25s %-12s %-12s %-25s %-12s %-5s %-40s\n";
+
+    private static final String LECTURER_UPDATE_HEADER = String.format(LECTURER_UPDATE_FORMATER,
+            "First name", "Second name", "Personal#", "DoB", "Email", "Mobile#", "Gender", "address");
 
     public static void printLecturerForUpdate(Lecturer lecturer) {
         System.out.print(LECTURER_UPDATE_HEADER);
         printUnderLineForString(LECTURER_UPDATE_HEADER);
-        System.out.printf("%-20s %-25s %-12s %-12s %-25s %-12s %-5s %-40s\n",
+        System.out.printf(LECTURER_UPDATE_FORMATER,
                 lecturer.getFirstName(), lecturer.getSecondName(), lecturer.getPersonalNumber(),
                 lecturer.getDateOfBirth(), lecturer.getEmail(), lecturer.getMobileNumber(),
                 lecturer.getGender(), lecturer.getAddress());

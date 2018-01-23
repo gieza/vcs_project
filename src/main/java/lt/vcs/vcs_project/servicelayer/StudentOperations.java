@@ -161,12 +161,15 @@ public class StudentOperations {
     }
 
     public static void assignAvailableCourse2Student(String courseCode, String studentId) {
-        if (courses.courseExists(courseCode)
-                && courses.getCourse(courseCode).available()) {
+        if (!courses.courseExists(courseCode)) {
+            System.out.println("Course or student does not exist");
+            return;
+        }
+        if (courses.getCourse(courseCode).available()) {
             courses.enrollStudent(courseCode, studentId);
             students.addCourse(studentId, courseCode);
         } else {
-            System.out.println("Course or student does not exist");
+            System.out.println("Course is not available for enrollment");
         }
     }
 

@@ -214,10 +214,10 @@ public class AdminUserInterface implements UserInterface {
         LecturerOperations.addLecturer("albert,emc2,Albert,Einstein,L0001,299792458,1879-03-14,albert@emcLab.cern,+41 22 76 784 84,M,CERN, CH-1211 Geneva 23, Switzerland");
         LecturerOperations.addLecturer("Marie,Polonium84,Marie,Curie,L0002,84_88,1867-11-07,MSC@sorbonne-universite.fr,+33 01 44 27 27 68,F,Sorbonne Université - 21," +
                 " rue de l'École-de-médecine 75006 Paris");
-        CourseOperations.addCourse("c0001,Praktine Astrologija,2018-03-02,2,l0001,Lorem ipsum dolor sit amet, " +
+        CourseOperations.addCourse("c0001,Praktine Astrologija,2018-03-02,2,,Lorem ipsum dolor sit amet, " +
                 "consectetur adipiscing elit. Sed vehicula tincidunt magna, sollicitudin vehicula ex malesuada " +
                 "sed. Mauris congue fringilla mi, vitae iaculis erat.");
-        CourseOperations.addCourse("c0002,Teorine griovakasyba,2018-04-02,1.5,l0003,Etiam varius quam purus, id vulputate tellus egestas at. Phasellus rutrum dolor " +
+        CourseOperations.addCourse("c0002,Teorine griovakasyba,2018-04-02,1.5,,Etiam varius quam purus, id vulputate tellus egestas at. Phasellus rutrum dolor " +
                 "condimentum, consectetur lorem vel, dignissim ante.");
         StudentOperations.assignAvailableCourse2Student("c0001", "s0001");
         StudentOperations.assignAvailableCourse2Student("c0001", "s0222");
@@ -225,6 +225,7 @@ public class AdminUserInterface implements UserInterface {
         StudentOperations.assignAvailableCourse2Student("c0001", "s0060");
         StudentOperations.assignAvailableCourse2Student("c0002", "s007");
         StudentOperations.assignAvailableCourse2Student("c0002", "s0060");
-        //assign course to Lecturer
+        LecturerOperations.assignCourse2Lecturer("c0001", "L0001");
+        LecturerOperations.assignCourse2Lecturer("c0002", "L0005");
     }
 }

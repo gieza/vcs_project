@@ -15,9 +15,10 @@ public class StudentUIMenuDefinition {
     }};
 
     public static final BiHashMap<MenuTitle, String, MenuTitle> menuNavigation
-            = new BiHashMap<MenuTitle, String, MenuTitle>() {{
+            = new BiHashMap<>() {{
         put(TOP, "1", STUDENT);
         put(TOP, "2", COURSE);
+        put(TOP, "9", LOGOUT);
         put(STUDENT, "0", TOP);
         put(STUDENT, "1", PRINT_STUDENT);
         put(STUDENT, "2", UPDATE_STUDENT);

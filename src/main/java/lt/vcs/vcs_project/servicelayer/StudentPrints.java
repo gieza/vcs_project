@@ -41,11 +41,11 @@ public class StudentPrints extends PrintService {
     public static void printStudent(Student student) {
         System.out.println("\nStudent Details:\n================" +
                 "\nStudent ID: " + student.getStudentId() +
-                "\nName:" + student.getFirstName() + " " + student.getSecondName() +
-                "\nLogin Name:" + student.getLoginId() + "\nPersonal number:" + student.getPersonalNumber() +
-                "\nDate Of Birth:" + student.getDateOfBirth() + "\nEmail:" + student.getEmail() +
-                "\nMobile:" + student.getMobileNumber() + "\nGender:" + student.getGender() +
-                "\nAddress:" + student.getAddress() + "\n");
+                "\nName: " + student.getFirstName() + " " + student.getSecondName() +
+                "\nLogin Name: " + student.getLoginId() + "\nPersonal number: " + student.getPersonalNumber() +
+                "\nDate Of Birth: " + student.getDateOfBirth() + "\nEmail: " + student.getEmail() +
+                "\nMobile: " + student.getMobileNumber() + "\nGender: " + student.getGender() +
+                "\nAddress: " + student.getAddress() + "\n");
         CoursePrints.listCourse(student.getEnrolledCouses());
     }
 
@@ -59,16 +59,16 @@ public class StudentPrints extends PrintService {
             printStudent(selectedStudent);
         }
     }
-
     public static final String UPDATE_STUDENT_DATA_INPUT_TEMPLATE = "First name,Second name,Personal#,DoB,Email," +
             "Mobile#,Gender,address";
-    public static final String STUDENT_UPDATE_HEADER = "First name,Second name,Personal#,DoB,Email,Mobile#," +
-            "Gender,address\n";
+    private static final String STUDENT_UPDATE_FORMATER = "%-20s %-25s %-12s %-12s %-25s %-12s %-5s %-40s\n";
+    private static final String STUDENT_UPDATE_HEADER = String.format(STUDENT_UPDATE_FORMATER,
+            "First name", "Second name", "Personal#", "DoB", "Email", "Mobile#", "Gender", "address");
 
     public static void printStudentForUpdate(Student student) {
         System.out.print(STUDENT_UPDATE_HEADER);
         printUnderLineForString(STUDENT_UPDATE_HEADER);
-        System.out.printf("%-20s %-25s %-12s %-12s %-25s %-12s %-5s %-40s\n",
+        System.out.printf(STUDENT_UPDATE_FORMATER,
                 student.getFirstName(), student.getSecondName(), student.getPersonalNumber(),
                 student.getDateOfBirth(), student.getEmail(), student.getMobileNumber(),
                 student.getGender(), student.getAddress());

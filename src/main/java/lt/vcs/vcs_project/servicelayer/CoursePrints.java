@@ -58,7 +58,6 @@ public class CoursePrints extends PrintService {
             lecturerName = lecturers.getLecturer(course.getLecturerId()).getFirstName() +
                     " " + lecturers.getLecturer(course.getLecturerId()).getSecondName();
         }
-        Lecturer lecturer = lecturers.getLecturer(course.getLecturerId());
         System.out.println("\nCourse Details:\n================" +
                 "\nCourse Code: " + course.getCourseCode() +
                 "\nTitle: " + course.getTitle() + "\nDescription: " + course.getDescription() +
@@ -83,12 +82,14 @@ public class CoursePrints extends PrintService {
 
     public static final String UPDATE_COURSE_DATA_INPUT_TEMPLATE = "Title,startDate[yyyy-MM-dd]," +
             "Credit,Description\n";
-    public static final String COURSE_UPDATE_HEADER = "Title,startDate[yyyy-MM-dd],Credit,Description\n";
+    private static final String COURSE_UPDATE_FORMATER = "%-25s %-12s %-8s %-40s\n";
+    private static final String COURSE_UPDATE_HEADER = String.format(COURSE_UPDATE_FORMATER,
+            "Title", "startDate", "Credit", "Description");
 
     public static void printCourseForUpdate(Course course) {
         System.out.print(COURSE_UPDATE_HEADER);
         printUnderLineForString(COURSE_UPDATE_HEADER);
-        System.out.printf("%-25s %-10s %-8s %-40s\n",
+        System.out.printf(COURSE_UPDATE_FORMATER,
                 course.getTitle(), course.getStartDate(), course.getCredit(), course.getDescription());
     }
 }

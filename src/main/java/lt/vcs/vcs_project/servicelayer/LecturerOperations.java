@@ -38,10 +38,10 @@ public class LecturerOperations {
         Lecturer newLecturer = makeLecturerFromCSV(csv);
 
         if (lecturers.lecturerExists(newLecturer.getLecturerId())) {
-            System.out.printf("Sorry, cannot add Lecturer, LecturerId %s already exists",
+            System.out.printf("Sorry, cannot add Lecturer, LecturerId %s already exists\n",
                     newLecturer.getLecturerId());
         } else if (accounts.accountExists(newLecturer.getLoginId())) {
-            System.out.printf("Sorry, cannot add Lecturer, login account %s already exists",
+            System.out.printf("Sorry, cannot add Lecturer, login account %s already exists\n",
                     newLecturer.getLoginId());
         } else {
             accounts.addAccount(newLecturer.makeAccount());
@@ -108,7 +108,7 @@ public class LecturerOperations {
     static public void changeLecturerPassword(String lecturerId) {
         String newPassword = askForNewPassword();
         if (newPassword.length() < 1) {
-            System.out.println("User password cannot be empty");
+            System.out.println("User password cannot be empty\n");
         } else if (lecturers.lecturerExists(lecturerId)) {
             lecturers.getLecturer(lecturerId).setPassword(newPassword);
         } else {

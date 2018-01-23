@@ -77,10 +77,12 @@ public class LecturerUserInterface implements UserInterface {
                 CoursePrints.listCourse();
                 menuPosition = COURSE;
                 waitForEnter();
+                break;
             case PRINT_COURSE:
                 CoursePrints.printCourse();
                 menuPosition = COURSE;
                 waitForEnter();
+                break;
             default:
                 menuPosition = TOP;
         }

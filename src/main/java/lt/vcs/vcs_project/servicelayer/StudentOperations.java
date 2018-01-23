@@ -39,10 +39,10 @@ public class StudentOperations {
         Student newStudent = makeStudentFromCSV(csv);
 
         if (students.studentExists(newStudent.getStudentId())) {
-            System.out.printf("Sorry, cannot add Student, StudentId %s already exists",
+            System.out.printf("Sorry, cannot add Student, StudentId %s already exists\n",
                     newStudent.getStudentId());
         } else if (accounts.accountExists(newStudent.getLoginId())) {
-            System.out.printf("Sorry, cannot add Student, login account %s already exists",
+            System.out.printf("Sorry, cannot add Student, login account %s already exists\n",
                     newStudent.getLoginId());
         } else {
             accounts.addAccount(newStudent.makeAccount());
@@ -147,20 +147,26 @@ public class StudentOperations {
     public static void assignAnyCourse2Student() {
         String selectedCourse = CourseOperations.selectCourse();
         String selectedStudent = StudentOperations.selectStudent();
-        courses.enrollStudent(selectedCourse, selectedStudent);
-        students.addCourse(selectedStudent, selectedCourse);
+        if (selectedCourse != null && selectedStudent != null) {
+            courses.enrollStudent(selectedCourse, selectedStudent);
+            students.addCourse(selectedStudent, selectedCourse);
+        }
     }
 
     public static void assignAvailableCourse2Student(String courseCode, String studentId) {
-        if (courses.getCourse(courseCode).available()) {
+        if (courses.courseExists(courseCode)
+                && courses.getCourse(courseCode).available()) {
             courses.enrollStudent(courseCode, studentId);
             students.addCourse(studentId, courseCode);
+        } else {
+            System.out.println("Course or student does not exist");
         }
     }
 
     public static void assignAvailableCourse2Student(String studentId) {
         String selectedCourse = CourseOperations.selectCourse();
-        assignAvailableCourse2Student(selectedCourse, studentId);
+        if (selectedCourse != null)
+            assignAvailableCourse2Student(selectedCourse, studentId);
     }
 
 

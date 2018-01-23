@@ -26,15 +26,15 @@ public class AccountPrints extends PrintService {
         printUnderLineForString(ACCOUNT_LISTING_HEADER);
         Set<String> keys = accounts.getKeyset();
         for (String key : keys) {
-            if (accounts.getAccount(key).getRole() == ADMIN) {
+            //if (accounts.getAccount(key).getRole() == ADMIN) {
                 listAccount(accounts.getAccount(key));
-            }
+            //}
         }
     }
 
     public static void printAccount(Account account) {
-        System.out.println("Account Data:\n=============\nLogin Name:"
-                + account.getLoginId() + "\nPassword:" + account.getPassword()
+        System.out.println("\nAccount Data:\n=============\nLogin Name:"
+                + account.getLoginId()
                 + "\nName:" + account.getFirstName() + " " + account.getSecondName()
                 + "\nRole:" + account.getRoleAsString()
                 + "\nPersonalId=" + account.getPersonalId());

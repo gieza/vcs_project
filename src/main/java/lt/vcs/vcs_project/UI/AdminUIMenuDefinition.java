@@ -8,10 +8,10 @@ import static lt.vcs.vcs_project.UI.MenuTitle.*;
 
 class AdminUIMenuDefinition {
     static final Hashtable<MenuTitle, String> menuOptions = new Hashtable<>() {{
-        put(TOP, "\t1 Account Menu\n\t2 Student Menu\n\t3 Lecturer menu\n\t4 Course menu\n" +
+        put(TOP, "\t1 Account Menu\n\t2 Student Menu\n\t3 Lecturer Menu\n\t4 Course Menu\n" +
                 "\t9 Logout\nPossible options[1-4,9]:");
-        put(ACCOUNT, "\t0 Top menu\n\t1 List Accounts\n\t2 Print Account\n\t3 Add Account\n" +
-                "\t4 Update Account\n\t5 Change Password \n\t6 Remove account\nPossible options[0-6]:");
+        put(ACCOUNT, "\t0 Top menu\n\t1 List Accounts\n\t2 Print Account\n\t3 Add ADMIN Account\n" +
+                "\t4 Update ADMIN Account\n\t5 Change ADMIN Password \n\t6 Remove ADMIN Account\nPossible options[0-6]:");
         put(STUDENT, "\t0 Top menu\n\t1 List Students\n\t2 Print Student\n\t3 Add Student\n" +
                 "\t4 Update Student\n\t5 Change password\n\t6 Remove Student\n" +
                 "\t7 Assign Student to Course\nPossible options[0-7]:");
@@ -24,7 +24,7 @@ class AdminUIMenuDefinition {
     }};
 
     static final BiHashMap<MenuTitle, String, MenuTitle> menuNavigation =
-            new BiHashMap<MenuTitle, String, MenuTitle>() {{
+            new BiHashMap<>() {{
                 put(TOP, "1", ACCOUNT);
                 put(TOP, "2", STUDENT);
                 put(TOP, "3", LECTURER);

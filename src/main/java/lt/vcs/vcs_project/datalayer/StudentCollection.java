@@ -80,9 +80,11 @@ public class StudentCollection {
 
     public void addCourse(String studentId, String courseCode) {
         studentCollection.get(studentId).addCourse(courseCode);
+        writeToFile();
     }
 
     public void removeCourse(String studentId, String courseCode) {
         studentCollection.get(studentId).removeCourse(courseCode);
+        writeToFile();
     }
 }

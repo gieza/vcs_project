@@ -21,7 +21,7 @@ public class StudentUserInterface implements UserInterface {
     @Override
     public void navigateMenu(String accountId) {
         currentAccount = accountId;
-        currentStudentId = accounts.getAccount(currentStudentId).getPersonalId();
+        currentStudentId = accounts.getAccount(currentAccount).getPersonalId();
         menuChoice = "";
         menuPosition = TOP;
         while (true) {
@@ -65,26 +65,32 @@ public class StudentUserInterface implements UserInterface {
                 StudentOperations.changeStudentPassword(currentAccount);
                 menuPosition = STUDENT;
                 waitForEnter();
+                break;
             case ASSIGN_COURSE_STUDENT:
-                StudentOperations.assignAvailableCourse2Student(currentAccount);
+                StudentOperations.assignAvailableCourse2Student(currentStudentId);
                 //menuPosition = "STUDENT";
                 waitForEnter();
+                break;
             case LIST_COURSES:
                 CoursePrints.listCourse();
                 menuPosition = COURSE;
                 waitForEnter();
+                break;
             case LIST_AVAILABLE_COURSES:
                 CoursePrints.listAvailableCourses();
                 menuPosition = COURSE;
                 waitForEnter();
+                break;
             case LIST_ENROLLED_COURSES:
                 CoursePrints.listEnrolledCourses(currentStudentId);
                 menuPosition = COURSE;
                 waitForEnter();
+                break;
             case PRINT_COURSE:
                 CoursePrints.printCourse();
                 menuPosition = COURSE;
                 waitForEnter();
+                break;
             default:
                 menuPosition = TOP;
         }

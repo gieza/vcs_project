@@ -11,7 +11,7 @@ public class CoursePrints extends PrintService {
             "Credit,lecturerCode,Description\n";
 
 
-    public static final String COURSE_LISTING_FORMATING = "%-8s %-25s %-10s %-5s %-12s %-40s\n";
+    public static final String COURSE_LISTING_FORMATING = "%-8s %-30s %-12s %-8s %-12s %-10s\n";
 
     public static final String COURSE_LISTING_HEADER = String.format(COURSE_LISTING_FORMATING,
             "Code", "title", "start Date", "credit", "lecturer", "# of Students");

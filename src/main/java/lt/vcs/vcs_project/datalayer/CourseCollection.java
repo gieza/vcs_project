@@ -86,9 +86,11 @@ public class CourseCollection {
 
     public void enrollStudent(String courseCode, String studentId) {
         courseCollection.get(courseCode).enrollStudent(studentId);
+        writeToFile();
     }
 
     public void deEnrollStudent(String courseCode, String studentId) {
         courseCollection.get(courseCode).deEnrollStudent(studentId);
+        writeToFile();
     }
 }

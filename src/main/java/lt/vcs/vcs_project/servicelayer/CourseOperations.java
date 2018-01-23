@@ -18,7 +18,7 @@ public class CourseOperations {
             return null;
         } else {
             if (parseLocalDate(inputArray[2]) == null) {
-                System.out.println("Date is provided in wrong format, try \"yyyy-MM-dd\" instead");
+                System.out.println("Date is provided in wrong format, try \"yyyy-MM-dd\" instead\n");
                 return null;
             }
             String description = "";
@@ -40,7 +40,7 @@ public class CourseOperations {
         Course newCourse = makeCourseFromCSV(csv);
 
         if (courses.courseExists(newCourse.getCourseCode())) {
-            System.out.printf("Sorry, cannot add Course, Course Code %s already exists",
+            System.out.printf("Sorry, cannot add Course, Course Code %s already exists\n",
                     newCourse.getCourseCode());
         } else {
             courses.addCourse(newCourse);

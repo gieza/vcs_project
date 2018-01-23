@@ -51,7 +51,7 @@ public class AccountOperations {
     static public void addAccount() {
         System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format" +
                 "\nfollowing template: %s\n:", AccountPrints.NEW_ACCOUNT_DATA_INPUT_TEMPLATE);
-        String userInput = ScannerUtils.scanString() + ",ADMIN";
+        String userInput = ScannerUtils.scanString();
 
         addAccount(userInput);
     }

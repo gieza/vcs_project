@@ -1,5 +1,6 @@
 package lt.vcs.vcs_project.UI;
 
+import lt.vcs.vcs_project.datalayer.Lecturer;
 import lt.vcs.vcs_project.servicelayer.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
@@ -204,9 +205,25 @@ public class AdminUserInterface implements UserInterface {
         AccountOperations.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
         AccountOperations.addAccount("admin3,admin,Pekka,Peltonen");
         StudentOperations.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");
-        StudentOperations.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Vytauto g.3, Kaukoliku km., Mazeikiu raj.");
+        StudentOperations.addStudent("petras,kurmelis2,Petras,Jonaitis,s0222,3450101002,19450101,petras@gmail.com,863303003,M,Egiptas,Inturkės sen., Molėtų r. sav.");
         StudentOperations.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
-        StudentOperations.addStudent("JB,youwon'tguess,James,BOND,s007,007,19450101,james.bond@mi5.gov.uk,undisclosed,M,somewhere on the globe");
-
+        StudentOperations.addStudent("student1,student1,Lars,Weckstrom,s0050,111111,19870701,student1@mit.edu,888888888,M,Lollandsgatan 18-4, Kista, Stockholm, Svenska");
+        StudentOperations.addStudent("student2,student2,Francesca,Ramon-Cortez,s0060,111111,19930403,student2@mit.edu,888888888,F,Clle 25b-65, Mérida, Yucatan, Mexico");
+        StudentOperations.addStudent("student3,student3,Auksinis,Kardas,s0560,111111,19930403,student4@mit.edu,888888888,F,Mokyklos g. 8, Kaukolikai, Skuodo raj.");
+        LecturerOperations.addLecturer("Juan,santamaria,Juan,Lopez Guerrero,L0005,111111,19630403,Juan.Lopez@caltech.edu,888888888,M,Plaza Cega 3, Valladolid, Espania");
+        LecturerOperations.addLecturer("albert,emc2,Albert,Einstein,L0001,299792458,1879-03-14,albert@emcLab.cern,+41 22 76 784 84,M,CERN, CH-1211 Geneva 23, Switzerland");
+        LecturerOperations.addLecturer("Marie,Polonium84,Marie,Curie,L0002,84_88,1867-11-07,Marie.Curie@sorbonne-universite.fr,+33 01 44 27 27 68,F,Sorbonne Université - 21," +
+                " rue de l'École-de-médecine 75006 Paris");
+        CourseOperations.addCourse("c0001,Praktine Astrologija,2018-03-02,2,l0001,Lorem ipsum dolor sit amet, " +
+                "consectetur adipiscing elit. Sed vehicula tincidunt magna, sollicitudin vehicula ex malesuada " +
+                "sed. Mauris congue fringilla mi, vitae iaculis erat.");
+        CourseOperations.addCourse("c0002,Teorine griovakasyba,2018-04-02,1.5,l0003,Etiam varius quam purus, id vulputate tellus egestas at. Phasellus rutrum dolor " +
+                "condimentum, consectetur lorem vel, dignissim ante.");
+        StudentOperations.assignAvailableCourse2Student("c0001", "s0001");
+        StudentOperations.assignAvailableCourse2Student("c0001", "s0222");
+        StudentOperations.assignAvailableCourse2Student("c0001", "s0560");
+        StudentOperations.assignAvailableCourse2Student("c0001", "s0060");
+        StudentOperations.assignAvailableCourse2Student("c0002", "s007");
+        StudentOperations.assignAvailableCourse2Student("c0002", "s0060");
     }
 }

@@ -1,4 +1,4 @@
-package lt.vsc.vcs_project;
+package lt.vcs.vcs_project;
 
 import lt.vcs.vcs_project.UI.CommandLineUI;
 

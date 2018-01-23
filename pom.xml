@@ -28,7 +28,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>lt.vcs.vcs_project.main</mainClass>
+                                    <mainClass>lt.vcs.vcs_project.Project</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

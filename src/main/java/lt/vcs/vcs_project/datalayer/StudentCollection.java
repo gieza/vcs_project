@@ -33,6 +33,7 @@ public class StudentCollection {
 
     public void updateStudent(Student student) {
         studentCollection.put(student.getStudentId(), student);
+        writeToFile();
     }
 
     public void removeStudent(String studentId) {

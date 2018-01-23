@@ -31,6 +31,7 @@ public class AccountCollection {
 
     public void updateAccount(Account account) {
         accountCollection.put(account.getLoginId(), account);
+        writeToFile();
     }
 
     public void addAccount(Account account) {

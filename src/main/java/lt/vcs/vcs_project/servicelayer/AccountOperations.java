@@ -76,6 +76,8 @@ public class AccountOperations {
 
     static public void changeAccountPassword(String currentAccount) {
         String selectedAccount = selectAccount(currentAccount);
+        if (selectedAccount == null)
+            return;
         String newPassword = askForNewPassword();
         if (newPassword.length() > 0) {
             Account accountToBeChanged = accounts.getAccount(selectedAccount);

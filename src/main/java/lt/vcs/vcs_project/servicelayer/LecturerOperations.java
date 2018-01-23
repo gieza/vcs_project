@@ -123,7 +123,8 @@ public class LecturerOperations {
 
     static public void changeLecturerPassword() {
         String selectedLecturer = selectLecturer();
-        changeLecturerPassword(selectedLecturer);
+        if (selectedLecturer != null)
+            changeLecturerPassword(selectedLecturer);
     }
 
     static public void removeLecturer() {

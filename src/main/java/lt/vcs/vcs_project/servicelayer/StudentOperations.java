@@ -123,7 +123,8 @@ public class StudentOperations {
 
     static public void changeStudentPassword() {
         String selectedStudent = StudentOperations.selectStudent();
-        changeStudentPassword(selectedStudent);
+        if (selectedStudent != null)
+            changeStudentPassword(selectedStudent);
     }
 
     static public void removeStudent() {

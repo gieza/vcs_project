@@ -26,7 +26,8 @@ public class Lecturer extends Account {
     }
 
     public Account makeAccount() {
-        return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(), this.getSecondName(), Role.STUDENT, this.lecturerId);
+        return new Account(this.getLoginId(), this.getPassword(), this.getFirstName(),
+                this.getSecondName(), Role.LECTURER, this.lecturerId);
     }
 
     public void addCourse(String courseId) {

@@ -39,8 +39,8 @@ public class StudentPrints extends PrintService {
     }
 
     public static void printStudent(Student student) {
-        System.out.println("\nStudent Details:\n================\n" +
-                "Student ID: " + student.getStudentId() +
+        System.out.println("\nStudent Details:\n================" +
+                "\nStudent ID: " + student.getStudentId() +
                 "\nName:" + student.getFirstName() + " " + student.getSecondName() +
                 "\nLogin Name:" + student.getLoginId() + "\nPersonal number:" + student.getPersonalNumber() +
                 "\nDate Of Birth:" + student.getDateOfBirth() + "\nEmail:" + student.getEmail() +

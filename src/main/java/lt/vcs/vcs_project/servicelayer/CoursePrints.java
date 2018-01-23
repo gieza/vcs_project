@@ -1,6 +1,7 @@
 package lt.vcs.vcs_project.servicelayer;
 
 import lt.vcs.vcs_project.datalayer.Course;
+import lt.vcs.vcs_project.datalayer.Lecturer;
 
 import java.util.Set;
 
@@ -52,14 +53,20 @@ public class CoursePrints extends PrintService {
     }
 
     public static void printCourse(Course course) {
-        System.out.println("Course Details:\n================" +
-                "\nCourse Code" + course.getCourseCode() +
-                "\nTitle:" + course.getTitle() + "\n:" + course.getDescription() +
-                "\nStartDate:" + course.getStartDate() +
-                "\nCredit:" + course.getCredit() +
-                "\nEmail:" + course.getLecturerId() +
-                "\nLecturer Name:" +
-                "\n# of Enrolled Students:" + course.getEnrolledStudentCount());
+        String lecturerName = "";
+        if (lecturers.lecturerExists(course.getLecturerId())) {
+            lecturerName = lecturers.getLecturer(course.getLecturerId()).getFirstName() +
+                    " " + lecturers.getLecturer(course.getLecturerId()).getSecondName();
+        }
+        Lecturer lecturer = lecturers.getLecturer(course.getLecturerId());
+        System.out.println("\nCourse Details:\n================" +
+                "\nCourse Code: " + course.getCourseCode() +
+                "\nTitle: " + course.getTitle() + "\nDescription: " + course.getDescription() +
+                "\nStartDate: " + course.getStartDate() +
+                "\nCredit: " + course.getCredit() +
+                "\nLecturer Id: " + course.getLecturerId() +
+                "\nLecturer Name: " + lecturerName +
+                "\n# of Enrolled Students: " + course.getEnrolledStudentCount());
         StudentPrints.listStudent(course.getEnrolledStudents());
     }
 

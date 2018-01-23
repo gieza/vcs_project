@@ -89,12 +89,12 @@ public class LecturerUserInterface implements UserInterface {
     }
 
     private void printMenuOptions() {
-        System.out.print("Logged-in User: " + currentAccount);
-        System.out.print("Lecturer ID: " + currentLecturerId);
-        System.out.print(menuPosition.toString() +
+        System.out.println("Logged-in User: " + currentAccount);
+        System.out.println("Lecturer ID: " + currentLecturerId);
+        System.out.println(menuPosition.toString() +
                 " Menu\n============================================\n" +
                 "Enter number to select one of the following:\n");
-        System.out.printf(menuOptions.get(menuPosition));
+        System.out.println(menuOptions.get(menuPosition));
     }
 
 }

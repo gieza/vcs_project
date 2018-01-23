@@ -179,7 +179,7 @@ public class AdminUserInterface implements UserInterface {
             case ASSIGN_COURSE_LECTURER:
                 LecturerOperations.assignCourse2Lecturer();
                 waitForEnter();
-                menuPosition = COURSE;
+                //menuPosition = COURSE;
                 break;
 
             case loadsomedata:
@@ -212,7 +212,7 @@ public class AdminUserInterface implements UserInterface {
         StudentOperations.addStudent("student3,student3,Auksinis,Kardas,s0560,111111,19930403,student4@mit.edu,888888888,F,Mokyklos g. 8, Kaukolikai, Skuodo raj.");
         LecturerOperations.addLecturer("Juan,santamaria,Juan,Lopez Guerrero,L0005,111111,19630403,Juan.Lopez@caltech.edu,888888888,M,Plaza Cega 3, Valladolid, Espania");
         LecturerOperations.addLecturer("albert,emc2,Albert,Einstein,L0001,299792458,1879-03-14,albert@emcLab.cern,+41 22 76 784 84,M,CERN, CH-1211 Geneva 23, Switzerland");
-        LecturerOperations.addLecturer("Marie,Polonium84,Marie,Curie,L0002,84_88,1867-11-07,Marie.Curie@sorbonne-universite.fr,+33 01 44 27 27 68,F,Sorbonne Université - 21," +
+        LecturerOperations.addLecturer("Marie,Polonium84,Marie,Curie,L0002,84_88,1867-11-07,MSC@sorbonne-universite.fr,+33 01 44 27 27 68,F,Sorbonne Université - 21," +
                 " rue de l'École-de-médecine 75006 Paris");
         CourseOperations.addCourse("c0001,Praktine Astrologija,2018-03-02,2,l0001,Lorem ipsum dolor sit amet, " +
                 "consectetur adipiscing elit. Sed vehicula tincidunt magna, sollicitudin vehicula ex malesuada " +
@@ -225,5 +225,6 @@ public class AdminUserInterface implements UserInterface {
         StudentOperations.assignAvailableCourse2Student("c0001", "s0060");
         StudentOperations.assignAvailableCourse2Student("c0002", "s007");
         StudentOperations.assignAvailableCourse2Student("c0002", "s0060");
+        //assign course to Lecturer
     }
 }

@@ -36,13 +36,14 @@ public class AccountPrints extends PrintService {
         System.out.println("\nAccount Data:\n=============\nLogin Name:"
                 + account.getLoginId()
                 + "\nName:" + account.getFirstName() + " " + account.getSecondName()
-                + "\nRole:" + account.getRoleAsString()
-                + "\nPersonalId=" + account.getPersonalId());
+                + "\nRole:" + account.getRoleAsString());
     }
 
     public static void printAccount(String currentAccountId) {
         String selectedAccount = AccountOperations.selectAccount(currentAccountId);
-        printAccount(accounts.getAccount(selectedAccount));
+        if (selectedAccount != null)
+            printAccount(accounts.getAccount(selectedAccount));
+
     }
 
     static public void printAccountForUpdate(Account account) {

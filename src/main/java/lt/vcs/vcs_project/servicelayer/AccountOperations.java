@@ -78,7 +78,9 @@ public class AccountOperations {
         String selectedAccount = selectAccount(currentAccount);
         String newPassword = askForNewPassword();
         if (newPassword.length() > 0) {
-            accounts.getAccount(selectedAccount).setPassword(newPassword);
+            Account accountToBeChanged = accounts.getAccount(selectedAccount);
+            accountToBeChanged.setPassword(newPassword);
+            accounts.updateAccount(accountToBeChanged);
         } else {
             System.out.println("User password cannot be empty");
         }
@@ -101,6 +103,9 @@ public class AccountOperations {
         } else if (accounts.AdminExists(userInput)) {
             System.out.printf("Selected account is: %s\n", userInput);
             return userInput;
+        } else if (accounts.accountExists(userInput)) {
+            System.out.printf("Sorry, selected account %s does not have ADMIN privilege.\n", userInput);
+            return null;
         } else {
             System.out.printf("\nSorry, Account %s does not exists.\n\treturning to menu\n\n", userInput);
             return null;

@@ -1,6 +1,8 @@
 package lt.vcs.vcs_project.servicelayer;
 
+import lt.vcs.vcs_project.datalayer.Account;
 import lt.vcs.vcs_project.datalayer.Lecturer;
+import lt.vcs.vcs_project.datalayer.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import java.util.Set;
@@ -110,7 +112,10 @@ public class LecturerOperations {
         if (newPassword.length() < 1) {
             System.out.println("User password cannot be empty\n");
         } else if (lecturers.lecturerExists(lecturerId)) {
-            lecturers.getLecturer(lecturerId).setPassword(newPassword);
+            Lecturer lecturerToBeChanged = lecturers.getLecturer(lecturerId);
+            lecturerToBeChanged.setPassword(newPassword);
+            lecturers.updateLecturer(lecturerToBeChanged);
+            accounts.updateAccount(lecturerToBeChanged.makeAccount());
         } else {
             System.out.printf("Lecturer password failed - no such account %s\n", lecturerId);
         }

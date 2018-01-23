@@ -1,5 +1,6 @@
 package lt.vcs.vcs_project.servicelayer;
 
+import lt.vcs.vcs_project.datalayer.Account;
 import lt.vcs.vcs_project.datalayer.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
@@ -111,7 +112,10 @@ public class StudentOperations {
         if (newPassword.length() < 1) {
             System.out.println("User password cannot be empty");
         } else if (students.studentExists(studentId)) {
-            students.getStudent(studentId).setPassword(newPassword);
+            Student studentToBeChanged = students.getStudent(studentId);
+            studentToBeChanged.setPassword(newPassword);
+            students.updateStudent(studentToBeChanged);
+            accounts.updateAccount(studentToBeChanged.makeAccount());
         } else {
             System.out.printf("Student password failed - no such account %s\n", studentId);
         }

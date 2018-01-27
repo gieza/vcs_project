@@ -18,6 +18,8 @@ public class AccountCollection {
     AccountCollection() {
         readFromFile();
         this.addAdminIfMissing();
+
+
     }
 
     public long getCount() {

@@ -11,7 +11,7 @@ import static lt.vcs.vcs_project.servicelayer.PrintService.askForNewPassword;
 public class AccountOperations {
 
 
-    public static Account makeAccountFromCSV(String csv) {
+    static Account makeAccountFromCSV(String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length < 2 || inputArray.length > 4) {
             System.out.printf("Account creation Failure: input data has incorrect number of fields\n");
@@ -24,7 +24,7 @@ public class AccountOperations {
         }
     }
 
-    public static Account updateAccountFromCSV(Account account, String csv) {
+    static Account updateAccountFromCSV(Account account, String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length != 2) {
             System.out.printf("Account update Failure: input data has incorrect number of fields\n");
@@ -37,7 +37,8 @@ public class AccountOperations {
     }
 
     public static boolean authenticate(String accountId, String password) {
-        if (!accounts.accountExists(accountId)) return false;
+        if (!accounts.accountExists(accountId))
+            return false;
         return accounts.getAccount(accountId).authenticate(password);
     }
 

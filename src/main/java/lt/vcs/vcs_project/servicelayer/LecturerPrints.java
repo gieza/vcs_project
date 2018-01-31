@@ -10,9 +10,9 @@ public class LecturerPrints extends PrintService {
     public static final String LECTURER_HEADER_CSV = "Login,Password,First name,Second name,StudentId," +
             "personalNumber,dateOfBirth,email,mobile,gender,address\n";
 
-    public static final String LECTURER_LISTING_FORMATING = "%-12s %15s %-20s %-12s %-10s %-12s %-25s" +
+    private static final String LECTURER_LISTING_FORMATING = "%-12s %15s %-20s %-12s %-10s %-12s %-25s" +
             "%-12s %-5s %-40s\n";
-    public static final String LECTURER_LISTING_HEADER = String.format(LECTURER_LISTING_FORMATING,
+    private static final String LECTURER_LISTING_HEADER = String.format(LECTURER_LISTING_FORMATING,
             "Lecturer ID", "First name", "Second name", "Login", "Personal#", "DoB", "email",
             "Mobile", "M/F", "Address");
 

@@ -11,7 +11,7 @@ import static lt.vcs.vcs_project.utils.DateConversionUtils.parseLocalDate;
 
 public class CourseOperations {
 
-    public static Course makeCourseFromCSV(String csv) {
+    static Course makeCourseFromCSV(String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length < 4) {
             System.out.printf("Course creation failure: input data has too few input fields\n");
@@ -56,7 +56,7 @@ public class CourseOperations {
     }
 
 
-    public static void updateCourse(String courseCode) {
+    private static void updateCourse(String courseCode) {
         System.out.printf("\nCurrent Student %s values are:\n", courseCode);
         CoursePrints.printCourseForUpdate(courses.getCourse(courseCode));
 
@@ -79,7 +79,7 @@ public class CourseOperations {
         }
     }
 
-    public static Course updateCourseFromCSV(Course course, String csv) {
+    static Course updateCourseFromCSV(Course course, String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length < 4) {
             System.out.printf("Course update Failure: input data has incorrect number of fields\n");

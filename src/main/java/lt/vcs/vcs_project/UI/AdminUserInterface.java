@@ -1,16 +1,13 @@
 package lt.vcs.vcs_project.UI;
 
-import lt.vcs.vcs_project.datalayer.Lecturer;
 import lt.vcs.vcs_project.servicelayer.*;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
-import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuNavigation;
-import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.menuOptions;
+import static lt.vcs.vcs_project.UI.AdminUIMenuDefinition.*;
 import static lt.vcs.vcs_project.UI.MenuTitle.*;
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 import static lt.vcs.vcs_project.servicelayer.LecturerOperations.*;
-import static lt.vcs.vcs_project.servicelayer.LecturerPrints.listLecturer;
-import static lt.vcs.vcs_project.servicelayer.LecturerPrints.printLecturer;
+import static lt.vcs.vcs_project.servicelayer.LecturerPrints.*;
 import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class AdminUserInterface implements UserInterface {
@@ -200,8 +197,7 @@ public class AdminUserInterface implements UserInterface {
     }
 
 
-
-    public static void addSomeData() {
+    private static void addSomeData() {
         AccountOperations.addAccount("Mikka,jumalauta1,Mikka,Saariniemi");
         AccountOperations.addAccount("admin3,admin,Pekka,Peltonen");
         StudentOperations.addStudent("juonis,juonis,Jonas,Petraitis,s0001,3450101000,19450101,juons@petraitis.lt,863303003,M,Jurgio g.1-13, Juonava");

@@ -13,7 +13,7 @@ import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 import static lt.vcs.vcs_project.UI.MenuTitle.*;
 
 public class LecturerUserInterface implements UserInterface {
-    static MenuTitle menuPosition = TOP;
+    private static MenuTitle menuPosition = TOP;
     static String menuChoice = "";
 
 

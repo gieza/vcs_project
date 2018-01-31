@@ -7,7 +7,7 @@ public class BiHashMap<K1, K2, V> {
 
         private final Map<K1, Map<K2, V>> mMap;
 
-        public BiHashMap() {
+    protected BiHashMap() {
             mMap = new HashMap<K1, Map<K2, V>>();
         }
 
@@ -24,7 +24,7 @@ public class BiHashMap<K1, K2, V> {
          * @return the value previously associated with (key1,key2), or <code>null</code> if none
          * @see Map#put(Object, Object)
          */
-        public V put(K1 key1, K2 key2, V value) {
+        protected V put(K1 key1, K2 key2, V value) {
             Map<K2, V> map;
             if (mMap.containsKey(key1)) {
                 map = mMap.get(key1);

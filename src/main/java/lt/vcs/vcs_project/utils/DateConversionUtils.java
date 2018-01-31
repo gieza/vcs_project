@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DateConversionUtils {
 
-    static final List<String> formatStrings = Arrays.asList("yyyy-MM-dd", "yyyy.MM.dd", "yyyy/MM/dd", "dd.MM.yyyy",
+    private static final List<String> formatStrings = Arrays.asList("yyyy-MM-dd", "yyyy.MM.dd", "yyyy/MM/dd", "dd.MM.yyyy",
             "dd/MM/yyyy");
 
 

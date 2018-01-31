@@ -1,7 +1,6 @@
 package lt.vcs.vcs_project.servicelayer;
 
 import lt.vcs.vcs_project.datalayer.Course;
-import lt.vcs.vcs_project.datalayer.Lecturer;
 
 import java.util.Set;
 
@@ -12,12 +11,12 @@ public class CoursePrints extends PrintService {
             "Credit,lecturerCode,Description\n";
 
 
-    public static final String COURSE_LISTING_FORMATING = "%-8s %-30s %-12s %-8s %-12s %-10s\n";
+    private static final String COURSE_LISTING_FORMATING = "%-8s %-30s %-12s %-8s %-12s %-10s\n";
 
-    public static final String COURSE_LISTING_HEADER = String.format(COURSE_LISTING_FORMATING,
+    private static final String COURSE_LISTING_HEADER = String.format(COURSE_LISTING_FORMATING,
             "Code", "title", "start Date", "credit", "lecturer", "# of Students");
 
-    public static void listCourse(Course course) {
+    private static void listCourse(Course course) {
         System.out.printf(COURSE_LISTING_FORMATING, course.getCourseCode(), course.getTitle(),
                 course.getStartDate(), course.getCredit(), course.getLecturerId(), course.getEnrolledStudentCount());
     }
@@ -52,7 +51,7 @@ public class CoursePrints extends PrintService {
         listCourse(keys);
     }
 
-    public static void printCourse(Course course) {
+    private static void printCourse(Course course) {
         String lecturerName = "";
         if (lecturers.lecturerExists(course.getLecturerId())) {
             lecturerName = lecturers.getLecturer(course.getLecturerId()).getFirstName() +
@@ -69,7 +68,7 @@ public class CoursePrints extends PrintService {
         StudentPrints.listStudent(course.getEnrolledStudents());
     }
 
-    public static void printCourse(String CourseId) {
+    private static void printCourse(String CourseId) {
         printCourse(courses.getCourse(CourseId));
     }
 

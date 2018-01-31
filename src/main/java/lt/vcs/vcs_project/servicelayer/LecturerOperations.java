@@ -1,8 +1,6 @@
 package lt.vcs.vcs_project.servicelayer;
 
-import lt.vcs.vcs_project.datalayer.Account;
 import lt.vcs.vcs_project.datalayer.Lecturer;
-import lt.vcs.vcs_project.datalayer.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
 import java.util.Set;
@@ -84,7 +82,7 @@ public class LecturerOperations {
         }
     }
 
-    public static Lecturer updateLecturerFromCSV(Lecturer lecturer, String csv) {
+    static Lecturer updateLecturerFromCSV(Lecturer lecturer, String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length < 8) {
             System.out.printf("Lecturer update Failure: input data has incorrect number of fields\n");
@@ -150,7 +148,7 @@ public class LecturerOperations {
         assignCourse2Lecturer(selectedCourse, selectedLecturer);
     }
 
-    static public void removeCourseFromLecturer(Set<String> courseList, String lecturerId) {
+    private static void removeCourseFromLecturer(Set<String> courseList, String lecturerId) {
         if (courseList == null || lecturerId == null) return;
         for (String courseId : courseList) {
             lecturers.removeCourse(lecturerId, courseId);

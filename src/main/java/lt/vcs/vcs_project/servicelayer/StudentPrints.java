@@ -11,13 +11,13 @@ public class StudentPrints extends PrintService {
             "personalNumber,dateOfBirth,email,mobile,gender,address\n";
 
 
-    public static final String STUDENT_LISTING_FORMATING = "%-12s %15s %-20s %-12s %-10s %-12s %-25s " +
+    private static final String STUDENT_LISTING_FORMATING = "%-12s %15s %-20s %-12s %-10s %-12s %-25s " +
             "%-12s %-5s %-40s\n";
-    public static final String STUDENT_LISTING_HEADER = String.format(STUDENT_LISTING_FORMATING,
+    private static final String STUDENT_LISTING_HEADER = String.format(STUDENT_LISTING_FORMATING,
             "Student ID", "First name", "Second name", "Login", "Personal#", "DoB", "email",
             "Mobile", "M/F", "Address");
 
-    public static void listStudent(Student student) {
+    private static void listStudent(Student student) {
         System.out.printf(STUDENT_LISTING_FORMATING, student.getStudentId(), student.getFirstName(),
                 student.getSecondName(), student.getLoginId(), student.getPersonalNumber(), student.getDateOfBirth(),
                 student.getEmail(), student.getMobileNumber(), student.getGender(), student.getAddress());
@@ -38,7 +38,7 @@ public class StudentPrints extends PrintService {
             listStudent(keys);
     }
 
-    public static void printStudent(Student student) {
+    private static void printStudent(Student student) {
         System.out.println("\nStudent Details:\n================" +
                 "\nStudent ID: " + student.getStudentId() +
                 "\nName: " + student.getFirstName() + " " + student.getSecondName() +

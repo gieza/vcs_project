@@ -69,7 +69,7 @@ public class AccountCollection {
         return adminCount;
     }
 
-    void addAdminIfMissing() {
+    private void addAdminIfMissing() {
         if (this.adminCount() < 1) {
             this.addAccount(defaultAdminAccount);
         }

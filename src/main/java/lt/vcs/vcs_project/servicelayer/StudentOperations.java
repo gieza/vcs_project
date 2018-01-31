@@ -1,6 +1,5 @@
 package lt.vcs.vcs_project.servicelayer;
 
-import lt.vcs.vcs_project.datalayer.Account;
 import lt.vcs.vcs_project.datalayer.Student;
 import lt.vcs.vcs_project.utils.ScannerUtils;
 
@@ -84,7 +83,7 @@ public class StudentOperations {
         }
     }
 
-    public static Student updateStudentFromCSV(Student student, String csv) {
+    static Student updateStudentFromCSV(Student student, String csv) {
         String[] inputArray = csv.split(",");
         if (inputArray.length < 8) {
             System.out.printf("Student update Failure: input data has incorrect number of fields\n");

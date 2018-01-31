@@ -13,7 +13,7 @@ public class LecturerCollection {
 
     private Hashtable<String, Lecturer> lecturerCollection = new Hashtable<>();
 
-    public LecturerCollection() {
+    LecturerCollection() {
         readFromFile();
     }
 

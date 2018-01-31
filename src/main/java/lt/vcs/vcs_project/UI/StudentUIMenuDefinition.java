@@ -6,15 +6,15 @@ import java.util.Hashtable;
 
 import static lt.vcs.vcs_project.UI.MenuTitle.*;
 
-public class StudentUIMenuDefinition {
-    public static final Hashtable<MenuTitle, String> menuOptions = new Hashtable<>() {{
+class StudentUIMenuDefinition {
+    static final Hashtable<MenuTitle, String> menuOptions = new Hashtable<>() {{
         put(TOP, "\t1 Student Menu\n\t2 Course menu\n\t9 Logout\nPossible options[1-2,9]:");
         put(STUDENT, "\t0 Top menu\n\t1 Print Student data\n\t2 Update Student\n" +
                 "\t3 Change password\n\t4 Assign course\nPossible options[0-4]:");
         put(COURSE, "\t0 Top menu\n\t1 List Courses\n\t2 List Available Courses\n\t3 List Enrolled Courses\n\t4 Print Course\n\t5 Enroll to Course\n\tPossible options[0-5]:");
     }};
 
-    public static final BiHashMap<MenuTitle, String, MenuTitle> menuNavigation
+    static final BiHashMap<MenuTitle, String, MenuTitle> menuNavigation
             = new BiHashMap<>() {{
         put(TOP, "1", STUDENT);
         put(TOP, "2", COURSE);

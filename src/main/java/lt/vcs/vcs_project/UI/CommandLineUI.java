@@ -13,7 +13,6 @@ public class CommandLineUI {
         UserInterface userInterface = null;
         while (true) {
             currentUser = login();
-            //currentUser = loginDefault();
             switch (accounts.getRole(currentUser)) {
                 case ADMIN:
                     userInterface = new AdminUserInterface();

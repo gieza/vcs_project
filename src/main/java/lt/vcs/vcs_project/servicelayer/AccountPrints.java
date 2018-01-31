@@ -5,18 +5,17 @@ import lt.vcs.vcs_project.datalayer.Account;
 import java.util.Set;
 
 import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
-import static lt.vcs.vcs_project.datalayer.Role.ADMIN;
 
 public class AccountPrints extends PrintService {
 
     public static final String NEW_ACCOUNT_DATA_INPUT_TEMPLATE = "Login,Password,First name,Second name";
     public static final String UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE = "First name,Second name";
-    public static final String ACCOUNT_LISTING_HEADER =
+    private static final String ACCOUNT_LISTING_HEADER =
             String.format("%-15s %20s %-25s %-8s %-8s", "Login", "First name", "Second name", "Role", "ID");
-    public static final String ACCOUNT_UPDATE_HEADER =
+    private static final String ACCOUNT_UPDATE_HEADER =
             String.format("%-20s %-25s\n", "First name", "Second name");
 
-    public static void listAccount(Account account) {
+    private static void listAccount(Account account) {
         System.out.printf("%-15s %20s %-25s %-8s %-8s\n", account.getLoginId(), account.getFirstName(),
                 account.getSecondName(), account.getRoleAsString(), account.getPersonalId());
     }
@@ -32,7 +31,7 @@ public class AccountPrints extends PrintService {
         }
     }
 
-    public static void printAccount(Account account) {
+    private static void printAccount(Account account) {
         System.out.println("\nAccount Data:\n=============\nLogin Name:"
                 + account.getLoginId()
                 + "\nName:" + account.getFirstName() + " " + account.getSecondName()

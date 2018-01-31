@@ -11,16 +11,13 @@ import static lt.vcs.vcs_project.servicelayer.LecturerPrints.*;
 import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class AdminUserInterface implements UserInterface {
-    static MenuTitle menuPosition = TOP;
-    static String menuChoice = "";
-
-
+    private static MenuTitle menuPosition = TOP;
     private String currentAccount;
 
     @Override
     public void navigateMenu(String accountId) {
+        String menuChoice;
         currentAccount = accountId;
-        menuChoice = "";
         menuPosition = TOP;
 
         while (true) {

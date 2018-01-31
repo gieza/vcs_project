@@ -12,9 +12,6 @@ import static lt.vcs.vcs_project.utils.ScannerUtils.waitForEnter;
 
 public class StudentUserInterface implements UserInterface {
     private static MenuTitle menuPosition;
-    private static String menuChoice;
-
-
     private String currentAccount;
     private String currentStudentId;
 
@@ -22,7 +19,7 @@ public class StudentUserInterface implements UserInterface {
     public void navigateMenu(String accountId) {
         currentAccount = accountId;
         currentStudentId = accounts.getAccount(currentAccount).getPersonalId();
-        menuChoice = "";
+        String menuChoice;
         menuPosition = TOP;
         while (true) {
             printMenuOptions();

@@ -14,9 +14,6 @@ import static lt.vcs.vcs_project.UI.MenuTitle.*;
 
 public class LecturerUserInterface implements UserInterface {
     private static MenuTitle menuPosition = TOP;
-    static String menuChoice = "";
-
-
     private String currentAccount;
     private String currentLecturerId;
 
@@ -24,7 +21,7 @@ public class LecturerUserInterface implements UserInterface {
     public void navigateMenu(String accountId) {
         currentAccount = accountId;
         currentLecturerId = accounts.getAccount(currentAccount).getPersonalId();
-        menuChoice = "";
+        String menuChoice;
         menuPosition = TOP;
         while (true) {
             printMenuOptions();

@@ -37,8 +37,9 @@ public class AccountOperations {
     }
 
     public static boolean authenticate(String accountId, String password) {
-        if (!accounts.accountExists(accountId)) return false;
-        return accounts.getAccount(accountId).authenticate(password);
+      /*  if (!accounts.accountExists(accountId)) return false;
+        return accounts.getAccount(accountId).authenticate(password);*/
+        return AccountRepository.sqlAuthenticate(accountId, password);
     }
 
     static public void addAccount(String csv) {
@@ -102,7 +103,7 @@ public class AccountOperations {
         if (userInput.equals("")) {
             System.out.printf("Selected account is: %s\n", currentAccount);
             return currentAccount;
-        } else if (accounts.AdminExists(userInput)) {
+        } else if (accounts.isAdmin(userInput)) {
             System.out.printf("Selected account is: %s\n", userInput);
             return userInput;
         } else if (accounts.accountExists(userInput)) {

@@ -1,12 +1,12 @@
 package lt.vcs.vcs_project;
 
 import lt.vcs.vcs_project.UI.CommandLineUI;
-import lt.vcs.vcs_project.db.DbAccess;
+import lt.vcs.vcs_project.servicelayer.AccountRepository;
 
 public class Project {
 
     public static void main(String[] args){
-        DbAccess dbAccess = new DbAccess();
+        AccountRepository accountRepository = new AccountRepository();
         CommandLineUI.run();
 
     }

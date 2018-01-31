@@ -1,5 +1,6 @@
 package lt.vcs.vcs_project.datalayer;
 
+import lt.vcs.vcs_project.servicelayer.AccountRepository;
 import lt.vcs.vcs_project.utils.IOObjectStreamUtils;
 
 import java.io.FileNotFoundException;
@@ -15,9 +16,9 @@ public class AccountCollection {
 
     private Hashtable<String, Account> accountCollection = new Hashtable<>();
 
-    AccountCollection() {
-        readFromFile();
-        this.addAdminIfMissing();
+    public AccountCollection() {
+        //readFromFile();
+        //this.addAdminIfMissing();
 
 
     }
@@ -26,20 +27,20 @@ public class AccountCollection {
         return accountCollection.size();
     }
 
-    public boolean AdminExists(String loginId) {
-        return (accountCollection.containsKey(loginId)
-                && accountCollection.get(loginId).getRole() == ADMIN);
+    public boolean isAdmin(String loginId) {
+        return AccountRepository.sqlIsAdmin(loginId);
     }
 
     public void updateAccount(Account account) {
-        accountCollection.put(account.getLoginId(), account);
-        writeToFile();
+        //accountCollection.put(account.getLoginId(), account);
+        //writeToFile();
+        AccountRepository.sqlUpdateAccount(account);
     }
 
     public void addAccount(Account account) {
-        if (!accountCollection.containsKey(account.getLoginId())) {
-            accountCollection.put(account.getLoginId(), account);
-            writeToFile();
+        if (!accountExists(account.getLoginId())) {
+            AccountRepository.sqlAddAccount(account);
+            //writeToFile();
         } else {
             //trow exception - duplicate
             System.out.printf("Account addition failure: User %s already exists\n", account.getLoginId());
@@ -47,28 +48,21 @@ public class AccountCollection {
     }
 
     public void removeAccount(String loginId) {
-        accountCollection.remove(loginId);
+        AccountRepository.sqlDeleteAccount(loginId);
         addAdminIfMissing();
-        writeToFile();
+        //writeToFile();
     }
 
     public Account getAccount(String accountId) {
-        if (accountCollection.containsKey(accountId)) return accountCollection.get(accountId);
-        System.out.printf("Failure: User %s does not exist\n", accountId);
-        return null;
+        return AccountRepository.getSqlAccount(accountId);
     }
 
     public boolean accountExists(String accountId) {
-        return accountCollection.containsKey(accountId);
+        return AccountRepository.sqlAccountExists(accountId);
     }
 
     private Integer adminCount() {
-        Integer adminCount = 0;
-        Set<String> keys = accountCollection.keySet();
-        for (String key : keys) {
-            if (accountCollection.get(key).getRole() == ADMIN) adminCount++;
-        }
-        return adminCount;
+        return AccountRepository.adminCount();
     }
 
     void addAdminIfMissing() {
@@ -94,7 +88,7 @@ public class AccountCollection {
     }
 
     public Set<String> getKeyset() {
-        return accountCollection.keySet();
+        return AccountRepository.getKeyset();
     }
 
     public String getStudentId(String loginId) {
@@ -114,6 +108,6 @@ public class AccountCollection {
     }
 
     public Role getRole(String accountId) {
-        return accountCollection.get(accountId).getRole();
+        return AccountRepository.getSqlAccount(accountId).getRole();
     }
 }

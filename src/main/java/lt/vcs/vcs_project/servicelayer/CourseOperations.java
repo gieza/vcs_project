@@ -48,8 +48,7 @@ public class CourseOperations {
     }
 
     public static void addCourse() {
-        System.out.printf("\nEnter new Course data in CommaSeparatedValue format\nfollowing template: %s\n",
-                CoursePrints.COURSE_HEADER_CSV);
+        CoursePrints.printHeaderForCourseAdd();
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
         addCourse(userInput);
@@ -60,9 +59,7 @@ public class CourseOperations {
         System.out.printf("\nCurrent Student %s values are:\n", courseCode);
         CoursePrints.printCourseForUpdate(courses.getCourse(courseCode));
 
-        System.out.println("\n\nEnter new Course data in CommaSeparatedValue format" +
-                "\nfollowing template:");
-        System.out.println(CoursePrints.UPDATE_COURSE_DATA_INPUT_TEMPLATE);
+        CoursePrints.printHeaderForCourseUpdate();
         String userInput = ScannerUtils.scanString();
         Course updatedCourse = updateCourseFromCSV(courses.getCourse(courseCode), userInput);
         courses.updateCourse(updatedCourse);

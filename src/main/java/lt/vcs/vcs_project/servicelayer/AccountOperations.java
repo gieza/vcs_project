@@ -50,8 +50,7 @@ public class AccountOperations {
     }
 
     static public void addAccount() {
-        System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format" +
-                "\nfollowing template: %s\n:", AccountPrints.NEW_ACCOUNT_DATA_INPUT_TEMPLATE);
+        AccountPrints.printHeaderForAccountAdd();
         String userInput = ScannerUtils.scanString();
 
         addAccount(userInput);
@@ -64,9 +63,7 @@ public class AccountOperations {
         Account accountForUpdate = accounts.getAccount(accountIdForUpdate);
         AccountPrints.printAccountForUpdate(accountForUpdate);
 
-        System.out.println("\n\nEnter new Admin Account data in CommaSeparatedValue format" +
-                "\nfollowing template:");
-        System.out.println(AccountPrints.UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE);
+        AccountPrints.printHeaderForAccountUpdate();
         String userInput = ScannerUtils.scanString();
         accounts.updateAccount(AccountOperations.updateAccountFromCSV(accountForUpdate, userInput));
         //print updated values

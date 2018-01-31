@@ -1,5 +1,6 @@
 package lt.vcs.vcs_project.servicelayer;
 
+import lt.vcs.vcs_project.datalayer.Lecturer;
 import lt.vcs.vcs_project.datalayer.Student;
 
 import java.util.Set;
@@ -7,9 +8,13 @@ import java.util.Set;
 import static lt.vcs.vcs_project.datalayer.DataLayer.students;
 
 public class StudentPrints extends PrintService {
-    public static final String STUDENT_HEADER_CSV = "Login,Password,First name,Second name,StudentId," +
+    private static final String STUDENT_HEADER_CSV = "Login,Password,First name,Second name,StudentId," +
             "personalNumber,dateOfBirth,email,mobile,gender,address\n";
 
+    static void printHeaderForStudentAdd() {
+        System.out.printf("\nEnter new Student data in CommaSeparatedValue format\nfollowing template: %s\n",
+                STUDENT_HEADER_CSV);
+    }
 
     private static final String STUDENT_LISTING_FORMATING = "%-12s %15s %-20s %-12s %-10s %-12s %-25s " +
             "%-12s %-5s %-40s\n";
@@ -61,6 +66,12 @@ public class StudentPrints extends PrintService {
     }
     public static final String UPDATE_STUDENT_DATA_INPUT_TEMPLATE = "First name,Second name,Personal#,DoB,Email," +
             "Mobile#,Gender,address";
+
+    public static void printHeaderForStudentUpdate() {
+        System.out.println("\n\nEnter new Student data in CommaSeparatedValue format" +
+                "\nfollowing template:\n" + UPDATE_STUDENT_DATA_INPUT_TEMPLATE);
+    }
+
     private static final String STUDENT_UPDATE_FORMATER = "%-20s %-25s %-12s %-12s %-25s %-12s %-5s %-40s\n";
     private static final String STUDENT_UPDATE_HEADER = String.format(STUDENT_UPDATE_FORMATER,
             "First name", "Second name", "Personal#", "DoB", "Email", "Mobile#", "Gender", "address");

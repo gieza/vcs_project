@@ -7,9 +7,13 @@ import java.util.Set;
 import static lt.vcs.vcs_project.datalayer.DataLayer.*;
 
 public class CoursePrints extends PrintService {
-    public static final String COURSE_HEADER_CSV = "courseCode,Title,startDate[yyyy-MM-dd]," +
+    private static final String COURSE_HEADER_CSV = "courseCode,Title,startDate[yyyy-MM-dd]," +
             "Credit,lecturerCode,Description\n";
 
+    static void printHeaderForCourseAdd() {
+        System.out.printf("\nEnter new Course data in CommaSeparatedValue format\nfollowing template: %s\n",
+                COURSE_HEADER_CSV);
+    }
 
     private static final String COURSE_LISTING_FORMATING = "%-8s %-30s %-12s %-8s %-12s %-10s\n";
 
@@ -79,8 +83,15 @@ public class CoursePrints extends PrintService {
         }
     }
 
-    public static final String UPDATE_COURSE_DATA_INPUT_TEMPLATE = "Title,startDate[yyyy-MM-dd]," +
+    private static final String UPDATE_COURSE_DATA_INPUT_TEMPLATE = "Title,startDate[yyyy-MM-dd]," +
             "Credit,Description\n";
+
+    public static void printHeaderForCourseUpdate() {
+        System.out.println("\n\nEnter new Course data in CommaSeparatedValue format" +
+                "\nfollowing template:\n" + UPDATE_COURSE_DATA_INPUT_TEMPLATE);
+    }
+
+
     private static final String COURSE_UPDATE_FORMATER = "%-25s %-12s %-8s %-40s\n";
     private static final String COURSE_UPDATE_HEADER = String.format(COURSE_UPDATE_FORMATER,
             "Title", "startDate", "Credit", "Description");
@@ -91,6 +102,8 @@ public class CoursePrints extends PrintService {
         System.out.printf(COURSE_UPDATE_FORMATER,
                 course.getTitle(), course.getStartDate(), course.getCredit(), course.getDescription());
     }
+
+
 }
 
 

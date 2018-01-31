@@ -50,8 +50,7 @@ public class LecturerOperations {
     }
 
     public static void addLecturer() {
-        System.out.printf("\nEnter new Lecturer data in CommaSeparatedValue format\nfollowing template: %s\n",
-                LecturerPrints.LECTURER_HEADER_CSV);
+        LecturerPrints.printHeaderForAddLecturer();
         String userInput = ScannerUtils.scanString();
         System.out.printf("Entered values %s\n", userInput);
         addLecturer(userInput);
@@ -61,9 +60,7 @@ public class LecturerOperations {
         System.out.printf("\nCurrent Lecturer %s values are:\n", lecturerId);
         LecturerPrints.printLecturerForUpdate(lecturers.getLecturer(lecturerId));
 
-        System.out.println("\n\nEnter new Lecturer data in CommaSeparatedValue format" +
-                "\nfollowing template:");
-        System.out.println(LecturerPrints.UPDATE_LECTURER_DATA_INPUT_TEMPLATE);
+        LecturerPrints.printHeaderForLecturerUpdate();
         String userInput = ScannerUtils.scanString();
         Lecturer updatedLecturer = updateLecturerFromCSV(lecturers.getLecturer(lecturerId), userInput);
         lecturers.updateLecturer(updatedLecturer);

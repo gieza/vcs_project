@@ -8,8 +8,23 @@ import static lt.vcs.vcs_project.datalayer.DataLayer.accounts;
 
 public class AccountPrints extends PrintService {
 
-    public static final String NEW_ACCOUNT_DATA_INPUT_TEMPLATE = "Login,Password,First name,Second name";
-    public static final String UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE = "First name,Second name";
+    private static final String NEW_ACCOUNT_DATA_INPUT_TEMPLATE = "Login,Password,First name,Second name";
+
+    public static void printHeaderForAccountAdd() {
+        System.out.printf("\nEnter new Admin Account data in CommaSeparatedValue format" +
+                "\nfollowing template: %s\n:", NEW_ACCOUNT_DATA_INPUT_TEMPLATE);
+
+    }
+
+    private static final String UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE = "First name,Second name";
+
+    public static void printHeaderForAccountUpdate() {
+
+        System.out.println("\n\nEnter new Admin Account data in CommaSeparatedValue format" +
+                "\nfollowing template:\n" + UPDATE_ACCOUNT_DATA_INPUT_TEMPLATE);
+    }
+
+
     private static final String ACCOUNT_LISTING_HEADER =
             String.format("%-15s %20s %-25s %-8s %-8s", "Login", "First name", "Second name", "Role", "ID");
     private static final String ACCOUNT_UPDATE_HEADER =

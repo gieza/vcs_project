@@ -7,8 +7,7 @@ import java.util.Set;
 import static lt.vcs.vcs_project.datalayer.DataLayer.lecturers;
 
 public class LecturerPrints extends PrintService {
-    public static final String LECTURER_HEADER_CSV = "Login,Password,First name,Second name,StudentId," +
-            "personalNumber,dateOfBirth,email,mobile,gender,address\n";
+
 
     private static final String LECTURER_LISTING_FORMATING = "%-12s %15s %-20s %-12s %-10s %-12s %-25s" +
             "%-12s %-5s %-40s\n";
@@ -58,8 +57,15 @@ public class LecturerPrints extends PrintService {
         }
     }
 
-    public static final String UPDATE_LECTURER_DATA_INPUT_TEMPLATE = "First name,Second name,Personal#,DoB,Email," +
+    private static final String UPDATE_LECTURER_DATA_INPUT_TEMPLATE = "First name,Second name,Personal#,DoB,Email," +
             "Mobile#,Gender,address";
+
+    public static void printHeaderForLecturerUpdate() {
+        System.out.println("\n\nEnter new Lecturer data in CommaSeparatedValue format" +
+                "\nfollowing template:\n" + UPDATE_LECTURER_DATA_INPUT_TEMPLATE);
+    }
+
+
     private static final String LECTURER_UPDATE_FORMATER = "%-20s %-25s %-12s %-12s %-25s %-12s %-5s %-40s\n";
 
     private static final String LECTURER_UPDATE_HEADER = String.format(LECTURER_UPDATE_FORMATER,
@@ -73,4 +79,15 @@ public class LecturerPrints extends PrintService {
                 lecturer.getDateOfBirth(), lecturer.getEmail(), lecturer.getMobileNumber(),
                 lecturer.getGender(), lecturer.getAddress());
     }
+
+
+    private static final String LECTURER_HEADER_CSV = "Login,Password,First name,Second name,StudentId," +
+            "personalNumber,dateOfBirth,email,mobile,gender,address\n";
+
+    static void printHeaderForAddLecturer() {
+        System.out.printf("\nEnter new Lecturer data in CommaSeparatedValue format\nfollowing template: %s\n",
+                LECTURER_HEADER_CSV);
+    }
+
+
 }
